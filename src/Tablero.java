@@ -28,7 +28,7 @@ public class Tablero extends JPanel implements Componentes {
 			int alto = Integer.parseInt(bf.readLine());
 			String linea = "";
 			casillas = new Casilla[ancho][alto];
-			this.setLayout(new GridLayout(ancho, alto));
+			this.setLayout(new GridLayout(ancho, alto, 1, 1));
 			while (bf.ready()) {
 				for (int j = 0; j < alto; j++) {
 					linea = bf.readLine();

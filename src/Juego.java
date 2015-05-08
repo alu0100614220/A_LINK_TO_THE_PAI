@@ -2,13 +2,15 @@ import java.awt.BorderLayout;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
 @SuppressWarnings("serial")
 public class Juego extends JFrame implements Componentes {
 	private Tablero tablero; // Tablero del juego
-	private Heroe heroe = new Heroe(0, 0); // Jugador
+	private Heroe heroe = new Heroe(5, 5); // Jugador
+	private ArrayList<Enemigo> enemigos;
 	private KeyListn listener = new KeyListn();
 
 	Juego() {

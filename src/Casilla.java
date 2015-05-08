@@ -59,7 +59,7 @@ public class Casilla extends JPanel implements Componentes {
 			case Obstaculo:
 				setOcupado(true);
 				g.setColor(Color.DARK_GRAY);
-				g.fillRect(0, 0, 10, 10);
+				g.fillRect(0, 0, getWidth(), getHeight());
 				break;
 			case Heroe:
 				setOcupado(true);
