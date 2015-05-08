@@ -7,7 +7,7 @@ public abstract class Enemigo {
 
 	Enemigo(int i, int j) {
 		setPosicion(new Point(i, j));
-		setOrientacion(0);
+		setOrientacion(Const.ORIENTACION.Sur);
 		this.setHp(100);
 	}
 
@@ -36,7 +36,7 @@ public abstract class Enemigo {
 		return orientacion;
 	}
 
-	public void setOrientacion(int orientacion) {
-		this.orientacion = orientacion;
+	public void setOrientacion(Const.ORIENTACION orientacion) {
+		this.orientacion = orientacion.ordinal();
 	}
 }

@@ -19,7 +19,7 @@ public class Tablero extends JPanel {
 		}
 	}
 
-	void setCasilla(Point punto, int estado, int orientacion) {
+	void setCasilla(Point punto, Const.ESTADO estado, Const.ORIENTACION orientacion) {
 		casillas[punto.x][punto.y].setEstado(estado);
 		casillas[punto.x][punto.y].setOrientacion(orientacion);
 		repaint();

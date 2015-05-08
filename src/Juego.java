@@ -13,15 +13,15 @@ public class Juego extends JFrame {
 
 	Juego() {
 		setTitle("Roguelike PAI");
-		setSize(Constantes.WIDTH, Constantes.HEIGHT);
+		setSize(Const.WIDTH, Const.HEIGHT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setTablero(new Tablero());
 		this.add(getTablero(), BorderLayout.CENTER);
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(),
-				Constantes.estado.Heroe.ordinal(),
-				Constantes.orientacion.Sur.ordinal());
+				Const.ESTADO.Heroe,
+				Const.ORIENTACION.Sur);
 	}
 
 	/*
@@ -47,39 +47,39 @@ public class Juego extends JFrame {
 
 		public void keyPressed(KeyEvent e) {
 			getTablero().setCasilla(getHeroe().getPosicion(),
-					Constantes.estado.Vacia.ordinal(), 0);
+					Const.ESTADO.Vacia, Const.ORIENTACION.Sur);
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				Point posicion = new Point(getHeroe().getPosicion().x,
 						getHeroe().getPosicion().y - 1);
 				getTablero().setCasilla(posicion,
-						Constantes.estado.Heroe.ordinal(),
-						Constantes.orientacion.Norte.ordinal());
+						Const.ESTADO.Heroe,
+						Const.ORIENTACION.Norte);
 				getHeroe().setPosicion(posicion);
-				getHeroe().setOrientacion(Constantes.orientacion.Norte.ordinal());
+				getHeroe().setOrientacion(Const.ORIENTACION.Norte);
 			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 				Point posicion = new Point(getHeroe().getPosicion().x,
 						getHeroe().getPosicion().y + 1);
 				getTablero().setCasilla(posicion,
-						Constantes.estado.Heroe.ordinal(),
-						Constantes.orientacion.Sur.ordinal());
+						Const.ESTADO.Heroe,
+						Const.ORIENTACION.Sur);
 				getHeroe().setPosicion(posicion);
-				getHeroe().setOrientacion(Constantes.orientacion.Sur.ordinal());
+				getHeroe().setOrientacion(Const.ORIENTACION.Sur);
 			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 				Point posicion = new Point(getHeroe().getPosicion().x - 1,
 						getHeroe().getPosicion().y);
 				getTablero().setCasilla(posicion,
-						Constantes.estado.Heroe.ordinal(),
-						Constantes.orientacion.Oeste.ordinal());
+						Const.ESTADO.Heroe,
+						Const.ORIENTACION.Oeste);
 				getHeroe().setPosicion(posicion);
-				getHeroe().setOrientacion(Constantes.orientacion.Oeste.ordinal());
+				getHeroe().setOrientacion(Const.ORIENTACION.Oeste);
 			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				Point posicion = new Point(getHeroe().getPosicion().x + 1,
 						getHeroe().getPosicion().y);
 				getTablero().setCasilla(posicion,
-						Constantes.estado.Heroe.ordinal(),
-						Constantes.orientacion.Este.ordinal());
+						Const.ESTADO.Heroe,
+						Const.ORIENTACION.Este);
 				getHeroe().setPosicion(posicion);
-				getHeroe().setOrientacion(Constantes.orientacion.Este.ordinal());
+				getHeroe().setOrientacion(Const.ORIENTACION.Este);
 			}
 
 		}

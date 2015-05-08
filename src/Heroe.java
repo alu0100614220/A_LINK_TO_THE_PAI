@@ -9,9 +9,9 @@ public class Heroe {
 
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
-		setOrientacion(0);
+		setOrientacion(Const.ORIENTACION.Sur);
 		this.setHp(HP);
-		this.setArma(0);
+		this.setArma(Const.ARMA.Espada);
 	}
 
 	/*
@@ -29,8 +29,8 @@ public class Heroe {
 		return arma;
 	}
 
-	public void setArma(int arma) {
-		this.arma = arma;
+	public void setArma(Const.ARMA arma) {
+		this.arma = arma.ordinal();
 	}
 
 	public Point getPosicion() {
@@ -45,7 +45,7 @@ public class Heroe {
 		return orientacion;
 	}
 
-	public void setOrientacion(int orientacion) {
-		this.orientacion = orientacion;
+	public void setOrientacion(Const.ORIENTACION orientacion) {
+		this.orientacion = orientacion.ordinal();
 	}
 }

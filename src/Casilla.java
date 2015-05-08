@@ -9,8 +9,8 @@ public class Casilla extends JPanel {
 	private int orientacion;
 
 	Casilla() {
-		setEstado(0);
-		setOrientacion(0);
+		setEstado(Const.ESTADO.Vacia);
+		setOrientacion(Const.ORIENTACION.Sur);
 		this.setBackground(Color.GREEN);
 	}
 
@@ -21,38 +21,38 @@ public class Casilla extends JPanel {
 		return estado;
 	}
 
-	public void setEstado(int estado) {
-		this.estado = estado;
+	public void setEstado(Const.ESTADO estado) {
+		this.estado = estado.ordinal();
 	}
 
 	public int getOrientacion() {
 		return orientacion;
 	}
 
-	public void setOrientacion(int orientacion) {
-		this.orientacion = orientacion;
+	public void setOrientacion(Const.ORIENTACION orientacion) {
+		this.orientacion = orientacion.ordinal();
 	}
 
 	/**
 	 * Método para dibujar el estado de la casilla
 	 */
 	public void dibujarEstado(Graphics g) {
-		if (estado == Constantes.estado.Vacia.ordinal()) {
-		} else if (estado == Constantes.estado.Obstaculo.ordinal()) {
+		if (estado == Const.ESTADO.Vacia.ordinal()) {
+		} else if (estado == Const.ESTADO.Obstaculo.ordinal()) {
 			g.setColor(Color.DARK_GRAY);
 			g.fillRect(0, 0, 10, 10);
-		} else if (estado == Constantes.estado.Heroe.ordinal()) {
+		} else if (estado == Const.ESTADO.Heroe.ordinal()) {
 			g.setColor(Color.RED);
 			System.out.println(orientacion);
-			if (orientacion == Constantes.orientacion.Norte.ordinal())
+			if (orientacion == Const.ORIENTACION.Norte.ordinal())
 				g.drawString("N", 10, 10);
-			else if (orientacion == Constantes.orientacion.Este.ordinal())
+			else if (orientacion == Const.ORIENTACION.Este.ordinal())
 				g.drawString("E", 10, 10);
-			else if (orientacion == Constantes.orientacion.Sur.ordinal())
+			else if (orientacion == Const.ORIENTACION.Sur.ordinal())
 				g.drawString("S", 10, 10);
-			else if (orientacion == Constantes.orientacion.Oeste.ordinal())
+			else if (orientacion == Const.ORIENTACION.Oeste.ordinal())
 				g.drawString("O", 10, 10);
-		} else if (estado == Constantes.estado.Enemigo.ordinal()) {
+		} else if (estado == Const.ESTADO.Enemigo.ordinal()) {
 		}
 	}
 

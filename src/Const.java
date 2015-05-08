@@ -1,22 +1,22 @@
 import java.awt.Toolkit;
 
-public interface Constantes {
+public interface Const {
 	// Resolución de la pantalla
 	int HEIGHT = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();
 	int WIDTH = (int) Toolkit.getDefaultToolkit().getScreenSize().getWidth();
 
 	// Estados de una casilla
-	enum estado {
+	enum ESTADO {
 		Vacia, Obstaculo, Heroe, Enemigo
 	}
 
 	// Orientación de los personajes
-	enum orientacion {
+	enum ORIENTACION {
 		Norte, Este, Sur, Oeste
 	}
 	
 	// Armas del jugador
-	enum arma {
+	enum ARMA {
 		Espada, Arco
 	}
 }
