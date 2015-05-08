@@ -16,10 +16,13 @@ public class Juego extends JFrame implements Componentes {
 	private ArrayList<Enemigo> enemigos;
 	private KeyListn listener = new KeyListn();
 	public Timer enemyMoving;
-	private Enemigo prueba1 = new Enemigo(10, 10);
+	public Timer heroeLife;
+	private Enemigo enemigo = new Enemigo(10, 10);
 
 	Juego() {
 		enemyMoving = new Timer(1000, new Listener());
+		heroeLife = new Timer(100, new Listener());
+
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -29,7 +32,7 @@ public class Juego extends JFrame implements Componentes {
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
-		getTablero().setCasilla(prueba1.getPosicion(), Estado.Enemigo,
+		getTablero().setCasilla(enemigo.getPosicion(), Estado.Enemigo,
 				Orientacion.Sur);
 	}
 
@@ -53,52 +56,52 @@ public class Juego extends JFrame implements Componentes {
 	}
 
 	public void accion(Point objetivo) {
-		if (prueba1.skill(getHeroe().getPosicion())) {
-			
+		if (enemigo.skill(getHeroe().getPosicion())) {
+			getHeroe().setHp(-30);
 		}
-		if (prueba1.getPosicion().x < heroe.getPosicion().x) {
-			Point posicion = new Point(prueba1.getPosicion().x + 1,
-					prueba1.getPosicion().y);
+		if (enemigo.getPosicion().x < heroe.getPosicion().x) {
+			Point posicion = new Point(enemigo.getPosicion().x + 1,
+					enemigo.getPosicion().y);
 			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(prueba1.getPosicion(), Estado.Vacia,
+				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Este);
-				prueba1.setPosicion(posicion);
-				prueba1.setOrientacion(Orientacion.Este);
+				enemigo.setPosicion(posicion);
+				enemigo.setOrientacion(Orientacion.Este);
 			}
-		} else if (prueba1.getPosicion().x > heroe.getPosicion().x) {
-			Point posicion = new Point(prueba1.getPosicion().x - 1,
-					prueba1.getPosicion().y);
+		} else if (enemigo.getPosicion().x > heroe.getPosicion().x) {
+			Point posicion = new Point(enemigo.getPosicion().x - 1,
+					enemigo.getPosicion().y);
 			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(prueba1.getPosicion(), Estado.Vacia,
+				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Oeste);
-				prueba1.setPosicion(posicion);
-				prueba1.setOrientacion(Orientacion.Oeste);
+				enemigo.setPosicion(posicion);
+				enemigo.setOrientacion(Orientacion.Oeste);
 			}
-		} else if (prueba1.getPosicion().y < heroe.getPosicion().y) {
-			Point posicion = new Point(prueba1.getPosicion().x,
-					prueba1.getPosicion().y + 1);
+		} else if (enemigo.getPosicion().y < heroe.getPosicion().y) {
+			Point posicion = new Point(enemigo.getPosicion().x,
+					enemigo.getPosicion().y + 1);
 			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(prueba1.getPosicion(), Estado.Vacia,
+				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Sur);
-				prueba1.setPosicion(posicion);
-				prueba1.setOrientacion(Orientacion.Sur);
+				enemigo.setPosicion(posicion);
+				enemigo.setOrientacion(Orientacion.Sur);
 			}
-		} else if (prueba1.getPosicion().y > heroe.getPosicion().y) {
-			Point posicion = new Point(prueba1.getPosicion().x,
-					prueba1.getPosicion().y - 1);
+		} else if (enemigo.getPosicion().y > heroe.getPosicion().y) {
+			Point posicion = new Point(enemigo.getPosicion().x,
+					enemigo.getPosicion().y - 1);
 			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(prueba1.getPosicion(), Estado.Vacia,
+				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Norte);
-				prueba1.setPosicion(posicion);
-				prueba1.setOrientacion(Orientacion.Norte);
+				enemigo.setPosicion(posicion);
+				enemigo.setOrientacion(Orientacion.Norte);
 			}
 		}
 	}
@@ -164,6 +167,11 @@ public class Juego extends JFrame implements Componentes {
 
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
+			if (getHeroe().getHp()<=0) {
+				System.out.println("Heroe muerto.");
+				heroeLife.stop();
+				enemyMoving.stop();
+			}
 			accion(getHeroe().getPosicion());
 		}
 	}

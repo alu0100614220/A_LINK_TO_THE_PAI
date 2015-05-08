@@ -27,7 +27,7 @@ public class Enemigo implements Componentes {
 	}
 
 	public void accion(Point objetivo) {
-		
+
 		if (objetivo.x < this.posicion.x) {
 			this.posicion.x = this.posicion.x - 1;
 		}
@@ -46,13 +46,13 @@ public class Enemigo implements Componentes {
 		this.posicion = posicion;
 	}
 
-	public boolean skill(Point objetivo){
-		if (objetivo.distance(this.posicion)< 3) {
-			System.out.println(objetivo.distance(this.posicion));
+	public boolean skill(Point objetivo) {
+		if (objetivo.distance(this.posicion) < 3) {
 			return true;
 		}
 		return false;
 	}
+
 	public Orientacion getOrientacion() {
 		return orientacion;
 	}

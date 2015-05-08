@@ -18,11 +18,12 @@ public class Heroe implements Componentes {
 	 * Getters & Setters
 	 */
 	public int getHp() {
+		System.out.println(hp);
 		return hp;
 	}
 
 	public void setHp(int hp) {
-		this.hp = hp;
+		this.hp = this.hp + hp;
 	}
 
 	public int getArma() {
