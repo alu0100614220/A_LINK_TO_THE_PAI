@@ -1,6 +1,6 @@
 import java.awt.Point;
 
-public class Heroe {
+public class Heroe implements Componentes {
 	private static final int HP = 100;	// Vida inicial del jugador
 	private int hp; // Vida del jugador
 	private int arma; // Arma actual del jugador
@@ -9,9 +9,9 @@ public class Heroe {
 
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
-		setOrientacion(Const.ORIENTACION.Sur);
+		setOrientacion(Orientacion.Sur);
 		this.setHp(HP);
-		this.setArma(Const.ARMA.Espada);
+		this.setArma(Arma.Espada);
 	}
 
 	/*
@@ -29,7 +29,7 @@ public class Heroe {
 		return arma;
 	}
 
-	public void setArma(Const.ARMA arma) {
+	public void setArma(Arma arma) {
 		this.arma = arma.ordinal();
 	}
 
@@ -45,7 +45,7 @@ public class Heroe {
 		return orientacion;
 	}
 
-	public void setOrientacion(Const.ORIENTACION orientacion) {
+	public void setOrientacion(Orientacion orientacion) {
 		this.orientacion = orientacion.ordinal();
 	}
 }

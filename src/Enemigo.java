@@ -1,13 +1,13 @@
 import java.awt.Point;
 
-public abstract class Enemigo {
+public abstract class Enemigo implements Componentes {
 	private int hp; // Vida del enemigo
 	private Point posicion; // Posición en el mapa
-	private int orientacion;
+	private Orientacion orientacion;
 
 	Enemigo(int i, int j) {
 		setPosicion(new Point(i, j));
-		setOrientacion(Const.ORIENTACION.Sur);
+		setOrientacion(Orientacion.Sur);
 		this.setHp(100);
 	}
 
@@ -32,11 +32,11 @@ public abstract class Enemigo {
 
 	public abstract void skill();
 
-	public int getOrientacion() {
+	public Orientacion getOrientacion() {
 		return orientacion;
 	}
 
-	public void setOrientacion(Const.ORIENTACION orientacion) {
-		this.orientacion = orientacion.ordinal();
+	public void setOrientacion(Orientacion orientacion) {
+		this.orientacion = orientacion;
 	}
 }

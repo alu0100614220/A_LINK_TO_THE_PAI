@@ -4,7 +4,7 @@ import java.awt.Point;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
-public class Tablero extends JPanel {
+public class Tablero extends JPanel implements Componentes {
 	private final static int SIZE = 20; // Tamaño del mapa
 	private Casilla casillas[][]; // Casillas del tablero que formarán el mapa
 
@@ -19,7 +19,7 @@ public class Tablero extends JPanel {
 		}
 	}
 
-	void setCasilla(Point punto, Const.ESTADO estado, Const.ORIENTACION orientacion) {
+	void setCasilla(Point punto, Estado estado, Orientacion orientacion) {
 		casillas[punto.x][punto.y].setEstado(estado);
 		casillas[punto.x][punto.y].setOrientacion(orientacion);
 		repaint();
