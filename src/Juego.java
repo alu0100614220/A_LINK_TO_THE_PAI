@@ -18,17 +18,19 @@ public class Juego extends JFrame implements Componentes {
 	public Timer enemyMoving;
 	public Timer heroeLife;
 	private Enemigo enemigo = new Enemigo(10, 10);
+	private Panel panel;
 
 	Juego() {
 		enemyMoving = new Timer(1000, new Listener());
-		heroeLife = new Timer(100, new Listener());
-
+		heroeLife = new Timer(50, new Listener());
+		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		setTablero(new Tablero("maps/1.map"));
 		this.add(getTablero(), BorderLayout.CENTER);
+		this.add(panel, BorderLayout.NORTH);
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
@@ -58,6 +60,13 @@ public class Juego extends JFrame implements Componentes {
 	public void accion(Point objetivo) {
 		if (enemigo.skill(getHeroe().getPosicion())) {
 			getHeroe().setHp(-30);
+			if (getHeroe().getHp() <= 0) {
+				panel.Vida.setText("RIP");
+				heroeLife.stop();
+				enemyMoving.stop();
+			} else {
+				panel.Vida.setText(Integer.toString(getHeroe().getHp()));
+			}
 		}
 		if (enemigo.getPosicion().x < heroe.getPosicion().x) {
 			Point posicion = new Point(enemigo.getPosicion().x + 1,
@@ -110,49 +119,51 @@ public class Juego extends JFrame implements Componentes {
 
 		public void keyPressed(KeyEvent e) {
 			enemyMoving.start();
-			if (e.getKeyCode() == KeyEvent.VK_UP) {
-				Point posicion = new Point(getHeroe().getPosicion().x,
-						getHeroe().getPosicion().y - 1);
-				if (!getTablero().getCasilla(posicion).isOcupado()) {
-					getTablero().setCasilla(getHeroe().getPosicion(),
-							Estado.Vacia, Orientacion.Sur);
-					getTablero().setCasilla(posicion, Estado.Heroe,
-							Orientacion.Norte);
-					getHeroe().setPosicion(posicion);
-					getHeroe().setOrientacion(Orientacion.Norte);
-				}
-			} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-				Point posicion = new Point(getHeroe().getPosicion().x,
-						getHeroe().getPosicion().y + 1);
-				if (!getTablero().getCasilla(posicion).isOcupado()) {
-					getTablero().setCasilla(getHeroe().getPosicion(),
-							Estado.Vacia, Orientacion.Sur);
-					getTablero().setCasilla(posicion, Estado.Heroe,
-							Orientacion.Sur);
-					getHeroe().setPosicion(posicion);
-					getHeroe().setOrientacion(Orientacion.Sur);
-				}
-			} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-				Point posicion = new Point(getHeroe().getPosicion().x - 1,
-						getHeroe().getPosicion().y);
-				if (!getTablero().getCasilla(posicion).isOcupado()) {
-					getTablero().setCasilla(getHeroe().getPosicion(),
-							Estado.Vacia, Orientacion.Sur);
-					getTablero().setCasilla(posicion, Estado.Heroe,
-							Orientacion.Oeste);
-					getHeroe().setPosicion(posicion);
-					getHeroe().setOrientacion(Orientacion.Oeste);
-				}
-			} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-				Point posicion = new Point(getHeroe().getPosicion().x + 1,
-						getHeroe().getPosicion().y);
-				if (!getTablero().getCasilla(posicion).isOcupado()) {
-					getTablero().setCasilla(getHeroe().getPosicion(),
-							Estado.Vacia, Orientacion.Sur);
-					getTablero().setCasilla(posicion, Estado.Heroe,
-							Orientacion.Este);
-					getHeroe().setPosicion(posicion);
-					getHeroe().setOrientacion(Orientacion.Este);
+			if (getHeroe().getHp() >= 0) {
+				if (e.getKeyCode() == KeyEvent.VK_UP) {
+					Point posicion = new Point(getHeroe().getPosicion().x,
+							getHeroe().getPosicion().y - 1);
+					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Vacia, Orientacion.Sur);
+						getTablero().setCasilla(posicion, Estado.Heroe,
+								Orientacion.Norte);
+						getHeroe().setPosicion(posicion);
+						getHeroe().setOrientacion(Orientacion.Norte);
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+					Point posicion = new Point(getHeroe().getPosicion().x,
+							getHeroe().getPosicion().y + 1);
+					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Vacia, Orientacion.Sur);
+						getTablero().setCasilla(posicion, Estado.Heroe,
+								Orientacion.Sur);
+						getHeroe().setPosicion(posicion);
+						getHeroe().setOrientacion(Orientacion.Sur);
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+					Point posicion = new Point(getHeroe().getPosicion().x - 1,
+							getHeroe().getPosicion().y);
+					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Vacia, Orientacion.Sur);
+						getTablero().setCasilla(posicion, Estado.Heroe,
+								Orientacion.Oeste);
+						getHeroe().setPosicion(posicion);
+						getHeroe().setOrientacion(Orientacion.Oeste);
+					}
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					Point posicion = new Point(getHeroe().getPosicion().x + 1,
+							getHeroe().getPosicion().y);
+					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Vacia, Orientacion.Sur);
+						getTablero().setCasilla(posicion, Estado.Heroe,
+								Orientacion.Este);
+						getHeroe().setPosicion(posicion);
+						getHeroe().setOrientacion(Orientacion.Este);
+					}
 				}
 			}
 
@@ -167,11 +178,6 @@ public class Juego extends JFrame implements Componentes {
 
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			if (getHeroe().getHp()<=0) {
-				System.out.println("Heroe muerto.");
-				heroeLife.stop();
-				enemyMoving.stop();
-			}
 			accion(getHeroe().getPosicion());
 		}
 	}

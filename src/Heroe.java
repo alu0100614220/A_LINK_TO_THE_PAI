@@ -18,7 +18,6 @@ public class Heroe implements Componentes {
 	 * Getters & Setters
 	 */
 	public int getHp() {
-		System.out.println(hp);
 		return hp;
 	}
 
