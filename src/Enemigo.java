@@ -1,6 +1,6 @@
 import java.awt.Point;
 
-public abstract class Enemigo implements Componentes {
+public class Enemigo implements Componentes {
 	private int hp; // Vida del enemigo
 	private Point posicion; // Posición en el mapa
 	private Orientacion orientacion;
@@ -26,12 +26,33 @@ public abstract class Enemigo implements Componentes {
 		return posicion;
 	}
 
+	public void accion(Point objetivo) {
+		
+		if (objetivo.x < this.posicion.x) {
+			this.posicion.x = this.posicion.x - 1;
+		}
+		if (objetivo.x > this.posicion.x) {
+			this.posicion.x = this.posicion.x + 1;
+		}
+		if (objetivo.y < this.posicion.y) {
+			this.posicion.y = this.posicion.y - 1;
+		}
+		if (objetivo.y > this.posicion.y) {
+			this.posicion.y = this.posicion.y + 1;
+		}
+	}
+
 	public void setPosicion(Point posicion) {
 		this.posicion = posicion;
 	}
 
-	public abstract void skill();
-
+	public boolean skill(Point objetivo){
+		if (objetivo.distance(this.posicion)< 3) {
+			System.out.println(objetivo.distance(this.posicion));
+			return true;
+		}
+		return false;
+	}
 	public Orientacion getOrientacion() {
 		return orientacion;
 	}
