@@ -7,8 +7,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Tablero extends JPanel implements Componentes {
-	private final static int SIZE = 20; // Tamaño del mapa
-	private Casilla casillas[][]; // Casillas del tablero que formarán el mapa
+	private final static int SIZE = 20; // Tama��o del mapa
+	private Casilla casillas[][]; // Casillas del tablero que formar��n el mapa
+	private int ancho = 0;
+	private int alto = 0;
 
 	Tablero() {
 		casillas = new Casilla[SIZE][SIZE];
@@ -22,10 +24,16 @@ public class Tablero extends JPanel implements Componentes {
 	}
 	
 	Tablero(String mapa) {
+		crearTablero(mapa);
+	}
+	
+	public void crearTablero(String mapa) {
+		this.removeAll();
+		casillas = null;
 		try {
 			BufferedReader bf = new BufferedReader(new FileReader(mapa));
-			int ancho = Integer.parseInt(bf.readLine());
-			int alto = Integer.parseInt(bf.readLine());
+			ancho = Integer.parseInt(bf.readLine());
+			alto = Integer.parseInt(bf.readLine());
 			String linea = "";
 			casillas = new Casilla[ancho][alto];
 			this.setLayout(new GridLayout(ancho, alto, 1, 1));
@@ -45,10 +53,44 @@ public class Tablero extends JPanel implements Componentes {
 			System.err.println("Error de lectura");
 		}
 	}
+	
+	public void cambiarTablero(String mapa) {
+		try {
+			BufferedReader bf = new BufferedReader(new FileReader(mapa));
+			ancho = Integer.parseInt(bf.readLine());
+			alto = Integer.parseInt(bf.readLine());
+			String linea = "";
+			this.setLayout(new GridLayout(ancho, alto, 1, 1));
+			while (bf.ready()) {
+				for (int j = 0; j < alto; j++) {
+					linea = bf.readLine();
+					for (int i = 0; i < ancho; i++) {
+						int numEstado = Integer.parseInt(linea.substring(i, i + 1));
+						casillas[i][j].setEstado(obtenerEstado(numEstado));
+						this.add(casillas[i][j]);
+					}
+				}
+			}
+			bf.close();
+		}
+		catch(Exception e) {
+			System.err.println("Error de lectura");
+		}
+				
+	}
 
 	/*
 	 * Getters & Setters
 	 */
+	
+	public int getAncho() {
+		return ancho;
+	}
+	
+	public int getAlto() {
+		return alto;
+	}
+	
 	public Casilla getCasilla(Point punto) {
 		return casillas[punto.x][punto.y];
 	}

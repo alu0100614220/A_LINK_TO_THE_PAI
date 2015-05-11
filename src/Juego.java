@@ -19,6 +19,8 @@ public class Juego extends JFrame implements Componentes {
 	public Timer heroeLife;
 	private Enemigo enemigo = new Enemigo(10, 10);
 	private Panel panel;
+	private int mapaActual = 1;
+	
 
 	Juego() {
 		enemyMoving = new Timer(500, new Listener());
@@ -63,6 +65,57 @@ public class Juego extends JFrame implements Componentes {
 
 	public void setEnemigos(ArrayList<Enemigo> enemigos) {
 		this.enemigos = enemigos;
+	}
+	
+	public int getMapaActual() {
+		return mapaActual;
+	}
+
+	public void setMapaActual(int mapaActual) {
+		this.mapaActual = mapaActual;
+	}
+
+	public void comprobarCambio() {
+		Point posicion = getHeroe().getPosicion();
+		if(posicion.x == 0) {
+			cambioMapa(Orientacion.Oeste);
+		}
+		else if (posicion.y == 0) {
+			cambioMapa(Orientacion.Norte);
+		}
+		else if (posicion.x == getTablero().getAncho()) {
+			cambioMapa(Orientacion.Este);
+		}
+		else if (posicion.y == getTablero().getAlto()) {
+			cambioMapa(Orientacion.Sur);
+		}
+	}
+
+	private void cambioMapa(Orientacion orientacion) {
+		mapaActual++;
+		switch (orientacion) {
+		case Norte:
+			getTablero().cambiarTablero("maps/" + mapaActual + "N" + ".map");
+			getHeroe().setPosicion(new Point(getHeroe().getPosicion().x, tablero.getAlto() - 1));
+			//repaint();
+			break;
+		case Sur:
+			getTablero().cambiarTablero("maps/" + mapaActual + "S" + ".map");
+			getHeroe().setPosicion(new Point(getHeroe().getPosicion().x, 1));			
+			break;
+		case Este:
+			getTablero().cambiarTablero("maps/" + mapaActual + "E" + ".map");
+			getHeroe().setPosicion(new Point(1, getHeroe().getPosicion().y));			
+			break;
+		case Oeste:
+			getTablero().cambiarTablero("maps/" + mapaActual + "O" + ".map");
+			getHeroe().setPosicion(new Point(getTablero().getAncho() - 1, getHeroe().getPosicion().y));			
+			break;
+
+		default:
+			System.err.println("Orientacion inválida.");
+			break;
+		}
 	}
 
 	/**
@@ -176,6 +229,7 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setOrientacion(Orientacion.Este);
 					}
 				}
+				comprobarCambio();
 			}
 
 		}

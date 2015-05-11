@@ -50,7 +50,7 @@ public class Casilla extends JPanel implements Componentes {
 	}
 
 	/**
-	 * Método para dibujar el estado de la casilla
+	 * M��todo para dibujar el estado de la casilla
 	 */
 	public void dibujarEstado(Graphics g) {
 		switch(estado) {
