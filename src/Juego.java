@@ -21,7 +21,7 @@ public class Juego extends JFrame implements Componentes {
 	private Panel panel;
 
 	Juego() {
-		enemyMoving = new Timer(1000, new Listener());
+		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
 		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
@@ -56,7 +56,18 @@ public class Juego extends JFrame implements Componentes {
 	public void setHeroe(Heroe heroe) {
 		this.heroe = heroe;
 	}
+	
+	public ArrayList<Enemigo> getEnemigos() {
+		return enemigos;
+	}
 
+	public void setEnemigos(ArrayList<Enemigo> enemigos) {
+		this.enemigos = enemigos;
+	}
+
+	/**
+	 * Método que define el movimiento del enemigo
+	 */
 	public void accion(Point objetivo) {
 		if (enemigo.skill(getHeroe().getPosicion())) {
 			getHeroe().setHp(-30);

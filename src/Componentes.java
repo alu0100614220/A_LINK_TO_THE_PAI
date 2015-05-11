@@ -1,4 +1,3 @@
-import java.awt.Toolkit;
 
 public interface Componentes {
 	// Resolución de la pantalla

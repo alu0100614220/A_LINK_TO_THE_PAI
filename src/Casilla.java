@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
@@ -66,16 +67,16 @@ public class Casilla extends JPanel implements Componentes {
 				g.setColor(Color.RED);
 				switch(orientacion){
 					case Norte:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("N", 5, 20);
 						break;
 					case Este:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("E", 5, 20);
 						break;
 					case Sur:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("S", 5, 20);
 						break;
 					case Oeste:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("O", 5, 20);
 						break;
 					default:
 						System.err.println("Orientacion desconocida");
@@ -86,16 +87,16 @@ public class Casilla extends JPanel implements Componentes {
 				g.setColor(Color.BLUE);
 				switch(orientacion){
 					case Norte:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("N", 5, 20);
 						break;
 					case Este:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("E", 5, 20);
 						break;
 					case Sur:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("S", 5, 20);
 						break;
 					case Oeste:
-						g.drawString(orientacion.toString(), 10, 10);
+						g.drawString("O", 5, 20);
 						break;
 					default:
 						System.err.println("Orientacion desconocida");
@@ -109,6 +110,8 @@ public class Casilla extends JPanel implements Componentes {
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Font fuente=new Font("Monospaced", Font.BOLD, 25);
+        g.setFont(fuente);
 		dibujarEstado(g);
 	}
 }
