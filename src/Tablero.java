@@ -23,15 +23,15 @@ public class Tablero extends JPanel implements Componentes {
 		}
 	}
 	
-	Tablero(String mapa) {
-		crearTablero(mapa);
+	Tablero(int mundo, int mapa) {
+		crearTablero(mundo, mapa);
 	}
 	
-	public void crearTablero(String mapa) {
+	public void crearTablero(int mundo, int mapa) {
 		this.removeAll();
 		casillas = null;
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader(mapa));
+			BufferedReader bf = new BufferedReader(new FileReader("maps/" + mundo + "/" + mapa + ".map" ));
 			ancho = Integer.parseInt(bf.readLine());
 			alto = Integer.parseInt(bf.readLine());
 			String linea = "";
@@ -108,6 +108,10 @@ public class Tablero extends JPanel implements Componentes {
 			return Estado.Heroe;
 		if(estado == Estado.Enemigo.ordinal())
 			return Estado.Enemigo;
+		if(estado == Estado.Puerta.ordinal())
+			return Estado.Puerta;
+		if(estado == Estado.Objeto.ordinal())
+			return Estado.Objeto;
 		return Estado.Vacia;
 	}
 }

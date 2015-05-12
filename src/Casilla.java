@@ -13,13 +13,11 @@ public class Casilla extends JPanel implements Componentes {
 	Casilla() {
 		setEstado(Estado.Vacia);
 		setOrientacion(Orientacion.Sur);
-		this.setBackground(Color.GREEN);
 	}
 	
 	Casilla(Estado estado) {
 		setEstado(estado);
 		setOrientacion(Orientacion.Sur);
-		this.setBackground(Color.GREEN);
 	}
 
 	/*
@@ -53,6 +51,8 @@ public class Casilla extends JPanel implements Componentes {
 	 * M��todo para dibujar el estado de la casilla
 	 */
 	public void dibujarEstado(Graphics g) {
+		g.setColor(Color.GREEN);
+		g.fillRect(0, 0, getWidth(), getHeight());
 		switch(estado) {
 			case Vacia:
 				setOcupado(false);
@@ -101,6 +101,11 @@ public class Casilla extends JPanel implements Componentes {
 					default:
 						System.err.println("Orientacion desconocida");
 				}
+				break;
+			case Puerta:
+				setOcupado(false);
+				g.setColor(Color.YELLOW);
+				g.fillRect(0, 0, getWidth(), getHeight());
 				break;
 			default:
 				System.err.println("Error al dibujar casilla.");
