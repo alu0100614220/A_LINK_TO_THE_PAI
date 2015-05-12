@@ -9,7 +9,7 @@ public class Casilla extends JPanel implements Componentes {
 	private Estado estado;
 	private Orientacion orientacion;
 	private boolean ocupado;	
-
+	private int danio = 0;
 	Casilla() {
 		setEstado(Estado.Vacia);
 		setOrientacion(Orientacion.Sur);
@@ -23,6 +23,7 @@ public class Casilla extends JPanel implements Componentes {
 	/*
 	 * Getters & Setters
 	 */
+	
 	public Estado getEstado() {
 		return estado;
 	}
@@ -118,5 +119,27 @@ public class Casilla extends JPanel implements Componentes {
 		Font fuente=new Font("Monospaced", Font.BOLD, 25);
         g.setFont(fuente);
 		dibujarEstado(g);
+	}
+
+	public int getDanio() {
+		return danio;
+	}
+
+	public void setDanio(int danioa) {
+		this.danio = danioa;
+		Thread threadaso = new Thread(new Runnable(){
+			public void run(){
+				if (Thread.currentThread().getName() == "threadaso") {
+					try {
+						Thread.sleep(3000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						danio = 0;
+					}
+				}
+			}
+		}, "threadaso");
+		threadaso.start();
 	}
 }

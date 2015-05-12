@@ -2,6 +2,7 @@ import java.awt.GridLayout;
 import java.awt.Point;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 
@@ -11,7 +12,8 @@ public class Tablero extends JPanel implements Componentes {
 	private Casilla casillas[][]; // Casillas del tablero que formar��n el mapa
 	private int ancho = 0;
 	private int alto = 0;
-
+	private ArrayList<Point> enemigos = new ArrayList<Point>();
+	
 	Tablero() {
 		casillas = new Casilla[SIZE][SIZE];
 		this.setLayout(new GridLayout(SIZE, SIZE));
@@ -26,7 +28,14 @@ public class Tablero extends JPanel implements Componentes {
 	Tablero(int mundo, int mapa) {
 		crearTablero(mundo, mapa);
 	}
-	
+	public ArrayList<Point> getEnemigos() {
+		return enemigos;
+	}
+
+	public void setEnemigos(ArrayList<Point> enemigos) {
+		this.enemigos = enemigos;
+	}
+
 	public void crearTablero(int mundo, int mapa) {
 		this.removeAll();
 		casillas = null;
@@ -44,6 +53,10 @@ public class Tablero extends JPanel implements Componentes {
 						int numEstado = Integer.parseInt(linea.substring(i, i + 1));
 						casillas[i][j] = new Casilla(obtenerEstado(numEstado));
 						this.add(casillas[i][j]);
+						if (obtenerEstado(numEstado)== Estado.Enemigo) {
+							Point punto = new Point(i,j);
+							enemigos.add(punto);
+						}
 					}
 				}
 			}
@@ -56,6 +69,7 @@ public class Tablero extends JPanel implements Componentes {
 	
 	public void cambiarTablero(String mapa) {
 		try {
+			enemigos.clear();
 			BufferedReader bf = new BufferedReader(new FileReader(mapa));
 			ancho = Integer.parseInt(bf.readLine());
 			alto = Integer.parseInt(bf.readLine());
@@ -68,6 +82,10 @@ public class Tablero extends JPanel implements Componentes {
 						int numEstado = Integer.parseInt(linea.substring(i, i + 1));
 						casillas[i][j].setEstado(obtenerEstado(numEstado));
 						this.add(casillas[i][j]);
+						if (obtenerEstado(numEstado)== Estado.Enemigo) {
+							Point punto = new Point(i,j);
+							enemigos.add(punto);
+						}
 					}
 				}
 			}

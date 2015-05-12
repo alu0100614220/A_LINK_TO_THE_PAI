@@ -17,11 +17,9 @@ public class Juego extends JFrame implements Componentes {
 	private KeyListn listener = new KeyListn();
 	public Timer enemyMoving;
 	public Timer heroeLife;
-	private Enemigo enemigo = new Enemigo(10, 10);
 	private Panel panel;
 	private int mundoActual = 1;
 	private Mundo mundo = new Mundo(mundoActual);
-	
 
 	Juego() {
 		enemyMoving = new Timer(500, new Listener());
@@ -37,8 +35,16 @@ public class Juego extends JFrame implements Componentes {
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
-		getTablero().setCasilla(enemigo.getPosicion(), Estado.Enemigo,
-				Orientacion.Sur);
+
+		setEnemigos();
+	}
+
+	private void setEnemigos() {
+		enemigos = new ArrayList<Enemigo>();
+		for (int i = 0; i < getTablero().getEnemigos().size(); i++) {
+			enemigos.add(new Enemigo(getTablero().getEnemigos().get(i),
+					getTablero()));
+		}
 	}
 
 	/*
@@ -59,7 +65,7 @@ public class Juego extends JFrame implements Componentes {
 	public void setHeroe(Heroe heroe) {
 		this.heroe = heroe;
 	}
-	
+
 	public ArrayList<Enemigo> getEnemigos() {
 		return enemigos;
 	}
@@ -67,7 +73,7 @@ public class Juego extends JFrame implements Componentes {
 	public void setEnemigos(ArrayList<Enemigo> enemigos) {
 		this.enemigos = enemigos;
 	}
-	
+
 	public int getMundoActual() {
 		return mundoActual;
 	}
@@ -78,90 +84,47 @@ public class Juego extends JFrame implements Componentes {
 
 	public void comprobarCambio() {
 		Point posicion = getHeroe().getPosicion();
-		if(posicion.x == 0) {
+		if (posicion.x == 0) {
+			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Oeste);
-			getHeroe().setPosicion(new Point(getTablero().getAncho() - 2, getHeroe().getPosicion().y));
-			getTablero().cambiarTablero("maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, Orientacion.Oeste);
-		}
-		else if (posicion.y == 0) {
+			getHeroe().setPosicion(
+					new Point(getTablero().getAncho() - 2, getHeroe()
+							.getPosicion().y));
+			getTablero().cambiarTablero(
+					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
+			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+					Orientacion.Oeste);
+			setEnemigos();
+		} else if (posicion.y == 0) {
+			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Norte);
-			getHeroe().setPosicion(new Point(getHeroe().getPosicion().x, tablero.getAlto() - 2));
-			getTablero().cambiarTablero("maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, Orientacion.Norte);
-		}
-		else if (posicion.x == getTablero().getAncho() - 1) {
+			getHeroe()
+					.setPosicion(
+							new Point(getHeroe().getPosicion().x, tablero
+									.getAlto() - 2));
+			getTablero().cambiarTablero(
+					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
+			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+					Orientacion.Norte);
+			setEnemigos();
+		} else if (posicion.x == getTablero().getAncho() - 1) {
+			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Este);
 			getHeroe().setPosicion(new Point(1, getHeroe().getPosicion().y));
-			getTablero().cambiarTablero("maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, Orientacion.Este);
-		}
-		else if (posicion.y == getTablero().getAlto() - 1) {
+			getTablero().cambiarTablero(
+					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
+			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+					Orientacion.Este);
+			setEnemigos();
+		} else if (posicion.y == getTablero().getAlto() - 1) {
+			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Sur);
 			getHeroe().setPosicion(new Point(getHeroe().getPosicion().x, 1));
-			getTablero().cambiarTablero("maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, Orientacion.Sur);
-		}
-	}
-
-	/**
-	 * Método que define el movimiento del enemigo
-	 */
-	public void accion(Point objetivo) {
-		if (enemigo.skill(getHeroe().getPosicion())) {
-			getHeroe().setHp(-30);
-			if (getHeroe().getHp() <= 0) {
-				panel.Vida.setText("RIP");
-				heroeLife.stop();
-				enemyMoving.stop();
-			} else {
-				panel.Vida.setText(Integer.toString(getHeroe().getHp()));
-			}
-		}
-		if (enemigo.getPosicion().x < heroe.getPosicion().x) {
-			Point posicion = new Point(enemigo.getPosicion().x + 1,
-					enemigo.getPosicion().y);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Este);
-				enemigo.setPosicion(posicion);
-				enemigo.setOrientacion(Orientacion.Este);
-			}
-		} else if (enemigo.getPosicion().x > heroe.getPosicion().x) {
-			Point posicion = new Point(enemigo.getPosicion().x - 1,
-					enemigo.getPosicion().y);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Oeste);
-				enemigo.setPosicion(posicion);
-				enemigo.setOrientacion(Orientacion.Oeste);
-			}
-		} else if (enemigo.getPosicion().y < heroe.getPosicion().y) {
-			Point posicion = new Point(enemigo.getPosicion().x,
-					enemigo.getPosicion().y + 1);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Sur);
-				enemigo.setPosicion(posicion);
-				enemigo.setOrientacion(Orientacion.Sur);
-			}
-		} else if (enemigo.getPosicion().y > heroe.getPosicion().y) {
-			Point posicion = new Point(enemigo.getPosicion().x,
-					enemigo.getPosicion().y - 1);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
-				getTablero().setCasilla(enemigo.getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Norte);
-				enemigo.setPosicion(posicion);
-				enemigo.setOrientacion(Orientacion.Norte);
-			}
+			getTablero().cambiarTablero(
+					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
+			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+					Orientacion.Sur);
+			setEnemigos();
 		}
 	}
 
@@ -229,7 +192,11 @@ public class Juego extends JFrame implements Componentes {
 
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			accion(getHeroe().getPosicion());
+			for (int i = 0; i < enemigos.size(); i++) {
+				enemigos.get(i).actuar(getHeroe().getPosicion());
+				
+			}
+
 		}
 	}
 }
