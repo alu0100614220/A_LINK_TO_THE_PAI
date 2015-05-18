@@ -23,7 +23,7 @@ public class MainWindow {
 				Clip audioClip = (Clip) AudioSystem.getLine(info);
 				audioClip.open(audioStream);
 				audioClip.start();
-				audioClip.loop(0);
+				audioClip.loop(100);
 			} catch (LineUnavailableException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
