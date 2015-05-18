@@ -23,6 +23,8 @@ public class Tablero extends JPanel implements Componentes {
 	Image heroe = (new ImageIcon("img/heroeoncio.gif")).getImage();
 	Image obstaculo = (new ImageIcon("img/obstaculo.gif")).getImage();
 	Image enemigo = (new ImageIcon("img/enemigo.gif")).getImage();
+	Image llave = (new ImageIcon("img/llave.gif")).getImage();
+	Image cofre = (new ImageIcon("img/cofre.gif")).getImage();
 
 	private ArrayList<Point> enemigos = new ArrayList<Point>();
 
@@ -127,9 +129,6 @@ public class Tablero extends JPanel implements Componentes {
 		for (int i = 0; i < ancho; i++)
 			for (int j = 0; j < alto; j++) {
 				switch (casillas[i][j].getEstado()) {
-				case Llave:
-					System.out.println("LLAVE LOL");
-					g.drawString("LLAVE", 0, 0);
 				case Heroe:
 					g2.drawImage(heroe, (int) (i * ratioW), (int) (j * ratioH),
 							(int) ratioW, (int) ratioH, this);
@@ -141,6 +140,16 @@ public class Tablero extends JPanel implements Componentes {
 					break;
 				case Enemigo:
 					g2.drawImage(enemigo, (int) (i * ratioW),
+							(int) (j * ratioH), (int) ratioW,
+							(int) (ratioH + ratioH / 2), this);
+					break;
+				case Cofre:
+					g2.drawImage(cofre, (int) (i * ratioW),
+							(int) (j * ratioH), (int) ratioW,
+							(int) (ratioH + ratioH / 2), this);
+					break;
+				case Llave:
+					g2.drawImage(llave, (int) (i * ratioW),
 							(int) (j * ratioH), (int) ratioW,
 							(int) (ratioH + ratioH / 2), this);
 					break;
