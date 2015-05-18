@@ -20,7 +20,10 @@ public class Tablero extends JPanel implements Componentes {
 	private int alto = 0;
 	Image suelo2 = (new ImageIcon("img/hierbilla2.gif")).getImage();
 	Image suelo = (new ImageIcon("img/hierbilla.gif")).getImage();
-	Image heroe = (new ImageIcon("img/heroeoncio.gif")).getImage();
+	Image heroeS = (new ImageIcon("img/heroeoncio.gif")).getImage();
+	Image heroeN = (new ImageIcon("img/heroe_arriba.gif")).getImage();
+	Image heroeE = (new ImageIcon("img/heroe_derecha.gif")).getImage();
+	Image heroeO = (new ImageIcon("img/heroe_izquierda.gif")).getImage();
 	Image obstaculo = (new ImageIcon("img/obstaculo.gif")).getImage();
 	Image enemigo = (new ImageIcon("img/enemigo.gif")).getImage();
 	Image llave = (new ImageIcon("img/llave.gif")).getImage();
@@ -130,8 +133,27 @@ public class Tablero extends JPanel implements Componentes {
 			for (int j = 0; j < alto; j++) {
 				switch (casillas[i][j].getEstado()) {
 				case Heroe:
-					g2.drawImage(heroe, (int) (i * ratioW), (int) (j * ratioH),
-							(int) ratioW, (int) ratioH, this);
+					
+					switch (casillas[i][j].getOrientacion()) {
+					case Norte:
+						g2.drawImage(heroeN, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
+					case Este:
+						g2.drawImage(heroeE, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
+					case Sur:
+						g2.drawImage(heroeS, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
+					case Oeste:
+						g2.drawImage(heroeO, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
+					default:
+						System.err.println("Orientacion desconocida");
+					}
 					break;
 				case Obstaculo:
 					g2.drawImage(obstaculo, (int) (i * ratioW),

@@ -5,7 +5,7 @@ import javax.swing.Timer;
 
 public class Enemigo implements Componentes {
 	private int hp; // Vida del enemigo
-	private Point posicion; // Posición en el mapa
+	private Point posicion; // Posici��n en el mapa
 	private Orientacion orientacion;
 	private Tablero tablero;
 	private Timer accion;
