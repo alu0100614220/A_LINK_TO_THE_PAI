@@ -12,6 +12,7 @@ public class Enemigo implements Componentes {
 	private final static int SPEED = 500;
 	private Juego juego;
 	private int Damage = -30;
+	private static int HP = 100;
 
 	Enemigo(Point punto, Tablero tableraso, Juego juegaso) {
 		accion = new Timer(SPEED, new Listener());
@@ -39,7 +40,7 @@ public class Enemigo implements Componentes {
 	}
 
 	public boolean actuar(Point objetivo) {
-	
+
 		if (skill(objetivo)) {
 			return true;
 		} else {
@@ -50,37 +51,47 @@ public class Enemigo implements Componentes {
 
 	public void mover(Point objetivo) {
 		Point posicion;
-		
-		if ((getPosicion().x < objetivo.x)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x+1,getPosicion().y)).isOcupado())) {
-				getTablero().setCasilla(getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Este);
-				setPosicion(posicion);
-				setOrientacion(Orientacion.Este);
-		} else if ((getPosicion().x > objetivo.x)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x-1,getPosicion().y)).isOcupado())) {
-				getTablero().setCasilla(getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Oeste);
-				setPosicion(posicion);
-				setOrientacion(Orientacion.Oeste);
-		} else if ((getPosicion().y < objetivo.y)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x,getPosicion().y+1)).isOcupado())) {
-				getTablero().setCasilla(getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Sur);
-				setPosicion(posicion);
-				setOrientacion(Orientacion.Sur);
 
-		} else if ((getPosicion().y > objetivo.y)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x,getPosicion().y-1)).isOcupado())) {
-				getTablero().setCasilla(getPosicion(), Estado.Vacia,
-						Orientacion.Este);
-				getTablero().setCasilla(posicion, Estado.Enemigo,
-						Orientacion.Norte);
-				setPosicion(posicion);
-				setOrientacion(Orientacion.Norte);
-		}		
+		if ((getPosicion().x < objetivo.x)
+				&& (!getTablero().getCasilla(
+						posicion = new Point(getPosicion().x + 1,
+								getPosicion().y)).isOcupado())) {
+			getTablero().setCasilla(getPosicion(), Estado.Vacia,
+					Orientacion.Este);
+			getTablero().setCasilla(posicion, Estado.Enemigo, Orientacion.Este);
+			setPosicion(posicion);
+			setOrientacion(Orientacion.Este);
+		} else if ((getPosicion().x > objetivo.x)
+				&& (!getTablero().getCasilla(
+						posicion = new Point(getPosicion().x - 1,
+								getPosicion().y)).isOcupado())) {
+			getTablero().setCasilla(getPosicion(), Estado.Vacia,
+					Orientacion.Este);
+			getTablero()
+					.setCasilla(posicion, Estado.Enemigo, Orientacion.Oeste);
+			setPosicion(posicion);
+			setOrientacion(Orientacion.Oeste);
+		} else if ((getPosicion().y < objetivo.y)
+				&& (!getTablero().getCasilla(
+						posicion = new Point(getPosicion().x,
+								getPosicion().y + 1)).isOcupado())) {
+			getTablero().setCasilla(getPosicion(), Estado.Vacia,
+					Orientacion.Este);
+			getTablero().setCasilla(posicion, Estado.Enemigo, Orientacion.Sur);
+			setPosicion(posicion);
+			setOrientacion(Orientacion.Sur);
+
+		} else if ((getPosicion().y > objetivo.y)
+				&& (!getTablero().getCasilla(
+						posicion = new Point(getPosicion().x,
+								getPosicion().y - 1)).isOcupado())) {
+			getTablero().setCasilla(getPosicion(), Estado.Vacia,
+					Orientacion.Este);
+			getTablero()
+					.setCasilla(posicion, Estado.Enemigo, Orientacion.Norte);
+			setPosicion(posicion);
+			setOrientacion(Orientacion.Norte);
+		}
 	}
 
 	public void setHp(int hp) {
@@ -111,8 +122,7 @@ public class Enemigo implements Componentes {
 			punto.x = punto.x - 1;
 			break;
 		}
-		if (objetivo.x == punto.x
-				&& objetivo.y == punto.y) {
+		if (objetivo.x == punto.x && objetivo.y == punto.y) {
 			return true;
 		} else {
 			return false;
@@ -126,13 +136,21 @@ public class Enemigo implements Componentes {
 	public void setOrientacion(Orientacion orientacion) {
 		this.orientacion = orientacion;
 	}
-
+	
 	public int getDamage() {
 		return Damage;
 	}
 
 	public void setDamage(int damage) {
 		Damage = damage;
+	}
+
+	public int getHP() {
+		return HP;
+	}
+
+	public void setHP(int hP) {
+		HP = this.HP + hP;
 	}
 
 	class Listener implements ActionListener {

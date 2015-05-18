@@ -135,9 +135,15 @@ public class Juego extends JFrame implements Componentes {
 			enemyMoving.start();
 			if (getHeroe().getHp() >= 0) {
 				if (e.getKeyCode() == KeyEvent.VK_A) {
-					System.out.println(getHeroe().getDamage());
 					for (int i = 0; i < enemigos.size(); i++) {
-						
+						if(getHeroe().atacar(enemigos.get(i))){
+							System.out.println(enemigos.get(i).getHp());
+							enemigos.get(i).setHp(getHeroe().getDamage());
+							System.out.println(enemigos.get(i).getHp());
+						}
+						if (enemigos.get(i).getHp()<= 0) {
+							enemigos.remove(i);
+						}
 					}
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
@@ -185,7 +191,6 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setOrientacion(Orientacion.Este);
 					}
 				}
-				System.out.println(getHeroe().getOrientacion());
 				comprobarCambio();
 			}
 

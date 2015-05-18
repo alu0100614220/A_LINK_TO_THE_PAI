@@ -1,18 +1,18 @@
 import java.awt.Point;
 
 public class Heroe implements Componentes {
-	private static final int HP = 100;	// Vida inicial del jugador
+	private static final int HP = 100; // Vida inicial del jugador
 	private int hp; // Vida del jugador
 	private int arma; // Arma actual del jugador
 	private Point posicion; // Posición en el mapa del jugador
 	private Orientacion orientacion; // Orientación en el mapa del jugador
-	private int damage;
+	private int damage = -50;
+
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);
 		this.setHp(HP);
 		this.setArma(Arma.Espada);
-		this.setDamage(50);
 	}
 
 	/*
@@ -21,8 +21,9 @@ public class Heroe implements Componentes {
 	public int getHp() {
 		return hp;
 	}
-	public boolean atacar(Enemigo enemy){
-		Point punto = new Point(enemy.getPosicion());
+
+	public boolean atacar(Enemigo enemy) {
+		Point punto = new Point(this.getPosicion());
 		switch (orientacion) {
 		case Norte:
 			punto.y = punto.y - 1;
@@ -39,13 +40,13 @@ public class Heroe implements Componentes {
 		}
 		if (enemy.getPosicion().x == punto.x
 				&& enemy.getPosicion().y == punto.y) {
-			System.out.println("HAY ENEMIGO AHI");
 			return true;
 		} else {
 			return false;
 		}
-		
+
 	}
+
 	public void setHp(int hp) {
 		this.hp = this.hp + hp;
 	}
