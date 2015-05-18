@@ -185,14 +185,18 @@ public class Tablero extends JPanel implements Componentes {
 	public Estado obtenerEstado(int estado) {
 		if (estado == Estado.Obstaculo.ordinal())
 			return Estado.Obstaculo;
-		if (estado == Estado.Heroe.ordinal())
+		else if (estado == Estado.Heroe.ordinal())
 			return Estado.Heroe;
-		if (estado == Estado.Enemigo.ordinal())
+		else if (estado == Estado.Enemigo.ordinal())
 			return Estado.Enemigo;
-		if (estado == Estado.Puerta.ordinal())
+		else if (estado == Estado.Puerta.ordinal())
 			return Estado.Puerta;
-		if (estado == Estado.Objeto.ordinal())
+		else if (estado == Estado.Objeto.ordinal())
 			return Estado.Objeto;
+		else if (estado == Estado.Cofre.ordinal())
+			return Estado.Cofre;
+		else if (estado == Estado.Llave.ordinal())
+			return Estado.Llave;
 		return Estado.Vacia;
 	}
 }
