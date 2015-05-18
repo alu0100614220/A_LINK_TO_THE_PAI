@@ -142,27 +142,30 @@ public class Juego extends JFrame implements Componentes {
 					
 				}
 				if (e.getKeyCode() == KeyEvent.VK_A) {
-					if (heroeCoolDown.isRunning() == false) { //Comprueba el cd del ataque
+					if (heroeCoolDown.isRunning() == false) { // Comprueba el cd
+																// del ataque
 						for (int i = 0; i < enemigos.size(); i++) {
-							if(getHeroe().atacar(enemigos.get(i))){
+							if (getHeroe().atacar(enemigos.get(i))) {
 								enemigos.get(i).setHp(getHeroe().getDamage());
 							}
-							if (enemigos.get(i).getHp()<= 0) {
-								getTablero().setCasilla(enemigos.get(i).getPosicion(), Estado.Vacia, Orientacion.Este);
+							if (enemigos.get(i).getHp() <= 0) {
+								getTablero().setCasilla(
+										enemigos.get(i).getPosicion(),
+										Estado.Vacia, Orientacion.Este);
 								enemigos.remove(i);
 							}
 						}
-					}else{
+					} else {
 					}
 					heroeCoolDown.start();
-					
+
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
 					if (!getTablero().getCasilla(posicion).isOcupado()) {
-						if (getTablero().getCasilla(posicion).getEstado()== Estado.Llave) {
-							System.out.println("habia una llave");
+						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+							getHeroe().setKey(true);
 						}
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
@@ -175,6 +178,9 @@ public class Juego extends JFrame implements Componentes {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y + 1);
 					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+							getHeroe().setKey(true);
+						}
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
@@ -186,6 +192,9 @@ public class Juego extends JFrame implements Componentes {
 					Point posicion = new Point(getHeroe().getPosicion().x - 1,
 							getHeroe().getPosicion().y);
 					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+							getHeroe().setKey(true);
+						}
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
@@ -197,6 +206,9 @@ public class Juego extends JFrame implements Componentes {
 					Point posicion = new Point(getHeroe().getPosicion().x + 1,
 							getHeroe().getPosicion().y);
 					if (!getTablero().getCasilla(posicion).isOcupado()) {
+						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+							getHeroe().setKey(true);
+						}
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
@@ -216,13 +228,15 @@ public class Juego extends JFrame implements Componentes {
 		public void keyTyped(KeyEvent e) {
 		}
 	}
-	class CDListener implements ActionListener{
+
+	class CDListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
 			heroeCoolDown.stop();
 		}
-		
+
 	}
+
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
@@ -233,8 +247,9 @@ public class Juego extends JFrame implements Componentes {
 						heroeLife.stop();
 						panel.Vida.setText("R.I.P");
 
-					}else{
-						panel.Vida.setText(Integer.toString(getHeroe().getHp()));
+					} else {
+						panel.Vida
+								.setText(Integer.toString(getHeroe().getHp()));
 
 					}
 				}

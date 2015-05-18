@@ -7,7 +7,7 @@ public class Heroe implements Componentes {
 	private Point posicion; // Posición en el mapa del jugador
 	private Orientacion orientacion; // Orientación en el mapa del jugador
 	private int damage = -50;
-
+	private boolean key = false;
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);
@@ -81,5 +81,14 @@ public class Heroe implements Componentes {
 
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+
+	public boolean getKey() {
+		return key;
+	}
+
+	public void setKey(boolean key) {
+		System.out.println("Llave obtenida.");
+		this.key = key;
 	}
 }
