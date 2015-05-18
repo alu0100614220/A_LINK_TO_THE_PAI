@@ -49,47 +49,38 @@ public class Enemigo implements Componentes {
 
 	public void mover(Point objetivo) {
 		System.out.println("Me muevo");
-		if (getPosicion().x < objetivo.x) {
-			Point posicion = new Point(getPosicion().x + 1, getPosicion().y);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
+		Point posicion;
+		
+		if ((getPosicion().x < objetivo.x)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x+1,getPosicion().y)).isOcupado())) {
 				getTablero().setCasilla(getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Este);
 				setPosicion(posicion);
 				setOrientacion(Orientacion.Este);
-			}
-		} else if (getPosicion().x > objetivo.x) {
-			Point posicion = new Point(getPosicion().x - 1, getPosicion().y);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
+		} else if ((getPosicion().x > objetivo.x)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x-1,getPosicion().y)).isOcupado())) {
 				getTablero().setCasilla(getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Oeste);
 				setPosicion(posicion);
 				setOrientacion(Orientacion.Oeste);
-			}
-		} else if (getPosicion().y < objetivo.y) {
-			Point posicion = new Point(getPosicion().x, getPosicion().y + 1);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
+		} else if ((getPosicion().y < objetivo.y)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x,getPosicion().y+1)).isOcupado())) {
 				getTablero().setCasilla(getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Sur);
 				setPosicion(posicion);
 				setOrientacion(Orientacion.Sur);
-			}
-		} else if (getPosicion().y > objetivo.y) {
-			Point posicion = new Point(getPosicion().x, getPosicion().y - 1);
-			if (!getTablero().getCasilla(posicion).isOcupado()) {
+
+		} else if ((getPosicion().y > objetivo.y)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x,getPosicion().y-1)).isOcupado())) {
 				getTablero().setCasilla(getPosicion(), Estado.Vacia,
 						Orientacion.Este);
 				getTablero().setCasilla(posicion, Estado.Enemigo,
 						Orientacion.Norte);
 				setPosicion(posicion);
 				setOrientacion(Orientacion.Norte);
-			}
-		}
+		}		
 	}
 
 	public void setHp(int hp) {
