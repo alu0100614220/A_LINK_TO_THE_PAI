@@ -142,6 +142,7 @@ public class Juego extends JFrame implements Componentes {
 							System.out.println(enemigos.get(i).getHp());
 						}
 						if (enemigos.get(i).getHp()<= 0) {
+							getTablero().setCasilla(enemigos.get(i).getPosicion(), Estado.Vacia, Orientacion.Este);
 							enemigos.remove(i);
 						}
 					}
