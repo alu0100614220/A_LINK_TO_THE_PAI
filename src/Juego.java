@@ -49,7 +49,7 @@ public class Juego extends JFrame implements Componentes {
 		enemigos = new ArrayList<Enemigo>();
 		for (int i = 0; i < getTablero().getEnemigos().size(); i++) {
 			enemigos.add(new Enemigo(getTablero().getEnemigos().get(i),
-					getTablero(), this));
+					getTablero()));
 		}
 	}
 
@@ -165,7 +165,7 @@ public class Juego extends JFrame implements Componentes {
 																// del ataque
 						for (int i = 0; i < enemigos.size(); i++) {
 							if (getHeroe().atacar(enemigos.get(i))) {
-								enemigos.get(i).setHp(getHeroe().getDamage());
+								enemigos.get(i).setHp(getHeroe().getDanio());
 							}
 							if (enemigos.get(i).getHp() <= 0) {
 								getTablero().setCasilla(
@@ -264,17 +264,10 @@ public class Juego extends JFrame implements Componentes {
 					if (getHeroe().getHp() <= 0) {
 						enemyMoving.stop();
 						heroeLife.stop();
-						panel.Vida.setText("R.I.P");
-
-					} else {
-						panel.Vida
-								.setText(Integer.toString(getHeroe().getHp()));
-
 					}
 				}
-
 			}
-
+			panel.actualizar();
 		}
 	}
 }

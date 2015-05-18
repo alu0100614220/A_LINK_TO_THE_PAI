@@ -6,7 +6,7 @@ public class Heroe implements Componentes {
 	private int arma; // Arma actual del jugador
 	private Point posicion; // Posición en el mapa del jugador
 	private Orientacion orientacion; // Orientación en el mapa del jugador
-	private int damage = -50;
+	private int danio = -50;
 	private boolean key = false;
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
@@ -75,12 +75,12 @@ public class Heroe implements Componentes {
 		this.orientacion = orientacion;
 	}
 
-	public int getDamage() {
-		return damage;
+	public int getDanio() {
+		return danio;
 	}
 
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setDanio(int danio) {
+		this.danio = danio;
 	}
 
 	public boolean getKey() {

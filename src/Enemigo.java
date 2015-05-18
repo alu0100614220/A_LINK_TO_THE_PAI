@@ -1,22 +1,14 @@
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 
 public class Enemigo implements Componentes {
 	private int hp; // Vida del enemigo
 	private Point posicion; // Posici��n en el mapa
 	private Orientacion orientacion;
 	private Tablero tablero;
-	private Timer accion;
-	private final static int SPEED = 500;
-	private int Damage = -30;
-	private int HP = 100;
+	private int danyo = -30;
 
-	Enemigo(Point punto, Tablero tableraso, Juego juegaso) {
-		accion = new Timer(SPEED, new Listener());
-		accion.start();
-		tablero = tableraso;
+	Enemigo(Point punto, Tablero tablero) {
+		setTablero(tablero);
 		setPosicion(new Point(punto));
 		setOrientacion(Orientacion.Sur);
 		this.setHp(100);
@@ -136,23 +128,10 @@ public class Enemigo implements Componentes {
 	}
 
 	public int getDamage() {
-		return Damage;
+		return danyo;
 	}
 
 	public void setDamage(int damage) {
-		Damage = damage;
-	}
-
-	public int getHP() {
-		return HP;
-	}
-
-	public void setHP(int hP) {
-		HP = this.HP + hP;
-	}
-
-	class Listener implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-		}
+		danyo = damage;
 	}
 }

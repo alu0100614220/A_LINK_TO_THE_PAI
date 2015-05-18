@@ -64,7 +64,6 @@ public class Tablero extends JPanel implements Componentes {
 			alto = Integer.parseInt(bf.readLine());
 			String linea = "";
 			casillas = new Casilla[ancho][alto];
-			// this.setLayout(new GridLayout(ancho, alto, 1, 1));
 			while (bf.ready()) {
 				for (int j = 0; j < alto; j++) {
 					linea = bf.readLine();
@@ -72,7 +71,6 @@ public class Tablero extends JPanel implements Componentes {
 						int numEstado = Integer.parseInt(linea.substring(i,
 								i + 1));
 						casillas[i][j] = new Casilla(obtenerEstado(numEstado));
-						// this.add(casillas[i][j]);
 						if (obtenerEstado(numEstado) == Estado.Enemigo) {
 							Point punto = new Point(i, j);
 							enemigos.add(punto);
@@ -93,7 +91,6 @@ public class Tablero extends JPanel implements Componentes {
 			ancho = Integer.parseInt(bf.readLine());
 			alto = Integer.parseInt(bf.readLine());
 			String linea = "";
-			// this.setLayout(new GridLayout(ancho, alto, 1, 1));
 			while (bf.ready()) {
 				for (int j = 0; j < alto; j++) {
 					linea = bf.readLine();
@@ -101,7 +98,6 @@ public class Tablero extends JPanel implements Componentes {
 						int numEstado = Integer.parseInt(linea.substring(i,
 								i + 1));
 						casillas[i][j].setEstado(obtenerEstado(numEstado));
-						// this.add(casillas[i][j]);
 						if (obtenerEstado(numEstado) == Estado.Enemigo) {
 							Point punto = new Point(i, j);
 							enemigos.add(punto);
