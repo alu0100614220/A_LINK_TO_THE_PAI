@@ -12,7 +12,7 @@ public class Enemigo implements Componentes {
 	private final static int SPEED = 500;
 	private Juego juego;
 	private int Damage = -30;
-	private static int HP = 100;
+	private int HP = 100;
 
 	Enemigo(Point punto, Tablero tableraso, Juego juegaso) {
 		accion = new Timer(SPEED, new Listener());
