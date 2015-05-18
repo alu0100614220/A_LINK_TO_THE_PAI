@@ -10,7 +10,6 @@ public class Enemigo implements Componentes {
 	private Tablero tablero;
 	private Timer accion;
 	private final static int SPEED = 500;
-	private Juego juego;
 	private int Damage = -30;
 	private int HP = 100;
 
@@ -18,7 +17,6 @@ public class Enemigo implements Componentes {
 		accion = new Timer(SPEED, new Listener());
 		accion.start();
 		tablero = tableraso;
-		juego = juegaso;
 		setPosicion(new Point(punto));
 		setOrientacion(Orientacion.Sur);
 		this.setHp(100);
@@ -136,7 +134,7 @@ public class Enemigo implements Componentes {
 	public void setOrientacion(Orientacion orientacion) {
 		this.orientacion = orientacion;
 	}
-	
+
 	public int getDamage() {
 		return Damage;
 	}
