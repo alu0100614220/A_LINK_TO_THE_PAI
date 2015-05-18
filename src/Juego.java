@@ -43,7 +43,7 @@ public class Juego extends JFrame implements Componentes {
 		enemigos = new ArrayList<Enemigo>();
 		for (int i = 0; i < getTablero().getEnemigos().size(); i++) {
 			enemigos.add(new Enemigo(getTablero().getEnemigos().get(i),
-					getTablero()));
+					getTablero(), this));
 		}
 	}
 
@@ -194,7 +194,7 @@ public class Juego extends JFrame implements Componentes {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
 				enemigos.get(i).actuar(getHeroe().getPosicion());
-				
+
 			}
 
 		}

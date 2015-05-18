@@ -10,11 +10,13 @@ public class Enemigo implements Componentes {
 	private Tablero tablero;
 	private Timer accion;
 	private final static int SPEED = 500;
+	private Juego juego;
 
-	Enemigo(Point punto, Tablero tableraso) {
+	Enemigo(Point punto, Tablero tableraso, Juego juegaso) {
 		accion = new Timer(SPEED, new Listener());
 		accion.start();
 		tablero = tableraso;
+		juego = juegaso;
 		setPosicion(new Point(punto));
 		setOrientacion(Orientacion.Sur);
 		this.setHp(100);
@@ -34,41 +36,19 @@ public class Enemigo implements Componentes {
 	public int getHp() {
 		return hp;
 	}
-	public void atacar(){
-		Point punto = getPosicion();
-		switch (getOrientacion()) {
-		case Norte:
-			punto.y = punto.y - 1;
-			tablero.getCasilla(punto).setDanio(100);
-			tablero.setCasilla(punto, Estado.Puerta, orientacion);
-			break;
-		case Sur:
-			punto.y = punto.y + 1;
-			tablero.getCasilla(punto).setDanio(100);
-			tablero.setCasilla(punto, Estado.Puerta, orientacion);
-			break;
-		case Este:
-			punto.x = punto.x + 1;
-			tablero.getCasilla(punto).setDanio(100);
-			tablero.setCasilla(punto, Estado.Puerta, orientacion);
-			break;
-		case Oeste:
-			punto.x = punto.x - 1;
-			tablero.getCasilla(punto).setDanio(100);
-			tablero.setCasilla(punto, Estado.Puerta, orientacion);
-			break;
-		}
-		
-	}
-	public void actuar(Point objetivo){
+
+	public void actuar(Point objetivo) {
+	
 		if (skill(objetivo)) {
-			atacar();
-		}else{
+			System.out.println("LEMETOUNATORTA");
+			
+		} else {
 			mover(objetivo);
 		}
 	}
 
 	public void mover(Point objetivo) {
+		System.out.println("Me muevo");
 		if (getPosicion().x < objetivo.x) {
 			Point posicion = new Point(getPosicion().x + 1, getPosicion().y);
 			if (!getTablero().getCasilla(posicion).isOcupado()) {
@@ -120,31 +100,33 @@ public class Enemigo implements Componentes {
 		return posicion;
 	}
 
-	public void accion(Point objetivo) {
-
-		if (objetivo.x < this.posicion.x) {
-			this.posicion.x = this.posicion.x - 1;
-		}
-		if (objetivo.x > this.posicion.x) {
-			this.posicion.x = this.posicion.x + 1;
-		}
-		if (objetivo.y < this.posicion.y) {
-			this.posicion.y = this.posicion.y - 1;
-		}
-		if (objetivo.y > this.posicion.y) {
-			this.posicion.y = this.posicion.y + 1;
-		}
-	}
-
 	public void setPosicion(Point posicion) {
+		System.out.println("POR QUE COÑO ME MUEVO");
 		this.posicion = posicion;
 	}
 
 	public boolean skill(Point objetivo) {
-		if (objetivo.distance(this.posicion) < 3) {
-			return true;
+		Point punto = new Point(getPosicion());
+		switch (getOrientacion()) {
+		case Norte:
+			punto.y = punto.y - 1;
+			break;
+		case Sur:
+			punto.y = punto.y + 1;
+			break;
+		case Este:
+			punto.x = punto.x + 1;
+			break;
+		case Oeste:
+			punto.x = punto.x - 1;
+			break;
 		}
-		return false;
+		if (objetivo.x == punto.x
+				&& objetivo.y == punto.y) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public Orientacion getOrientacion() {
