@@ -17,6 +17,8 @@ public class Juego extends JFrame implements Componentes {
 	private KeyListn listener = new KeyListn();
 	public Timer enemyMoving;
 	public Timer heroeLife;
+	public Timer heroeCoolDown;
+
 	private Panel panel;
 	private int mundoActual = 1;
 	private Mundo mundo = new Mundo(mundoActual);
@@ -24,6 +26,7 @@ public class Juego extends JFrame implements Componentes {
 	Juego() {
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
+		heroeCoolDown = new Timer(1000, new CDListener());
 		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
@@ -134,18 +137,24 @@ public class Juego extends JFrame implements Componentes {
 		public void keyPressed(KeyEvent e) {
 			enemyMoving.start();
 			if (getHeroe().getHp() >= 0) {
+				
 				if (e.getKeyCode() == KeyEvent.VK_A) {
-					for (int i = 0; i < enemigos.size(); i++) {
-						if(getHeroe().atacar(enemigos.get(i))){
-							System.out.println(enemigos.get(i).getHp());
-							enemigos.get(i).setHp(getHeroe().getDamage());
-							System.out.println(enemigos.get(i).getHp());
+					if (heroeCoolDown.isRunning() == false) { //Comprueba el cd del ataque
+						for (int i = 0; i < enemigos.size(); i++) {
+							if(getHeroe().atacar(enemigos.get(i))){
+								System.out.println(enemigos.get(i).getHp());
+								enemigos.get(i).setHp(getHeroe().getDamage());
+								System.out.println(enemigos.get(i).getHp());
+							}
+							if (enemigos.get(i).getHp()<= 0) {
+								getTablero().setCasilla(enemigos.get(i).getPosicion(), Estado.Vacia, Orientacion.Este);
+								enemigos.remove(i);
+							}
 						}
-						if (enemigos.get(i).getHp()<= 0) {
-							getTablero().setCasilla(enemigos.get(i).getPosicion(), Estado.Vacia, Orientacion.Este);
-							enemigos.remove(i);
-						}
+					}else{
 					}
+					heroeCoolDown.start();
+					
 				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
@@ -203,7 +212,13 @@ public class Juego extends JFrame implements Componentes {
 		public void keyTyped(KeyEvent e) {
 		}
 	}
+	class CDListener implements ActionListener{
 
+		public void actionPerformed(ActionEvent arg0) {
+			heroeCoolDown.stop();
+		}
+		
+	}
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
