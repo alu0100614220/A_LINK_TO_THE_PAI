@@ -38,8 +38,11 @@ public class Juego extends JFrame implements Componentes {
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
-
 		setEnemigos();
+		
+		
+		
+		
 	}
 
 	private void setEnemigos() {
