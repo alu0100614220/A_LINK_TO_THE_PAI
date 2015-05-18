@@ -138,7 +138,24 @@ public class Juego extends JFrame implements Componentes {
 			enemyMoving.start();
 			if (getHeroe().getHp() >= 0) {
 				if (e.getKeyCode() == KeyEvent.VK_E) {
-					
+					Point punto = new Point(getHeroe().getPosicion());
+					switch (getHeroe().getOrientacion()) {
+					case Norte:
+						punto.y = punto.y - 1;
+						break;
+					case Sur:
+						punto.y = punto.y + 1;
+						break;
+					case Este:
+						punto.x = punto.x + 1;
+						break;
+					case Oeste:
+						punto.x = punto.x - 1;
+						break;
+					}
+					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre && getHeroe().getKey()) {
+						System.out.println("FINAL");
+					}
 				}
 				if (e.getKeyCode() == KeyEvent.VK_A) {
 					if (heroeCoolDown.isRunning() == false) { // Comprueba el cd
