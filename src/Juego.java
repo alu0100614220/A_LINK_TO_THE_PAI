@@ -76,6 +76,7 @@ public class Juego extends JFrame implements Componentes {
 
 	public int getMundoActual() {
 		return mundoActual;
+
 	}
 
 	public void setMundoActual(int mundoActual) {
@@ -133,6 +134,12 @@ public class Juego extends JFrame implements Componentes {
 		public void keyPressed(KeyEvent e) {
 			enemyMoving.start();
 			if (getHeroe().getHp() >= 0) {
+				if (e.getKeyCode() == KeyEvent.VK_A) {
+					System.out.println(getHeroe().getDamage());
+					for (int i = 0; i < enemigos.size(); i++) {
+						
+					}
+				}
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
@@ -178,6 +185,7 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setOrientacion(Orientacion.Este);
 					}
 				}
+				System.out.println(getHeroe().getOrientacion());
 				comprobarCambio();
 			}
 
@@ -193,7 +201,18 @@ public class Juego extends JFrame implements Componentes {
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
-				enemigos.get(i).actuar(getHeroe().getPosicion());
+				if (enemigos.get(i).actuar(getHeroe().getPosicion())) {
+					getHeroe().setHp(enemigos.get(i).getDamage());
+					if (getHeroe().getHp() <= 0) {
+						enemyMoving.stop();
+						heroeLife.stop();
+						panel.Vida.setText("R.I.P");
+
+					}else{
+						panel.Vida.setText(Integer.toString(getHeroe().getHp()));
+
+					}
+				}
 
 			}
 

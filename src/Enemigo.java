@@ -11,6 +11,7 @@ public class Enemigo implements Componentes {
 	private Timer accion;
 	private final static int SPEED = 500;
 	private Juego juego;
+	private int Damage = -30;
 
 	Enemigo(Point punto, Tablero tableraso, Juego juegaso) {
 		accion = new Timer(SPEED, new Listener());
@@ -37,18 +38,17 @@ public class Enemigo implements Componentes {
 		return hp;
 	}
 
-	public void actuar(Point objetivo) {
+	public boolean actuar(Point objetivo) {
 	
 		if (skill(objetivo)) {
-			System.out.println("LEMETOUNATORTA");
-			
+			return true;
 		} else {
 			mover(objetivo);
+			return false;
 		}
 	}
 
 	public void mover(Point objetivo) {
-		System.out.println("Me muevo");
 		Point posicion;
 		
 		if ((getPosicion().x < objetivo.x)&&(!getTablero().getCasilla(posicion = new Point(getPosicion().x+1,getPosicion().y)).isOcupado())) {
@@ -92,7 +92,6 @@ public class Enemigo implements Componentes {
 	}
 
 	public void setPosicion(Point posicion) {
-		System.out.println("POR QUE COÑO ME MUEVO");
 		this.posicion = posicion;
 	}
 
@@ -126,6 +125,14 @@ public class Enemigo implements Componentes {
 
 	public void setOrientacion(Orientacion orientacion) {
 		this.orientacion = orientacion;
+	}
+
+	public int getDamage() {
+		return Damage;
+	}
+
+	public void setDamage(int damage) {
+		Damage = damage;
 	}
 
 	class Listener implements ActionListener {

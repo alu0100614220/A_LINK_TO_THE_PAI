@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
@@ -67,10 +68,12 @@ public class Casilla extends JPanel implements Componentes {
 	 * M��todo para dibujar el estado de la casilla
 	 */
 	public void dibujarEstado(Graphics g) {
-		System.out.println("paint de mierda");
 		g.setColor(Color.GREEN);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		switch (estado) {
+		case Llave:
+			setOcupado(false);
+			this.add(new JFrame("llave"));
 		case Vacia:
 			setOcupado(false);
 			break;

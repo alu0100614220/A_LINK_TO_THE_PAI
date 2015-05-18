@@ -14,7 +14,8 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Tablero extends JPanel implements Componentes {
 	private final static int SIZE = 20; // Tama��o del mapa
-	private Casilla casillas[][]; // Casillas del tablero que formar��n el mapa
+	private Casilla casillas[][]; // Casillas del tablero que formar��n el
+									// mapa
 	private int ancho = 0;
 	private int alto = 0;
 	Image suelo2 = (new ImageIcon("img/hierbilla2.gif")).getImage();
@@ -126,6 +127,9 @@ public class Tablero extends JPanel implements Componentes {
 		for (int i = 0; i < ancho; i++)
 			for (int j = 0; j < alto; j++) {
 				switch (casillas[i][j].getEstado()) {
+				case Llave:
+					System.out.println("LLAVE LOL");
+					g.drawString("LLAVE", 0, 0);
 				case Heroe:
 					g2.drawImage(heroe, (int) (i * ratioW), (int) (j * ratioH),
 							(int) ratioW, (int) ratioH, this);

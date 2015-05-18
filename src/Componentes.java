@@ -13,7 +13,7 @@ public interface Componentes {
 	int ANCHO = 700;
 	// Estados de una casilla
 	enum Estado {
-		Vacia, Obstaculo, Heroe, Enemigo, Puerta, Objeto
+		Vacia, Obstaculo, Heroe, Enemigo, Puerta, Objeto, Cofre, Llave
 	}
 
 	// Orientación de los personajes
