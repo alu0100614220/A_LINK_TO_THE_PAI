@@ -45,6 +45,8 @@ public class Panel extends JPanel {
 		picVidaMas.setVisible(false);
 		cent.add(picVida);
 		cent.add(vida);
+		cent.add(picMuerte);
+		picMuerte.setVisible(false);
 		der.add(picPause);
 		picPause.setVisible(false);
 		this.add(izq);
@@ -78,9 +80,9 @@ public class Panel extends JPanel {
 		}
 		if (heroe.getHp() <= 0) {
 			vida.setText("RIP");
-			this.remove(picVida);
-			this.remove(picVidaMas);
-			this.add(picMuerte);
+			picVida.setVisible(false);
+			picVidaMas.setVisible(false);
+			picMuerte.setVisible(true);
 		} else
 			vida.setText(Integer.toString(heroe.getHp()));
 		if(estado) {
