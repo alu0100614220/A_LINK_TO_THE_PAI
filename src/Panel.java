@@ -42,6 +42,7 @@ public class Panel extends JPanel {
 		if(heroe.getHp() <= 0){
 			vida.setText("RIP");
 			this.remove(picVida);
+			this.remove(picVidaMas);
 			this.add(picMuerte);
 		}		
 		else
