@@ -28,9 +28,7 @@ public class Heroe implements Componentes {
 	public int getHp() {
 		return hp;
 	}
-	
 
-	
 	public void setHp(int hp) {
 		this.hp = this.hp + hp;
 	}
