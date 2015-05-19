@@ -12,36 +12,56 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+/**
+ * Clase para representar el tablero donde tendrá lugar el juego.
+ *
+ */
 @SuppressWarnings("serial")
 public class Tablero extends JPanel implements Componentes {
-	private final static int SIZE = 20; // Tama��o del mapa
-	private Casilla casillas[][]; // Casillas del tablero que formar��n el
-									// mapa
-	private int ancho = 0;
-	private int alto = 0;
-	Image suelo2 = (new ImageIcon("img/hierbilla2.gif")).getImage();
-	Image suelo = (new ImageIcon("img/hierbilla.gif")).getImage();
-	Image heroeS = (new ImageIcon("img/heroeoncio.gif")).getImage();
-	Image heroeN = (new ImageIcon("img/heroe_arriba.gif")).getImage();
-	Image heroeE = (new ImageIcon("img/heroe_derecha.gif")).getImage();
-	Image heroeO = (new ImageIcon("img/heroe_izquierda.gif")).getImage();
-	Image heroeAS = (new ImageIcon("img/heroeAS.gif")).getImage();
-	Image heroeAN = (new ImageIcon("img/heroeAN.gif")).getImage();
-	Image heroeAE = (new ImageIcon("img/heroeAE.gif")).getImage();
-	Image heroeAO = (new ImageIcon("img/heroeAO.gif")).getImage();
-	Image obstaculo = (new ImageIcon("img/obstaculo.gif")).getImage();
-	Image enemigoN = (new ImageIcon("img/enemigoN.gif")).getImage();
-	Image enemigoE = (new ImageIcon("img/enemigoE.gif")).getImage();
-	Image enemigoS = (new ImageIcon("img/enemigo.gif")).getImage();
-	Image enemigoO = (new ImageIcon("img/enemigoO.gif")).getImage();
-	Image llave = (new ImageIcon("img/llave.gif")).getImage();
-	Image cofre = (new ImageIcon("img/cofre.gif")).getImage();
-	Image espada = (new ImageIcon("img/espada.gif")).getImage();
-	Image escudo = (new ImageIcon("img/escudo.gif")).getImage();
-	Image corazon = (new ImageIcon("img/corazon.gif")).getImage();
+	private final static int SIZE = 20; // Tamaño del mapa
+	private Casilla casillas[][]; // Casillas del tablero que formarán el mapa
+	private int ancho = 0; // Ancho del tablero
+	private int alto = 0; // Alto del tablero
 
+	/**
+	 * Declaración de las diferentes imágenes que representarán los diferentes
+	 * elementos del juego
+	 */
+	private Image suelo = (new ImageIcon("img/hierbilla.gif")).getImage();
+	private Image heroeSur = (new ImageIcon("img/heroeoncio.gif")).getImage();
+	private Image heroeNorte = (new ImageIcon("img/heroe_arriba.gif"))
+			.getImage();
+	private Image heroeEste = (new ImageIcon("img/heroe_derecha.gif"))
+			.getImage();
+	private Image heroeOeste = (new ImageIcon("img/heroe_izquierda.gif"))
+			.getImage();
+	private Image heroeAtaqueSur = (new ImageIcon("img/heroeAS.gif"))
+			.getImage();
+	private Image heroeAtaqueNorte = (new ImageIcon("img/heroeAN.gif"))
+			.getImage();
+	private Image heroeAtaqueEste = (new ImageIcon("img/heroeAE.gif"))
+			.getImage();
+	private Image heroeAtaqueOeste = (new ImageIcon("img/heroeAO.gif"))
+			.getImage();
+	private Image obstaculo = (new ImageIcon("img/obstaculo.gif")).getImage();
+	private Image enemigoNorte = (new ImageIcon("img/enemigoN.gif")).getImage();
+	private Image enemigoEste = (new ImageIcon("img/enemigoE.gif")).getImage();
+	private Image enemigoSur = (new ImageIcon("img/enemigo.gif")).getImage();
+	private Image enemigoOeste = (new ImageIcon("img/enemigoO.gif")).getImage();
+	private Image llave = (new ImageIcon("img/llave.gif")).getImage();
+	private Image cofre = (new ImageIcon("img/cofre.gif")).getImage();
+	private Image espada = (new ImageIcon("img/espada.gif")).getImage();
+	private Image escudo = (new ImageIcon("img/escudo.gif")).getImage();
+	private Image corazon = (new ImageIcon("img/corazon.gif")).getImage();
+
+	/**
+	 * Array que contiene los enemigos que habrá en cada mapa
+	 */
 	private ArrayList<Point> enemigos = new ArrayList<Point>();
 
+	/**
+	 * Constructor por defecto. Inicializa el vector de casillas.
+	 */
 	Tablero() {
 		casillas = new Casilla[SIZE][SIZE];
 		this.setLayout(new GridLayout(SIZE, SIZE));
@@ -53,18 +73,47 @@ public class Tablero extends JPanel implements Componentes {
 		}
 	}
 
+	/**
+	 * Constructor que recibe un mundo y un mapa y crea el tablero adecuado
+	 * leyendo dicho mapa.
+	 * 
+	 * @param mundo
+	 *            Mundo donde se contendrá el mapa
+	 * @param mapa
+	 *            Mapa a mostrar
+	 */
 	Tablero(int mundo, int mapa) {
 		crearTablero(mundo, mapa);
 	}
 
+	/**
+	 * Getter del array de enemigos
+	 * 
+	 * @return Array de enemigos
+	 */
 	public ArrayList<Point> getEnemigos() {
 		return enemigos;
 	}
 
+	/**
+	 * Setter de enemigos.
+	 * 
+	 * @param enemigos
+	 *            Nuevo array de enemigos a asignar.
+	 */
 	public void setEnemigos(ArrayList<Point> enemigos) {
 		this.enemigos = enemigos;
 	}
 
+	/**
+	 * Crea un tablero a partir del mundo y mapa especificados. Se leerá de
+	 * fichero el mapa especificado.
+	 * 
+	 * @param mundo
+	 *            Mundo donde se contendrá el mapa
+	 * @param mapa
+	 *            Mapa a mostrar
+	 */
 	public void crearTablero(int mundo, int mapa) {
 		this.removeAll();
 		casillas = null;
@@ -95,6 +144,13 @@ public class Tablero extends JPanel implements Componentes {
 		}
 	}
 
+	/**
+	 * Método que cambia el tablero al mapa especificado. Utilizado cuando el
+	 * héroe cambia de escenario a otro.
+	 * 
+	 * @param mapa
+	 *            Mapa al que cambiar
+	 */
 	public void cambiarTablero(String mapa) {
 		try {
 			enemigos.clear();
@@ -123,6 +179,13 @@ public class Tablero extends JPanel implements Componentes {
 		System.out.println(mapa);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics) Método
+	 * paintComponent que pintará todas las imágenes que forman parte del
+	 * tablero a partir de la información del array de Casillas
+	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.LIGHT_GRAY);
@@ -140,48 +203,57 @@ public class Tablero extends JPanel implements Componentes {
 			}
 		for (int i = 0; i < ancho; i++)
 			for (int j = 0; j < alto; j++) {
-				switch (casillas[i][j].getEstado()) {
+				switch (casillas[i][j].getEstado()) { // Switch que decide que
+														// dibujar en funcion
+														// del Estado de la
+														// casilla
 				case Heroe:
 
-					switch (casillas[i][j].getOrientacion()) {
+					switch (casillas[i][j].getOrientacion()) { // Switch que
+																// decide la
+																// orientación
+																// del héroe en
+																// función de la
+																// info de la
+																// casilla
 					case Norte:
-						g2.drawImage(heroeN, (int) (i * ratioW),
+						g2.drawImage(heroeNorte, (int) (i * ratioW),
 								(int) (j * ratioH), (int) ratioW, (int) ratioH,
 								this);
 						break;
 					case AtacandoNorte:
-						g2.drawImage(heroeAN, (int) (i * ratioW),
+						g2.drawImage(heroeAtaqueNorte, (int) (i * ratioW),
 								(int) (((j - 1) * ratioH) + ratioH / 2),
 								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Este:
-						g2.drawImage(heroeE, (int) (i * ratioW),
+						g2.drawImage(heroeEste, (int) (i * ratioW),
 								(int) (j * ratioH), (int) ratioW, (int) ratioH,
 								this);
 						break;
 					case AtacandoEste:
-						g2.drawImage(heroeAE, (int) (i * ratioW),
+						g2.drawImage(heroeAtaqueEste, (int) (i * ratioW),
 								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 
 					case Sur:
-						g2.drawImage(heroeS, (int) (i * ratioW),
+						g2.drawImage(heroeSur, (int) (i * ratioW),
 								(int) (j * ratioH), (int) ratioW, (int) ratioH,
 								this);
 						break;
 					case AtacandoSur:
-						g2.drawImage(heroeAS, (int) (i * ratioW),
+						g2.drawImage(heroeAtaqueSur, (int) (i * ratioW),
 								(int) (j * ratioH), (int) ratioW,
 								(int) (ratioH + ratioH / 2), this);
 						break;
 					case Oeste:
-						g2.drawImage(heroeO, (int) (i * ratioW),
+						g2.drawImage(heroeOeste, (int) (i * ratioW),
 								(int) (j * ratioH), (int) ratioW, (int) ratioH,
 								this);
 						break;
 					case AtacandoOeste:
-						g2.drawImage(heroeAO,
+						g2.drawImage(heroeAtaqueOeste,
 								(int) (((i - 1) * ratioW) + ratioW / 2),
 								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
@@ -196,24 +268,31 @@ public class Tablero extends JPanel implements Componentes {
 							this);
 					break;
 				case Enemigo:
-					switch (casillas[i][j].getOrientacion()) {
+					switch (casillas[i][j].getOrientacion()) { // Switch que
+																// decide la
+																// orientación
+																// del enemigo
+																// en
+																// función de la
+																// info de la
+																// casilla
 					case Norte:
-						g2.drawImage(enemigoN, (int) (i * ratioW),
+						g2.drawImage(enemigoNorte, (int) (i * ratioW),
 								(int) (((j - 1) * ratioH) + ratioH / 2),
 								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Este:
-						g2.drawImage(enemigoE, (int) (i * ratioW),
+						g2.drawImage(enemigoEste, (int) (i * ratioW),
 								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 					case Sur:
-						g2.drawImage(enemigoS, (int) (i * ratioW),
+						g2.drawImage(enemigoSur, (int) (i * ratioW),
 								(int) (j * ratioH), (int) ratioW,
 								(int) (ratioH + ratioH / 2), this);
 						break;
 					case Oeste:
-						g2.drawImage(enemigoO,
+						g2.drawImage(enemigoOeste,
 								(int) (((i - 1) * ratioW) + ratioW / 2),
 								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
@@ -274,6 +353,12 @@ public class Tablero extends JPanel implements Componentes {
 		repaint();
 	}
 
+	/**
+	 * Método para devolver el valor del enum de Estado a partir de un entero.
+	 * 
+	 * @param estado
+	 * @return Estado correspondiente
+	 */
 	public Estado obtenerEstado(int estado) {
 		if (estado == Estado.Obstaculo.ordinal())
 			return Estado.Obstaculo;
