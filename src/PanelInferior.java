@@ -18,7 +18,8 @@ public class PanelInferior extends JPanel {
 		this.add(restart);
 		this.add(new JLabel("Movimiento:"));
 		this.add(new JLabel(new ImageIcon(imFlechas)));
-	
+		this.add(new JLabel("Atacar:"));
+		this.add(new JLabel("Pausa:"));
 		restart.addActionListener(new Clicker());
 		restart.setFocusable(false);
 	}

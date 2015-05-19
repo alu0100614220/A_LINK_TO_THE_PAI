@@ -31,6 +31,7 @@ public class Panel extends JPanel {
 		picVidaMas.setVisible(false);
 		this.add(picVida);
 		this.add(vida);
+//		//this.add(textoEspacio);
 
 	}
 	
@@ -66,6 +67,9 @@ public class Panel extends JPanel {
 			g.drawImage(imEscudo, 82, 3, this);
 		}
 		if (estado == true) {
+			g.setColor(Color.CYAN);
+			g.fillRect(this.getWidth()-60, 0, this.getWidth(), this.getHeight());
+			g.setColor(Color.black);
 			g.drawString("Pause.", this.getWidth()-50, 17);	
 		}else{
 			g.drawString("", this.getWidth()-50, 17);
