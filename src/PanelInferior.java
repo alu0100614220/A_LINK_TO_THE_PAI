@@ -10,13 +10,20 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class PanelInferior extends JPanel {
-	Juego juego;
-	JButton restart = new JButton("Restart");
+	Juego juego;// Acceso a heroe
+	JButton restart = new JButton("Restart"); //Boton que nos permite resetear el juego
+	/**
+	 * Declaracion de las imagenes que usaremos
+	 */
 	Image imFlechas = (new ImageIcon("img/flechas.gif")).getImage();
 	Image imgA = (new ImageIcon("img/a.gif")).getImage();
 	Image imgP = (new ImageIcon("img/p.gif")).getImage();
 	Image imgE = (new ImageIcon("img/e.gif")).getImage();
 
+	/**
+	 * Constructor donde colocamos en su sitio los distintos elementos
+	 * 
+	 */	
 	PanelInferior(Juego juego) {
 		this.juego = juego;
 		this.setBackground(Color.LIGHT_GRAY);
@@ -32,15 +39,15 @@ public class PanelInferior extends JPanel {
 		restart.addActionListener(new Clicker());
 		restart.setFocusable(false);
 	}
-
+	/**
+	 *Listener del boton "restart" que reinicia el juego
+	 */
 	class Clicker implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == restart) {
-				System.out.println("HAYOLA");
-				juego.reinicia();
-				
+				juego.reinicia();			
 			}
 		}
 

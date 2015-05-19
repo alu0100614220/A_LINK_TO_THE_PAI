@@ -8,7 +8,10 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Panel extends JPanel {
-	Heroe heroe;
+	Heroe heroe; // Acceso a heroe
+	/**
+	 * Declaracion de las imagenes que usaremos
+	 */
 	Image imLlave = (new ImageIcon("img/llave.gif")).getImage();
 	Image imVida = (new ImageIcon("img/vida.gif")).getImage();
 	Image imVidaMas = (new ImageIcon("img/corazon.gif")).getImage();
@@ -16,6 +19,9 @@ public class Panel extends JPanel {
 	Image imEspada = (new ImageIcon("img/espada.gif")).getImage();
 	Image imEscudo = (new ImageIcon("img/escudo.gif")).getImage();
 	Image imPause = (new ImageIcon("img/pause.gif")).getImage();
+	/*
+	 * Añadiendo las imagenes a JLabels junto con el texto de la vida del heroe
+	 */
 	JLabel picLlave = new JLabel(new ImageIcon(imLlave));
 	JLabel picEspada = new JLabel(new ImageIcon(imEspada));
 	JLabel picEscudo= new JLabel(new ImageIcon(imEscudo));
@@ -24,8 +30,13 @@ public class Panel extends JPanel {
 	JLabel picVidaMas = new JLabel(new ImageIcon(imVidaMas));
 	JLabel picPause= new JLabel(new ImageIcon(imPause));	
 	JLabel vida = new JLabel("100");
-	Boolean estado = false;
+	
+	Boolean estado = false;// Estado para poner el juego en PAUSE
 
+	/**
+	 * Constructor donde colocamos en su sitio los distintos elementos
+	 * 
+	 */	
 	Panel(Heroe heroe) {
 		setLayout(new GridLayout(1,3));
 		JPanel izq = new JPanel();
@@ -53,7 +64,10 @@ public class Panel extends JPanel {
 		this.add(cent);
 		this.add(der);
 	}
-
+	/**
+	 * Método que comprueba y muestra/oculta los objetos del heroe o
+	 * sus puntos de vida o si muere. 
+	 */
 	public void actualizar() {
 		if(heroe.getLlave())
 			picLlave.setVisible(true);
@@ -92,35 +106,11 @@ public class Panel extends JPanel {
 			picPause.setVisible(false);
 
 	}
-
+	/**
+	 * Metodo usado para saber cuando mostrar la imagen PAUSE
+	 */
 	public void pintaPause(boolean estado) {
 		this.estado = estado;
 		actualizar();
 	}
-
-	/*protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-
-		g.drawString("Objetos: ", 10, 25);
-		if (heroe.getLlave()) {
-			g.drawImage(imLlave, 105, 2, this);
-		}
-		if (heroe.getEspada()) {
-			System.out.println("ESPASDADADAADDD");
-			g.drawImage(imEspada, 60, 2, this);
-		}
-		if (heroe.getEscudo()) {
-			g.drawImage(imEscudo, 82, 2, this);
-		}
-		if (estado == true) {
-			g.setColor(Color.CYAN);
-			g.fillRect(this.getWidth() - 60, 0, this.getWidth(),
-					this.getHeight());
-			g.setColor(Color.black);
-			g.drawString("Pause.", this.getWidth() - 50, 17);
-		} else {
-			g.drawString("", this.getWidth() - 50, 17);
-		}
-
-	}*/
 }
