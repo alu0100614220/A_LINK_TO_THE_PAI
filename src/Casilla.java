@@ -12,7 +12,7 @@ public class Casilla implements Componentes {
 	 * Constructor por defecto.
 	 * Por defecto la casilla está vacía.
 	 */
-	Casilla() {
+	public Casilla() {
 		setEstado(Estado.Vacia);
 		setOrientacion(Orientacion.Sur);
 	}
@@ -21,7 +21,7 @@ public class Casilla implements Componentes {
 	 * Construye la casilla con un Estado determinado
 	 * @param estado
 	 */
-	Casilla(Estado estado) {
+	public Casilla(Estado estado) {
 		setEstado(estado);
 		setOrientacion(Orientacion.Sur);
 	}
