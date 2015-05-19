@@ -38,44 +38,47 @@ public class Enemigo implements Componentes {
 	public void mover(Point objetivo) {
 		Point posicion;
 
-		if ((getPosicion().x < objetivo.x)
-				&& (!getTablero().getCasilla(
-						posicion = new Point(getPosicion().x + 1,
-								getPosicion().y)).isOcupado())) {
-			getTablero().setCasilla(getPosicion(), Estado.Vacia,
-					Orientacion.Este);
-			getTablero().setCasilla(posicion, Estado.Enemigo, Orientacion.Este);
-			setPosicion(posicion);
+		if (getPosicion().x < objetivo.x) {
+			if (!getTablero().getCasilla(
+					posicion = new Point(getPosicion().x + 1,
+								getPosicion().y)).isOcupado()) {
+				getTablero().setCasilla(getPosicion(), Estado.Vacia,
+						Orientacion.Este);
+				setPosicion(posicion);
+			}
+			getTablero().setCasilla(getPosicion(), Estado.Enemigo, Orientacion.Este);
 			setOrientacion(Orientacion.Este);
-		} else if ((getPosicion().x > objetivo.x)
-				&& (!getTablero().getCasilla(
+		} else if (getPosicion().x > objetivo.x) {
+			if (!getTablero().getCasilla(
 						posicion = new Point(getPosicion().x - 1,
-								getPosicion().y)).isOcupado())) {
-			getTablero().setCasilla(getPosicion(), Estado.Vacia,
-					Orientacion.Este);
+								getPosicion().y)).isOcupado()) {
+				getTablero().setCasilla(getPosicion(), Estado.Vacia,
+						Orientacion.Este);
+				setPosicion(posicion);
+			}
 			getTablero()
-					.setCasilla(posicion, Estado.Enemigo, Orientacion.Oeste);
-			setPosicion(posicion);
+			.setCasilla(getPosicion(), Estado.Enemigo, Orientacion.Oeste);
 			setOrientacion(Orientacion.Oeste);
-		} else if ((getPosicion().y < objetivo.y)
-				&& (!getTablero().getCasilla(
+		} else if (getPosicion().y < objetivo.y) {
+			if (!getTablero().getCasilla(
 						posicion = new Point(getPosicion().x,
-								getPosicion().y + 1)).isOcupado())) {
-			getTablero().setCasilla(getPosicion(), Estado.Vacia,
-					Orientacion.Este);
-			getTablero().setCasilla(posicion, Estado.Enemigo, Orientacion.Sur);
-			setPosicion(posicion);
+								getPosicion().y + 1)).isOcupado()) {
+				getTablero().setCasilla(getPosicion(), Estado.Vacia,
+						Orientacion.Este);
+				setPosicion(posicion);
+			}
+			getTablero().setCasilla(getPosicion(), Estado.Enemigo, Orientacion.Sur);
 			setOrientacion(Orientacion.Sur);
-
-		} else if ((getPosicion().y > objetivo.y)
-				&& (!getTablero().getCasilla(
+		} else if (getPosicion().y > objetivo.y) {
+			if (!getTablero().getCasilla(
 						posicion = new Point(getPosicion().x,
-								getPosicion().y - 1)).isOcupado())) {
-			getTablero().setCasilla(getPosicion(), Estado.Vacia,
-					Orientacion.Este);
+								getPosicion().y - 1)).isOcupado()) {
+				getTablero().setCasilla(getPosicion(), Estado.Vacia,
+						Orientacion.Este);
+				setPosicion(posicion);
+			}
 			getTablero()
-					.setCasilla(posicion, Estado.Enemigo, Orientacion.Norte);
-			setPosicion(posicion);
+			.setCasilla(getPosicion(), Estado.Enemigo, Orientacion.Norte);
 			setOrientacion(Orientacion.Norte);
 		}
 	}
