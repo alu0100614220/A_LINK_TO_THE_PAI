@@ -12,17 +12,16 @@ public class Heroe implements Componentes {
 	private boolean escudo = false;
 	private boolean corazon = false;
 	
-	//Constructor del heroe al que creamos en una posicion
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);//Orientado por defecto mirando hacia abajo
 		this.setHp(HP);
 	}
 
-	/*
+	/**
 	 * Getters & Setters
 	 */
-	/*
+	/**
 	 * Vida
 	 */
 	public int getHp() {
@@ -32,14 +31,14 @@ public class Heroe implements Componentes {
 	public void setHp(int hp) {
 		this.hp = this.hp + hp;
 	}
-	/*
+	/**
 	 * Reinicio de la vida
 	 */
 	public void resetHp() {
 		this.hp = 100;
 	}
 	
-	/*
+	/**
 	 * Posicion
 	 */
 	public Point getPosicion() {
@@ -49,7 +48,7 @@ public class Heroe implements Componentes {
 	public void setPosicion(Point posicion) {
 		this.posicion = posicion;
 	}
-	/*
+	/**
 	 * Orientacion
 	 */
 	public Orientacion getOrientacion() {
@@ -59,7 +58,7 @@ public class Heroe implements Componentes {
 	public void setOrientacion(Orientacion orientacion) {
 		this.orientacion = orientacion;
 	}
-	/*
+	/**
 	 * Para el daño
 	 */
 	public int getDanio() {
@@ -69,7 +68,7 @@ public class Heroe implements Componentes {
 	public void setDanio(int danio) {
 		this.danio = danio;
 	}
-	/*
+	/**
 	 * Cuando consiga la llave
 	 */
 	public boolean getLlave() {
@@ -79,7 +78,7 @@ public class Heroe implements Componentes {
 	public void setLlave(boolean llave) {
 		this.llave = llave;
 	}
-	/*
+	/**
 	 * Espada
 	 */
 	public boolean getEspada() {
@@ -90,7 +89,7 @@ public class Heroe implements Componentes {
 		this.espada = espada;
 		this.danio = -100;
 	}
-	/*
+	/**
 	 * Escudo
 	 */
 	public boolean getEscudo() {
@@ -100,7 +99,7 @@ public class Heroe implements Componentes {
 	public void setEscudo(boolean escudo) {
 		this.escudo = escudo;
 	}
-	/*
+	/**
 	 * Aumentando la vida con corazon
 	 */
 	public boolean getCorazon() {
@@ -112,7 +111,11 @@ public class Heroe implements Componentes {
 		this.hp = 150;
 	}
 	
-	//Verdadero si tiene un enemigo en la posicion en la que esta mirando
+	/**
+	 * @param enemy
+	 * Verdadero si tiene un enemigo en la posicion en la que esta mirando
+	 * @return
+	 */
 	public boolean atacar(Enemigo enemy) {
 		Point punto = new Point(this.getPosicion());
 		switch (orientacion) {
