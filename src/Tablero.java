@@ -28,6 +28,8 @@ public class Tablero extends JPanel implements Componentes {
 	Image enemigo = (new ImageIcon("img/enemigo.gif")).getImage();
 	Image llave = (new ImageIcon("img/llave.gif")).getImage();
 	Image cofre = (new ImageIcon("img/cofre.gif")).getImage();
+	Image espada = (new ImageIcon("img/espada.gif")).getImage();
+	Image escudo = (new ImageIcon("img/escudo.gif")).getImage();
 
 	private ArrayList<Point> enemigos = new ArrayList<Point>();
 
@@ -171,6 +173,16 @@ public class Tablero extends JPanel implements Componentes {
 							(int) (j * ratioH), (int) ratioW,
 							(int) (ratioH + ratioH / 2), this);
 					break;
+				case Espada:
+					g2.drawImage(espada, (int) (i * ratioW),
+							(int) (j * ratioH), (int) ratioW,
+							(int) (ratioH + ratioH / 2), this);
+					break;
+				case Escudo:
+					g2.drawImage(escudo, (int) (i * ratioW),
+							(int) (j * ratioH), (int) ratioW,
+							(int) (ratioH + ratioH / 2), this);
+					break;
 				default:
 					break;
 				}
@@ -215,6 +227,10 @@ public class Tablero extends JPanel implements Componentes {
 			return Estado.Cofre;
 		else if (estado == Estado.Llave.ordinal())
 			return Estado.Llave;
+		else if (estado == Estado.Espada.ordinal())
+			return Estado.Espada;
+		else if (estado == Estado.Escudo.ordinal())
+			return Estado.Escudo;
 		return Estado.Vacia;
 	}
 }

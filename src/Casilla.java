@@ -39,6 +39,12 @@ public class Casilla extends JPanel implements Componentes {
 		case Llave:
 			setOcupado(false);
 			break;
+		case Espada:
+			setOcupado(false);
+			break;
+		case Escudo:
+			setOcupado(false);
+			break;
 		case Objeto:
 			setOcupado(false);
 			break;

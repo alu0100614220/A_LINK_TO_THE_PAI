@@ -8,6 +8,8 @@ public class Heroe implements Componentes {
 	private Orientacion orientacion; // Orientación en el mapa del jugador
 	private int danio = -50;
 	private boolean key = false;
+	private boolean sword = false;
+	private boolean shield = false;
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);
@@ -90,5 +92,21 @@ public class Heroe implements Componentes {
 	public void setKey(boolean key) {
 		System.out.println("Llave obtenida.");
 		this.key = key;
+	}
+
+	public boolean getSword() {
+		return sword;
+	}
+
+	public void setSword(boolean sword) {
+		this.sword = sword;
+	}
+
+	public boolean getShield() {
+		return shield;
+	}
+
+	public void setShield(boolean shield) {
+		this.shield = shield;
 	}
 }

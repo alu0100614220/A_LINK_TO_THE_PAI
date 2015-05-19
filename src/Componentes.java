@@ -10,7 +10,7 @@ public interface Componentes {
 	
 	// Estados de una casilla
 	enum Estado {
-		Vacia, Obstaculo, Heroe, Enemigo, Puerta, Objeto, Cofre, Llave
+		Vacia, Obstaculo, Heroe, Enemigo, Puerta, Objeto, Cofre, Llave, Espada, Escudo
 	}
 
 	// Orientación de los personajes
