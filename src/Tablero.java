@@ -25,7 +25,10 @@ public class Tablero extends JPanel implements Componentes {
 	Image heroeE = (new ImageIcon("img/heroe_derecha.gif")).getImage();
 	Image heroeO = (new ImageIcon("img/heroe_izquierda.gif")).getImage();
 	Image obstaculo = (new ImageIcon("img/obstaculo.gif")).getImage();
-	Image enemigo = (new ImageIcon("img/enemigo.gif")).getImage();
+	Image enemigoN = (new ImageIcon("img/enemigoN.gif")).getImage();
+	Image enemigoE = (new ImageIcon("img/enemigoE.gif")).getImage();
+	Image enemigoS = (new ImageIcon("img/enemigo.gif")).getImage();
+	Image enemigoO = (new ImageIcon("img/enemigoO.gif")).getImage();
 	Image llave = (new ImageIcon("img/llave.gif")).getImage();
 	Image cofre = (new ImageIcon("img/cofre.gif")).getImage();
 	Image espada = (new ImageIcon("img/espada.gif")).getImage();
@@ -160,9 +163,26 @@ public class Tablero extends JPanel implements Componentes {
 							this);
 					break;
 				case Enemigo:
-					g2.drawImage(enemigo, (int) (i * ratioW),
-							(int) (j * ratioH), (int) ratioW,
-							(int) (ratioH + ratioH / 2), this);
+					switch (casillas[i][j].getOrientacion()) {
+					case Norte:
+						g2.drawImage(enemigoN, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) (ratioH + ratioH / 2), this);
+						break;
+					case Este:
+						g2.drawImage(enemigoE, (int) (i * ratioW), (int) (j * ratioH),
+								(int) (ratioW + ratioW / 2), (int) ratioH, this);
+						break;
+					case Sur:
+						g2.drawImage(enemigoS, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) (ratioH + ratioH / 2), this);
+						break;
+					case Oeste:
+						g2.drawImage(enemigoO, (int) (i * ratioW), (int) (j * ratioH),
+								(int) (ratioW + ratioW / 2), (int) ratioH, this);
+						break;
+					default:
+						System.err.println("Orientacion desconocida");
+					}
 					break;
 				case Cofre:
 					g2.drawImage(cofre, (int) (i * ratioW),
@@ -187,6 +207,7 @@ public class Tablero extends JPanel implements Componentes {
 							(int) (j * ratioH) + 12, this);
 					break;
 				default:
+					System.err.println("Estado a dibujar desconocido.");
 					break;
 				}
 			}
