@@ -2,32 +2,27 @@ import java.awt.Point;
 
 public class Enemigo implements Componentes {
 	private int hp; // Vida del enemigo
-	private Point posicion; // Posiciï¿½ï¿½n en el mapa
-	private Orientacion orientacion;
-	private Tablero tablero;
-	private int danyo = -30;
-	boolean movimiento;
+	private Point posicion; // Posición en el mapa
+	private Orientacion orientacion; // Orientación del enemigo
+	private Tablero tablero; // Acceso a Tablero
+	private int danyo = -30; // Daño que inflinge el enemigo
+	boolean movimiento; // Controla el movimiento del enemigo
 
-	Enemigo(Point punto, Tablero tablero) {
+	/**
+	 * Constructor de enemigo
+	 */
+	public Enemigo(Point punto, Tablero tablero) {
 		setTablero(tablero);
 		setPosicion(new Point(punto));
 		setOrientacion(Orientacion.Sur);
 		this.setHp(100);
 	}
-
-	/*
-	 * Getters & Setters
+	
+	/**
+	 * Método que decide entre moverse si el heroe esta lejos
+	 * o atacar si esta junto al heroe
 	 */
-	public Tablero getTablero() {
-		return tablero;
-	}
-
-	public void setTablero(Tablero tablero) {
-		this.tablero = tablero;
-	}
-
 	public boolean actuar(Point objetivo) {
-
 		if (skill(objetivo)) {
 			return true;
 		} else {
@@ -36,6 +31,9 @@ public class Enemigo implements Componentes {
 		}
 	}
 	
+	/**
+	 * Método que mueve al enemigo a la casilla correspondiente
+	 */
 	private void moverse(Point posicion, Orientacion aux){
 		if (!getTablero().getCasilla(posicion).isOcupado()) {
 			getTablero().setCasilla(getPosicion(), Estado.Vacia,
@@ -48,6 +46,9 @@ public class Enemigo implements Componentes {
 		setOrientacion(aux);
 	}
 
+	/**
+	 * Método que analiza hacia donde debe moverse el enemigo
+	 */
 	public void mover(Point objetivo) {
 		Point posicion;
 		this.movimiento = false;
@@ -70,22 +71,10 @@ public class Enemigo implements Componentes {
 		}
 	}
 
-	public int getHp() {
-		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = this.hp + hp;
-	}
-
-	public Point getPosicion() {
-		return posicion;
-	}
-
-	public void setPosicion(Point posicion) {
-		this.posicion = posicion;
-	}
-
+	/**
+	 * Método para atacar al heroe si este en la posición 
+	 * a la que está mirando
+	 */
 	public boolean skill(Point objetivo) {
 		Point punto = new Point(getPosicion());
 		switch (getOrientacion()) {
@@ -109,6 +98,33 @@ public class Enemigo implements Componentes {
 		} else {
 			return false;
 		}
+	}
+	
+	/*
+	 * Getters & Setters
+	 */
+	public Tablero getTablero() {
+		return tablero;
+	}
+
+	public void setTablero(Tablero tablero) {
+		this.tablero = tablero;
+	}
+	
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = this.hp + hp;
+	}
+
+	public Point getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(Point posicion) {
+		this.posicion = posicion;
 	}
 
 	public Orientacion getOrientacion() {
