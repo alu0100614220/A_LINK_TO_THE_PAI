@@ -30,7 +30,7 @@ public class Juego extends JFrame implements Componentes {
 
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
-		heroeCoolDown = new Timer(500, new CDListener());
+		heroeCoolDown = new Timer(100, new CDListener());
 		animacion = new Timer(500, new accion());
 		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
