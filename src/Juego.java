@@ -219,9 +219,9 @@ public class Juego extends JFrame implements Componentes {
 							&& getHeroe().getLlave()) {
 						getTablero().cambiarTablero(
 								"maps/" + mundoActual + "/25.map");
-						Point ending = new Point(5, 15);
+						Point ending = new Point(11, 6);
 						getTablero().setCasilla(ending, Estado.Heroe,
-								Orientacion.Norte);
+								Orientacion.Sur);
 						getHeroe().setPosicion(ending);
 						getHeroe().setOrientacion(Orientacion.Norte);
 						enemigos.clear();
