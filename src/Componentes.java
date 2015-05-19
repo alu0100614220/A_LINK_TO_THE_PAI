@@ -1,3 +1,6 @@
+/**
+ * Interfaz para almacenar diferentes constantes accesibles por el resto de clases
+ */
 public interface Componentes {
 	// Resolución de la pantalla
 	int ALTO = 700;
