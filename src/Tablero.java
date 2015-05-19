@@ -207,7 +207,6 @@ public class Tablero extends JPanel implements Componentes {
 							(int) (j * ratioH) + 12, this);
 					break;
 				default:
-					System.err.println("Estado a dibujar desconocido.");
 					break;
 				}
 			}

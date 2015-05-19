@@ -1,6 +1,7 @@
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -22,22 +23,25 @@ public class Panel extends JPanel {
 	JLabel picMuerte = new JLabel(new ImageIcon(imMuerte));
 	JLabel picVidaMas = new JLabel(new ImageIcon(imVidaMas));
 	JLabel vida = new JLabel("100");
-	
+	JLabel estadoPause = new JLabel("Pause");
+	Boolean estado = false;
 	Panel(Heroe heroe){
 		this.heroe = heroe;
 		this.setBackground(Color.LIGHT_GRAY);
+		this.add(picVidaMas);
+		picVidaMas.setVisible(false);
 		this.add(picVida);
 		this.add(vida);
+		this.add(estadoPause);
+		estadoPause.setVisible(false);
 //		//this.add(textoEspacio);
 
 	}
 	
 	public void actualizar(){
 		if (heroe.getHeart()) {
-			this.remove(picVida);
-			this.remove(vida);
-			this.add(picVidaMas);
-			this.add(vida);
+			picVida.setVisible(false);
+			picVidaMas.setVisible(true);
 		}
 		if(heroe.getHp() <= 0){
 			vida.setText("RIP");
@@ -49,7 +53,9 @@ public class Panel extends JPanel {
 			vida.setText(Integer.toString(heroe.getHp()));
 
 	}
-	
+	public void pintaPause(boolean estado){
+		this.estado = estado;	
+	}
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -63,7 +69,11 @@ public class Panel extends JPanel {
 		if (heroe.getShield()) {
 			g.drawImage(imEscudo, 82, 3, this);
 		}
-		
+		if (estado == true) {
+			g.drawString("Pause.", this.getWidth()-50, 17);	
+		}else{
+			g.drawString("", this.getWidth()-50, 17);
+		}
 		
 	}
 }
