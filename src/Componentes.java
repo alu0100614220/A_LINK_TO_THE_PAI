@@ -14,10 +14,4 @@ public interface Componentes {
 	enum Orientacion {
 		Norte, Este, Sur, Oeste, AtacandoNorte, AtacandoEste, AtacandoSur, AtacandoOeste
 	}
-
-	// Armas del jugador
-	enum Arma {
-		Espada, Arco
-	}
-
 }
