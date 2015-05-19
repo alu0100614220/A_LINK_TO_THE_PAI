@@ -165,7 +165,7 @@ public class Tablero extends JPanel implements Componentes {
 				case Enemigo:
 					switch (casillas[i][j].getOrientacion()) {
 					case Norte:
-						g2.drawImage(enemigoN, (int) (i * ratioW), (int) (j * ratioH),
+						g2.drawImage(enemigoN, (int) (i * ratioW), (int) (((j - 1) * ratioH) + ratioH / 2),
 								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Este:
@@ -177,7 +177,7 @@ public class Tablero extends JPanel implements Componentes {
 								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Oeste:
-						g2.drawImage(enemigoO, (int) (i * ratioW), (int) (j * ratioH),
+						g2.drawImage(enemigoO, (int) (((i -1) * ratioW) + ratioW / 2), (int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 					default:
