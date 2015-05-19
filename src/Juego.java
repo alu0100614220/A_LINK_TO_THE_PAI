@@ -18,6 +18,7 @@ public class Juego extends JFrame implements Componentes {
 	public Timer enemyMoving;
 	public Timer heroeLife;
 	public Timer heroeCoolDown;
+	public Timer animacion;
 	private boolean stop = false;
 	private Panel panel;
 	private int mundoActual = 1;
@@ -27,6 +28,7 @@ public class Juego extends JFrame implements Componentes {
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
 		heroeCoolDown = new Timer(500, new CDListener());
+		animacion = new Timer(1000, new accion());
 		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
@@ -171,7 +173,7 @@ public class Juego extends JFrame implements Componentes {
 				}
 				panel.pintaPause(stop);
 
-			}else{
+			} else {
 				panel.pintaPause(false);
 			}
 			if (getHeroe().getHp() > 0) {
@@ -197,9 +199,14 @@ public class Juego extends JFrame implements Componentes {
 					}
 				}
 				if (e.getKeyCode() == KeyEvent.VK_A) {
+
+					getTablero().setCasilla(getHeroe().getPosicion(),
+							Estado.Heroe, Orientacion.AtacandoNorte);
+					animacion.start();
 					if (heroeCoolDown.isRunning() == false) { // Comprueba el cd
-																// del ataque
+						// del ataque
 						for (int i = 0; i < enemigos.size(); i++) {
+
 							if (getHeroe().atacar(enemigos.get(i))) {
 								enemigos.get(i).setHp(getHeroe().getDanio());
 							}
@@ -289,10 +296,21 @@ public class Juego extends JFrame implements Componentes {
 		}
 	}
 
+	class accion implements ActionListener {
+
+		public void actionPerformed(ActionEvent arg0) {
+			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+			Orientacion.Norte);
+			animacion.stop();
+		}
+
+	}
+
 	class CDListener implements ActionListener {
 
 		public void actionPerformed(ActionEvent arg0) {
 			heroeCoolDown.stop();
+
 		}
 
 	}

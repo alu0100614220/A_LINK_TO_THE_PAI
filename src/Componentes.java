@@ -15,7 +15,7 @@ public interface Componentes {
 
 	// Orientación de los personajes
 	enum Orientacion {
-		Norte, Este, Sur, Oeste
+		Norte,AtacandoNorte, Este, Sur, Oeste
 	}
 	
 	// Armas del jugador
