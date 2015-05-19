@@ -13,12 +13,14 @@ public class Panel extends JPanel {
 	Heroe heroe;
 	final static JLabel textoEspacio = new JLabel("   ");
 	Image imLlave = (new ImageIcon("img/llave.gif")).getImage();
-	Image imVida = (new ImageIcon("img/objeto.gif")).getImage();
+	Image imVida = (new ImageIcon("img/vida.gif")).getImage();
+	Image imVidaMas = (new ImageIcon("img/corazon.gif")).getImage();
 	Image imMuerte = (new ImageIcon("img/muerte.gif")).getImage();
 	Image imEspada = (new ImageIcon("img/espada.gif")).getImage();
 	Image imEscudo = (new ImageIcon("img/escudo.gif")).getImage();
 	JLabel picVida = new JLabel(new ImageIcon(imVida));
 	JLabel picMuerte = new JLabel(new ImageIcon(imMuerte));
+	JLabel picVidaMas = new JLabel(new ImageIcon(imVidaMas));
 	JLabel vida = new JLabel("100");
 	
 	Panel(Heroe heroe){
@@ -31,6 +33,12 @@ public class Panel extends JPanel {
 	}
 	
 	public void actualizar(){
+		if (heroe.getHeart()) {
+			this.remove(picVida);
+			this.remove(vida);
+			this.add(picVidaMas);
+			this.add(vida);
+		}
 		if(heroe.getHp() <= 0){
 			vida.setText("RIP");
 			this.remove(picVida);

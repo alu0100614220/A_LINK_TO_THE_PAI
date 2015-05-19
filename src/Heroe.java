@@ -10,6 +10,8 @@ public class Heroe implements Componentes {
 	private boolean key = false;
 	private boolean sword = false;
 	private boolean shield = false;
+	private boolean heart = false;
+	
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);
@@ -108,5 +110,14 @@ public class Heroe implements Componentes {
 
 	public void setShield(boolean shield) {
 		this.shield = shield;
+	}
+
+	public boolean getHeart() {
+		return heart;
+	}
+
+	public void setHeart(boolean corazon) {
+		this.heart = corazon;
+		this.hp = 150;
 	}
 }

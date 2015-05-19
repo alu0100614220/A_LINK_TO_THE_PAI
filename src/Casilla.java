@@ -51,6 +51,9 @@ public class Casilla extends JPanel implements Componentes {
 		case Cofre:
 			setOcupado(true);
 			break;
+		case Corazon:
+			setOcupado(true);
+			break;
 		default:
 			setOcupado(false);
 			break;

@@ -136,7 +136,8 @@ public class Juego extends JFrame implements Componentes {
 		if ((!getTablero().getCasilla(posicion).isOcupado())
 				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
 				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
+				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)
+				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)) {
 			if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
 				getHeroe().setKey(true);
 			}
@@ -145,6 +146,9 @@ public class Juego extends JFrame implements Componentes {
 			}
 			if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
 				getHeroe().setShield(true);
+			}
+			if (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon) {
+				getHeroe().setHeart(true);
 			}
 			return true;
 		}

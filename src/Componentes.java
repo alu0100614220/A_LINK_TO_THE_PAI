@@ -10,7 +10,7 @@ public interface Componentes {
 	
 	// Estados de una casilla
 	enum Estado {
-		Vacia, Obstaculo, Heroe, Enemigo, Puerta, Objeto, Cofre, Llave, Espada, Escudo
+		Vacia, Obstaculo, Corazon, Enemigo, Puerta, Objeto, Cofre, Llave, Espada, Escudo ,Heroe
 	}
 
 	// Orientación de los personajes
@@ -20,7 +20,7 @@ public interface Componentes {
 	
 	// Armas del jugador
 	enum Arma {
-		Espada, Escudo, Llave
+		Espada, Arco
 	}
 
 }
