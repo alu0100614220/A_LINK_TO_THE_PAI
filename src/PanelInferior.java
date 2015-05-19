@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class PanelInferior extends JPanel {
 	Juego juego;
 	JButton restart = new JButton("Restart");
@@ -15,6 +16,7 @@ public class PanelInferior extends JPanel {
 	Image imgA = (new ImageIcon("img/a.gif")).getImage();
 	Image imgP = (new ImageIcon("img/p.gif")).getImage();
 	Image imgE = (new ImageIcon("img/e.gif")).getImage();
+
 	PanelInferior(Juego juego) {
 		this.juego = juego;
 		this.setBackground(Color.LIGHT_GRAY);

@@ -1,13 +1,10 @@
-
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 @SuppressWarnings("serial")
 public class Panel extends JPanel {
@@ -24,56 +21,57 @@ public class Panel extends JPanel {
 	JLabel picVidaMas = new JLabel(new ImageIcon(imVidaMas));
 	JLabel vida = new JLabel("100");
 	Boolean estado = false;
-	Panel(Heroe heroe){
+
+	Panel(Heroe heroe) {
 		this.heroe = heroe;
 		this.setBackground(Color.LIGHT_GRAY);
 		this.add(picVidaMas);
 		picVidaMas.setVisible(false);
 		this.add(picVida);
 		this.add(vida);
-//		//this.add(textoEspacio);
-
 	}
-	
-	public void actualizar(){
-		if (heroe.getHeart()) {
+
+	public void actualizar() {
+		if (heroe.getCorazon()) {
 			picVida.setVisible(false);
 			picVidaMas.setVisible(true);
 		}
-		if(heroe.getHp() <= 0){
+		if (heroe.getHp() <= 0) {
 			vida.setText("RIP");
 			this.remove(picVida);
 			this.remove(picVidaMas);
 			this.add(picMuerte);
-		}		
-		else
+		} else
 			vida.setText(Integer.toString(heroe.getHp()));
 
 	}
-	public void pintaPause(boolean estado){
-		this.estado = estado;	
+
+	public void pintaPause(boolean estado) {
+		this.estado = estado;
 	}
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		g.drawString("Objetos: ", 10, 17);
-		if (heroe.getKey()) {
+		if (heroe.getLlave()) {
 			g.drawImage(imLlave, 90, -7, this);
 		}
-		if (heroe.getSword()) {
+		if (heroe.getEspada()) {
 			g.drawImage(imEspada, 60, 2, this);
 		}
-		if (heroe.getShield()) {
+		if (heroe.getEscudo()) {
 			g.drawImage(imEscudo, 82, 3, this);
 		}
 		if (estado == true) {
 			g.setColor(Color.CYAN);
-			g.fillRect(this.getWidth()-60, 0, this.getWidth(), this.getHeight());
+			g.fillRect(this.getWidth() - 60, 0, this.getWidth(),
+					this.getHeight());
 			g.setColor(Color.black);
-			g.drawString("Pause.", this.getWidth()-50, 17);	
-		}else{
-			g.drawString("", this.getWidth()-50, 17);
+			g.drawString("Pause.", this.getWidth() - 50, 17);
+		} else {
+			g.drawString("", this.getWidth() - 50, 17);
 		}
-		
+
 	}
 }

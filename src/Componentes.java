@@ -1,4 +1,3 @@
-
 public interface Componentes {
 	// Resolución de la pantalla
 	// int ALTO = (int) Toolkit.getDefaultToolkit().getScreenSize().getHeight();

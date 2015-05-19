@@ -42,7 +42,7 @@ public class Tablero extends JPanel implements Componentes {
 
 	private ArrayList<Point> enemigos = new ArrayList<Point>();
 
-	Tablero() {	
+	Tablero() {
 		casillas = new Casilla[SIZE][SIZE];
 		this.setLayout(new GridLayout(SIZE, SIZE));
 		for (int j = 0; j < SIZE; j++) {
@@ -142,39 +142,48 @@ public class Tablero extends JPanel implements Componentes {
 			for (int j = 0; j < alto; j++) {
 				switch (casillas[i][j].getEstado()) {
 				case Heroe:
-					
+
 					switch (casillas[i][j].getOrientacion()) {
 					case Norte:
-						g2.drawImage(heroeN, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeN, (int) (i * ratioW),
+								(int) (j * ratioH), (int) ratioW, (int) ratioH,
+								this);
 						break;
 					case AtacandoNorte:
-						g2.drawImage(heroeAN, (int) (i * ratioW), (int) (((j - 1) * ratioH) + ratioH / 2),
+						g2.drawImage(heroeAN, (int) (i * ratioW),
+								(int) (((j - 1) * ratioH) + ratioH / 2),
 								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Este:
-						g2.drawImage(heroeE, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeE, (int) (i * ratioW),
+								(int) (j * ratioH), (int) ratioW, (int) ratioH,
+								this);
 						break;
 					case AtacandoEste:
-						g2.drawImage(heroeAE, (int) (i * ratioW), (int) (j * ratioH),
+						g2.drawImage(heroeAE, (int) (i * ratioW),
+								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
-						
+
 					case Sur:
-						g2.drawImage(heroeS, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeS, (int) (i * ratioW),
+								(int) (j * ratioH), (int) ratioW, (int) ratioH,
+								this);
 						break;
 					case AtacandoSur:
-						g2.drawImage(heroeAS, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) (ratioH + ratioH / 2), this);
+						g2.drawImage(heroeAS, (int) (i * ratioW),
+								(int) (j * ratioH), (int) ratioW,
+								(int) (ratioH + ratioH / 2), this);
 						break;
 					case Oeste:
-						g2.drawImage(heroeO, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeO, (int) (i * ratioW),
+								(int) (j * ratioH), (int) ratioW, (int) ratioH,
+								this);
 						break;
 					case AtacandoOeste:
-						g2.drawImage(heroeAO, (int) (((i -1) * ratioW) + ratioW / 2), (int) (j * ratioH),
+						g2.drawImage(heroeAO,
+								(int) (((i - 1) * ratioW) + ratioW / 2),
+								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 					default:
@@ -189,19 +198,24 @@ public class Tablero extends JPanel implements Componentes {
 				case Enemigo:
 					switch (casillas[i][j].getOrientacion()) {
 					case Norte:
-						g2.drawImage(enemigoN, (int) (i * ratioW), (int) (((j - 1) * ratioH) + ratioH / 2),
+						g2.drawImage(enemigoN, (int) (i * ratioW),
+								(int) (((j - 1) * ratioH) + ratioH / 2),
 								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Este:
-						g2.drawImage(enemigoE, (int) (i * ratioW), (int) (j * ratioH),
+						g2.drawImage(enemigoE, (int) (i * ratioW),
+								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 					case Sur:
-						g2.drawImage(enemigoS, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) (ratioH + ratioH / 2), this);
+						g2.drawImage(enemigoS, (int) (i * ratioW),
+								(int) (j * ratioH), (int) ratioW,
+								(int) (ratioH + ratioH / 2), this);
 						break;
 					case Oeste:
-						g2.drawImage(enemigoO, (int) (((i -1) * ratioW) + ratioW / 2), (int) (j * ratioH),
+						g2.drawImage(enemigoO,
+								(int) (((i - 1) * ratioW) + ratioW / 2),
+								(int) (j * ratioH),
 								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 					default:
@@ -209,14 +223,12 @@ public class Tablero extends JPanel implements Componentes {
 					}
 					break;
 				case Cofre:
-					g2.drawImage(cofre, (int) (i * ratioW),
-							(int) (j * ratioH), (int) ratioW,
-							(int) (ratioH + ratioH / 2), this);
+					g2.drawImage(cofre, (int) (i * ratioW), (int) (j * ratioH),
+							(int) ratioW, (int) (ratioH + ratioH / 2), this);
 					break;
 				case Llave:
-					g2.drawImage(llave, (int) (i * ratioW),
-							(int) (j * ratioH), (int) ratioW,
-							(int) (ratioH + ratioH / 2), this);
+					g2.drawImage(llave, (int) (i * ratioW), (int) (j * ratioH),
+							(int) ratioW, (int) (ratioH + ratioH / 2), this);
 					break;
 				case Espada:
 					g2.drawImage(espada, (int) (i * ratioW) + 12,

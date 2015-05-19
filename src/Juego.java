@@ -27,7 +27,7 @@ public class Juego extends JFrame implements Componentes {
 	Orientacion antigua = Orientacion.Sur;
 
 	Juego() {
-		
+
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
 		heroeCoolDown = new Timer(500, new CDListener());
@@ -40,15 +40,17 @@ public class Juego extends JFrame implements Componentes {
 		setTablero(new Tablero(mundoActual, mundo.getPosicion()));
 		this.add(getTablero(), BorderLayout.CENTER);
 		this.add(panel, BorderLayout.NORTH);
-		this.add(panelSur,BorderLayout.SOUTH);
+		this.add(panelSur, BorderLayout.SOUTH);
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
 
 	}
-	public void reinicia(){
+
+	public void reinicia() {
 	}
+
 	private void setEnemigos() {
 		enemigos = new ArrayList<Enemigo>();
 		for (int i = 0; i < getTablero().getEnemigos().size(); i++) {
@@ -146,16 +148,16 @@ public class Juego extends JFrame implements Componentes {
 				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)
 				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)) {
 			if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
-				getHeroe().setKey(true);
+				getHeroe().setLlave(true);
 			}
 			if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
-				getHeroe().setSword(true);
+				getHeroe().setEspada(true);
 			}
 			if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
-				getHeroe().setShield(true);
+				getHeroe().setEscudo(true);
 			}
 			if (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon) {
-				getHeroe().setHeart(true);
+				getHeroe().setCorazon(true);
 			}
 			return true;
 		} else
@@ -182,7 +184,8 @@ public class Juego extends JFrame implements Componentes {
 				panel.pintaPause(false);
 			}
 			if (getHeroe().getHp() > 0) {
-				if (e.getKeyCode() == KeyEvent.VK_E) {
+				if (e.getKeyCode() == KeyEvent.VK_E
+						&& !heroeCoolDown.isRunning()) {
 					Point punto = new Point(getHeroe().getPosicion());
 					switch (getHeroe().getOrientacion()) {
 					case Norte:
@@ -201,16 +204,19 @@ public class Juego extends JFrame implements Componentes {
 						break;
 					}
 					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre
-							&& getHeroe().getKey()) {
-						getTablero().cambiarTablero("maps/" + mundoActual + "/25.map");
-						Point ending = new Point(5,15);
-						getTablero().setCasilla(ending, Estado.Heroe, Orientacion.Norte);
+							&& getHeroe().getLlave()) {
+						getTablero().cambiarTablero(
+								"maps/" + mundoActual + "/25.map");
+						Point ending = new Point(5, 15);
+						getTablero().setCasilla(ending, Estado.Heroe,
+								Orientacion.Norte);
 						getHeroe().setPosicion(ending);
 						getHeroe().setOrientacion(Orientacion.Norte);
 						enemigos.clear();
 					}
 				}
-				if (e.getKeyCode() == KeyEvent.VK_A) {
+				if (e.getKeyCode() == KeyEvent.VK_A
+						&& !heroeCoolDown.isRunning()) {
 					antigua = getHeroe().getOrientacion();
 					switch (heroe.getOrientacion()) {
 					case Norte:
@@ -233,7 +239,7 @@ public class Juego extends JFrame implements Componentes {
 						break;
 					}
 					animacion.start();
-					if (heroeCoolDown.isRunning() == false) { // Comprueba el cd
+					if (!heroeCoolDown.isRunning()) { // Comprueba el CD
 						// del ataque
 						for (int i = 0; i < enemigos.size(); i++) {
 
@@ -252,7 +258,8 @@ public class Juego extends JFrame implements Componentes {
 					heroeCoolDown.start();
 
 				}
-				if (e.getKeyCode() == KeyEvent.VK_UP) {
+				if (e.getKeyCode() == KeyEvent.VK_UP
+						&& !heroeCoolDown.isRunning()) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
 					if (condicionParaMoverse(posicion)) {
@@ -268,7 +275,8 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setOrientacion(Orientacion.Norte);
 					}
 
-				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				} else if (e.getKeyCode() == KeyEvent.VK_DOWN
+						&& !heroeCoolDown.isRunning()) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y + 1);
 					if (condicionParaMoverse(posicion)) {
@@ -283,7 +291,8 @@ public class Juego extends JFrame implements Componentes {
 								Estado.Heroe, Orientacion.Sur);
 						getHeroe().setOrientacion(Orientacion.Sur);
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				} else if (e.getKeyCode() == KeyEvent.VK_LEFT
+						&& !heroeCoolDown.isRunning()) {
 					Point posicion = new Point(getHeroe().getPosicion().x - 1,
 							getHeroe().getPosicion().y);
 					if (condicionParaMoverse(posicion)) {
@@ -298,7 +307,8 @@ public class Juego extends JFrame implements Componentes {
 								Estado.Heroe, Orientacion.Oeste);
 						getHeroe().setOrientacion(Orientacion.Oeste);
 					}
-				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT
+						&& !heroeCoolDown.isRunning()) {
 					Point posicion = new Point(getHeroe().getPosicion().x + 1,
 							getHeroe().getPosicion().y);
 					if (condicionParaMoverse(posicion)) {
@@ -349,7 +359,7 @@ public class Juego extends JFrame implements Componentes {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
 				if (enemigos.get(i).actuar(getHeroe().getPosicion())) {
-					if (getHeroe().getShield()) {
+					if (getHeroe().getEscudo()) {
 						getHeroe().setHp(enemigos.get(i).getDamage() + 20);
 					} else
 						getHeroe().setHp(enemigos.get(i).getDamage());

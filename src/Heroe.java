@@ -7,11 +7,11 @@ public class Heroe implements Componentes {
 	private Point posicion; // Posición en el mapa del jugador
 	private Orientacion orientacion; // Orientación en el mapa del jugador
 	private int danio = -50;
-	private boolean key = false;
-	private boolean sword = false;
-	private boolean shield = false;
-	private boolean heart = false;
-	
+	private boolean llave = false;
+	private boolean espada = false;
+	private boolean escudo = false;
+	private boolean corazon = false;
+
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);
@@ -40,6 +40,8 @@ public class Heroe implements Componentes {
 			break;
 		case Oeste:
 			punto.x = punto.x - 1;
+			break;
+		default:
 			break;
 		}
 		if (enemy.getPosicion().x == punto.x
@@ -87,37 +89,37 @@ public class Heroe implements Componentes {
 		this.danio = danio;
 	}
 
-	public boolean getKey() {
-		return key;
+	public boolean getLlave() {
+		return llave;
 	}
 
-	public void setKey(boolean key) {
-		this.key = key;
+	public void setLlave(boolean llave) {
+		this.llave = llave;
 	}
 
-	public boolean getSword() {
-		return sword;
+	public boolean getEspada() {
+		return espada;
 	}
 
-	public void setSword(boolean sword) {
-		this.sword = sword;
+	public void setEspada(boolean espada) {
+		this.espada = espada;
 		this.danio = -100;
 	}
 
-	public boolean getShield() {
-		return shield;
+	public boolean getEscudo() {
+		return escudo;
 	}
 
-	public void setShield(boolean shield) {
-		this.shield = shield;
+	public void setEscudo(boolean escudo) {
+		this.escudo = escudo;
 	}
 
-	public boolean getHeart() {
-		return heart;
+	public boolean getCorazon() {
+		return corazon;
 	}
 
-	public void setHeart(boolean corazon) {
-		this.heart = corazon;
+	public void setCorazon(boolean corazon) {
+		this.corazon = corazon;
 		this.hp = 150;
 	}
 }

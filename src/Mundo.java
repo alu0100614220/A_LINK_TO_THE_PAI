@@ -1,24 +1,23 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 
-
 public class Mundo implements Componentes {
 	private int ancho, alto;
 	private int posicion;
-	
+
 	Mundo(int numMundo) {
 		try {
-			BufferedReader bf = new BufferedReader(new FileReader("maps/" + numMundo + "/config.map"));
+			BufferedReader bf = new BufferedReader(new FileReader("maps/"
+					+ numMundo + "/config.map"));
 			setAncho(Integer.parseInt(bf.readLine()));
 			setAlto(Integer.parseInt(bf.readLine()));
 			setPosicion(Integer.parseInt(bf.readLine()));
 			bf.close();
-		}
-		catch(Exception e) {
+		} catch (Exception e) {
 			System.err.println("Error de lectura en mapa");
 		}
 	}
-	
+
 	public void cambioMapa(Orientacion orientacion) {
 		switch (orientacion) {
 		case Norte:
