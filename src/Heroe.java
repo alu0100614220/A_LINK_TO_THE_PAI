@@ -1,31 +1,130 @@
 import java.awt.Point;
 
 public class Heroe implements Componentes {
-	private static final int HP = 100; // Vida inicial del jugador
+	private int HP = 100; // Vida inicial del jugador
 	private int hp; // Vida del jugador
 	private int arma; // Arma actual del jugador
 	private Point posicion; // Posiciï¿½ï¿½n en el mapa del jugador
 	private Orientacion orientacion; // Orientaciï¿½ï¿½n en el mapa del jugador
 	private int danio = -50;
-	private boolean llave = false;
+	//Booleanos para saber que objetos tiene el heroe
+	private boolean llave = false; 
 	private boolean espada = false;
 	private boolean escudo = false;
 	private boolean corazon = false;
-
+	
+	//Constructor del heroe al que creamos en una posicion
 	Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
-		setOrientacion(Orientacion.Sur);
+		setOrientacion(Orientacion.Sur);//Orientado por defecto mirando hacia abajo
 		this.setHp(HP);
-		this.setArma(Arma.Espada);
 	}
 
 	/*
 	 * Getters & Setters
 	 */
+	/*
+	 * Vida
+	 */
 	public int getHp() {
 		return hp;
 	}
+	
 
+	
+	public void setHp(int hp) {
+		this.hp = this.hp + hp;
+	}
+	/*
+	 * Reinicio de la vida
+	 */
+	public void resetHp() {
+		this.hp = 100;
+	}
+	/*
+	 * Arma
+	 */
+	public int getArma() {
+		return arma;
+	}
+
+	public void setArma(Arma arma) {
+		this.arma = arma.ordinal();
+	}
+	/*
+	 * Posicion
+	 */
+	public Point getPosicion() {
+		return posicion;
+	}
+
+	public void setPosicion(Point posicion) {
+		this.posicion = posicion;
+	}
+	/*
+	 * Orientacion
+	 */
+	public Orientacion getOrientacion() {
+		return orientacion;
+	}
+
+	public void setOrientacion(Orientacion orientacion) {
+		this.orientacion = orientacion;
+	}
+	/*
+	 * Para el daño
+	 */
+	public int getDanio() {
+		return danio;
+	}
+
+	public void setDanio(int danio) {
+		this.danio = danio;
+	}
+	/*
+	 * Cuando consiga la llave
+	 */
+	public boolean getLlave() {
+		return llave;
+	}
+
+	public void setLlave(boolean llave) {
+		this.llave = llave;
+	}
+	/*
+	 * Espada
+	 */
+	public boolean getEspada() {
+		return espada;
+	}
+
+	public void setEspada(boolean espada) {
+		this.espada = espada;
+		this.danio = -100;
+	}
+	/*
+	 * Escudo
+	 */
+	public boolean getEscudo() {
+		return escudo;
+	}
+
+	public void setEscudo(boolean escudo) {
+		this.escudo = escudo;
+	}
+	/*
+	 * Aumentando la vida con corazon
+	 */
+	public boolean getCorazon() {
+		return corazon;
+	}
+
+	public void setCorazon(boolean corazon) {
+		this.corazon = corazon;
+		this.hp = 150;
+	}
+	
+	//Verdadero si tiene un enemigo en la posicion en la que esta mirando
 	public boolean atacar(Enemigo enemy) {
 		Point punto = new Point(this.getPosicion());
 		switch (orientacion) {
@@ -52,78 +151,5 @@ public class Heroe implements Componentes {
 		}
 
 	}
-
-	public void setHp(int hp) {
-		this.hp = this.hp + hp;
-	}
 	
-	public void resetHp() {
-		this.hp = 100;
-	}
-
-	public int getArma() {
-		return arma;
-	}
-
-	public void setArma(Arma arma) {
-		this.arma = arma.ordinal();
-	}
-
-	public Point getPosicion() {
-		return posicion;
-	}
-
-	public void setPosicion(Point posicion) {
-		this.posicion = posicion;
-	}
-
-	public Orientacion getOrientacion() {
-		return orientacion;
-	}
-
-	public void setOrientacion(Orientacion orientacion) {
-		this.orientacion = orientacion;
-	}
-
-	public int getDanio() {
-		return danio;
-	}
-
-	public void setDanio(int danio) {
-		this.danio = danio;
-	}
-
-	public boolean getLlave() {
-		return llave;
-	}
-
-	public void setLlave(boolean llave) {
-		this.llave = llave;
-	}
-
-	public boolean getEspada() {
-		return espada;
-	}
-
-	public void setEspada(boolean espada) {
-		this.espada = espada;
-		this.danio = -100;
-	}
-
-	public boolean getEscudo() {
-		return escudo;
-	}
-
-	public void setEscudo(boolean escudo) {
-		this.escudo = escudo;
-	}
-
-	public boolean getCorazon() {
-		return corazon;
-	}
-
-	public void setCorazon(boolean corazon) {
-		this.corazon = corazon;
-		this.hp = 150;
-	}
 }
