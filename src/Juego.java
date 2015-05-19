@@ -10,10 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 /**
- * @author adrian
- *
+ * Es la clase principal, gestionara en general todo el juego en si.
+ * Controla los movimientos del heroe, enemigos etc.
+ * Tambien controla toda la lógica.
  */
-@SuppressWarnings("serial")
 public class Juego extends JFrame implements Componentes {
 	private Tablero tablero; // Tablero del juego
 	private Heroe heroe = new Heroe(5, 5); // Jugador
