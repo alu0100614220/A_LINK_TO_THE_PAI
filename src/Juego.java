@@ -124,64 +124,36 @@ public class Juego extends JFrame implements Componentes {
 	public void setMundoActual(int mundoActual) {
 		this.mundoActual = mundoActual;
 	}
-
+	/**
+	 * Cambia al tablero nuevo
+	 */	
+	private void cambiarMundo(Point posicionNueva, Orientacion aux){
+		enemigos.clear();
+		mundo.cambioMapa(aux);
+		getHeroe().setPosicion(posicionNueva);
+		getTablero().cambiarTablero(
+				"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
+		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, aux);
+		setEnemigos();
+	}
 	/**
 	 * Comprobara a que direccion se ira dependiendo de la orientacion
 	 */
 	public void comprobarCambio() {
 		Point posicion = getHeroe().getPosicion();
-		
-		//Oeste
-		if (posicion.x == 0) { 
-			enemigos.clear(); //Limpia el array de enemigos
-			mundo.cambioMapa(Orientacion.Oeste); //Cambia el mapa segun la orientacion
-			getHeroe().setPosicion(
-					new Point(getTablero().getAncho() - 2, getHeroe()
-							.getPosicion().y)); //establecemos la posicion nueva del heroe
-			getTablero().cambiarTablero(
-					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map"); //Recargamos el tablero del mapa actual
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-					Orientacion.Oeste); //añadimos la posicion del heroe al tablero
-			setEnemigos();
-		} 
-		
-		//Norte
-		else if (posicion.y == 0) {
-			enemigos.clear();
-			mundo.cambioMapa(Orientacion.Norte);
-			getHeroe()
-					.setPosicion(
-							new Point(getHeroe().getPosicion().x, tablero
-									.getAlto() - 2));
-			getTablero().cambiarTablero(
-					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-					Orientacion.Norte);
-			setEnemigos();
-		}
-		
-		//Este
-		else if (posicion.x == getTablero().getAncho() - 1) {
-			enemigos.clear();
-			mundo.cambioMapa(Orientacion.Este);
-			getHeroe().setPosicion(new Point(1, getHeroe().getPosicion().y));
-			getTablero().cambiarTablero(
-					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-					Orientacion.Este);
-			setEnemigos();
-		}
-		
-		//Sur
-		else if (posicion.y == getTablero().getAlto() - 1) {
-			enemigos.clear();
-			mundo.cambioMapa(Orientacion.Sur);
-			getHeroe().setPosicion(new Point(getHeroe().getPosicion().x, 1));
-			getTablero().cambiarTablero(
-					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
-			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-					Orientacion.Sur);
-			setEnemigos();
+		Point posicionNueva;
+		if (posicion.x == 0) {
+			posicionNueva = new Point(getTablero().getAncho() - 2, getHeroe().getPosicion().y);
+			cambiarMundo(posicionNueva, Orientacion.Oeste);
+		} else if (posicion.y == 0) {
+			posicionNueva = new Point(getHeroe().getPosicion().x, tablero.getAlto() - 2);
+			cambiarMundo(posicionNueva, Orientacion.Norte);
+		} else if (posicion.x == getTablero().getAncho() - 1) {
+			posicionNueva = new Point(1, getHeroe().getPosicion().y);
+			cambiarMundo(posicionNueva, Orientacion.Este);
+		} else if (posicion.y == getTablero().getAlto() - 1) {
+			posicionNueva = new Point(getHeroe().getPosicion().x, 1);
+			cambiarMundo(posicionNueva, Orientacion.Sur);
 		}
 	}
 	
