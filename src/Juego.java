@@ -239,21 +239,17 @@ public class Juego extends JFrame implements Componentes {
 						break;
 					}
 					animacion.start();
-					if (!heroeCoolDown.isRunning()) { // Comprueba el CD
-						// del ataque
-						for (int i = 0; i < enemigos.size(); i++) {
+					for (int i = 0; i < enemigos.size(); i++) {
 
-							if (getHeroe().atacar(enemigos.get(i))) {
-								enemigos.get(i).setHp(getHeroe().getDanio());
-							}
-							if (enemigos.get(i).getHp() <= 0) {
-								getTablero().setCasilla(
-										enemigos.get(i).getPosicion(),
-										Estado.Vacia, Orientacion.Este);
-								enemigos.remove(i);
-							}
+						if (getHeroe().atacar(enemigos.get(i))) {
+							enemigos.get(i).setHp(getHeroe().getDanio());
 						}
-					} else {
+						if (enemigos.get(i).getHp() <= 0) {
+							getTablero().setCasilla(
+									enemigos.get(i).getPosicion(),
+									Estado.Vacia, Orientacion.Este);
+							enemigos.remove(i);
+						}
 					}
 					heroeCoolDown.start();
 
