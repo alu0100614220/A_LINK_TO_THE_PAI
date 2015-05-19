@@ -27,57 +27,66 @@ public class Juego extends JFrame implements Componentes {
 	Orientacion antigua = Orientacion.Sur;
 
 	Juego() {
-		//Definimos los timer
-		enemyMoving = new Timer(500, new Listener()); //Controla los movimientos del enemigo
-		heroeLife = new Timer(50, new Listener()); // Un controlador para saber si el heroe se movio
-		heroeCoolDown = new Timer(100, new CDListener());//EL CoolDown del ataque del heroe
-		animacion = new Timer(500, new accion());//Controlar la animacion de ataque
-		panel = new Panel(getHeroe()); //Panel con los datos del heroe superior
-		panelSur = new PanelInferior(this); //Panel con inferior
+		// Definimos los timer
+		enemyMoving = new Timer(500, new Listener()); // Controla los
+														// movimientos del
+														// enemigo
+		heroeLife = new Timer(50, new Listener()); // Un controlador para saber
+													// si el heroe se movio
+		heroeCoolDown = new Timer(100, new CDListener());// EL CoolDown del
+															// ataque del heroe
+		animacion = new Timer(500, new accion());// Controlar la animacion de
+													// ataque
+		panel = new Panel(getHeroe()); // Panel con los datos del heroe superior
+		panelSur = new PanelInferior(this); // Panel con inferior
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setTablero(new Tablero(mundoActual, mundo.getPosicion())); //El juego tiene que aceder al tablero
+		setTablero(new Tablero(mundoActual, mundo.getPosicion())); // El juego
+																	// tiene que
+																	// aceder al
+																	// tablero
 		this.add(getTablero(), BorderLayout.CENTER);
 		this.add(panel, BorderLayout.NORTH);
-		this.add(panelSur, BorderLayout.SOUTH); 
+		this.add(panelSur, BorderLayout.SOUTH);
 		this.addKeyListener(listener);
-		//Establecemos en el tablero la posicion del heroe
+		// Establecemos en el tablero la posicion del heroe
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
 
 	}
-	
+
 	/**
-	 * Llamaremos al metodo cada vez que pulsemos restart y nos "reiniciara" la partida sin crearlo todo de 0
+	 * Llamaremos al metodo cada vez que pulsemos restart y nos "reiniciara" la
+	 * partida sin crearlo todo de 0
 	 */
 	public void reinicia() {
-		
-		//Paramos los timers
-		enemyMoving.stop(); 
+
+		// Paramos los timers
+		enemyMoving.stop();
 		heroeLife.stop();
 		heroeCoolDown.stop();
 		animacion.stop();
-		
-		//Volvemos al mapa 1
+
+		// Volvemos al mapa 1
 		getTablero().cambiarTablero("maps/" + getMundoActual() + "/1.map");
 		this.setMundoActual(1);
 		this.mundo.setPosicion(1);
-		
-		//Volvemos a crear de 0 al Heroe en la posicion 5,5
+
+		// Volvemos a crear de 0 al Heroe en la posicion 5,5
 		setHeroe(new Heroe(5, 5));
-		//Ocultamos el panel y lo reiniciamos
+		// Ocultamos el panel y lo reiniciamos
 		panel.setVisible(false);
 		panel = new Panel(getHeroe());
 		this.add(panel, BorderLayout.NORTH);
-		//Añadimos el heroe al tablero
+		// Añadimos el heroe al tablero
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
 	}
-	
+
 	/**
 	 * Crea un array de enemigos para hacerlo mas sencillo
 	 */
@@ -124,10 +133,11 @@ public class Juego extends JFrame implements Componentes {
 	public void setMundoActual(int mundoActual) {
 		this.mundoActual = mundoActual;
 	}
+
 	/**
 	 * Cambia al tablero nuevo
-	 */	
-	private void cambiarMundo(Point posicionNueva, Orientacion aux){
+	 */
+	private void cambiarMundo(Point posicionNueva, Orientacion aux) {
 		enemigos.clear();
 		mundo.cambioMapa(aux);
 		getHeroe().setPosicion(posicionNueva);
@@ -136,6 +146,7 @@ public class Juego extends JFrame implements Componentes {
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, aux);
 		setEnemigos();
 	}
+
 	/**
 	 * Comprobara a que direccion se ira dependiendo de la orientacion
 	 */
@@ -143,10 +154,12 @@ public class Juego extends JFrame implements Componentes {
 		Point posicion = getHeroe().getPosicion();
 		Point posicionNueva;
 		if (posicion.x == 0) {
-			posicionNueva = new Point(getTablero().getAncho() - 2, getHeroe().getPosicion().y);
+			posicionNueva = new Point(getTablero().getAncho() - 2, getHeroe()
+					.getPosicion().y);
 			cambiarMundo(posicionNueva, Orientacion.Oeste);
 		} else if (posicion.y == 0) {
-			posicionNueva = new Point(getHeroe().getPosicion().x, tablero.getAlto() - 2);
+			posicionNueva = new Point(getHeroe().getPosicion().x,
+					tablero.getAlto() - 2);
 			cambiarMundo(posicionNueva, Orientacion.Norte);
 		} else if (posicion.x == getTablero().getAncho() - 1) {
 			posicionNueva = new Point(1, getHeroe().getPosicion().y);
@@ -156,47 +169,66 @@ public class Juego extends JFrame implements Componentes {
 			cambiarMundo(posicionNueva, Orientacion.Sur);
 		}
 	}
-	
+
 	/**
 	 * @param posicion
 	 * @return
 	 */
 	private boolean condicionParaMoverse(Point posicion) {
-		//Comprueba que sea una casilla visitable
-		if ((!getTablero().getCasilla(posicion).isOcupado())
-				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
-				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)
-				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)) {
-			if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+		// Comprueba que sea una casilla visitable
+//		if ((!getTablero().getCasilla(posicion).isOcupado())){
+//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
+//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
+//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)
+//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)) {
+				if (!getTablero().getCasilla(posicion).isOcupado()) {
+					return true;
+				}
+			switch (getTablero().getCasilla(posicion).getEstado()) {
+			case Llave:
 				getHeroe().setLlave(true);
-			}
-			if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
+				return true;
+			case Espada:
 				getHeroe().setEspada(true);
-			}
-			if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
+				return true;
+			case Escudo:
 				getHeroe().setEscudo(true);
-			}
-			if (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon) {
+				return true;
+			case Corazon:
 				getHeroe().setCorazon(true);
+				return true;
+			default:
+				return false;
 			}
-			return true;
-		} else
-			return false;
+		
+
+		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+		// getHeroe().setLlave(true);
+		// }
+		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
+		// getHeroe().setEspada(true);
+		// }
+		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
+		// getHeroe().setEscudo(true);
+		// }
+		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)
+		// {
+		// getHeroe().setCorazon(true);
+		// }
+		// return true;
+		// } else
+		// return false;
 	}
-	
-	private void moverse(Point posicion, Orientacion aux){
-		getTablero().setCasilla(getHeroe().getPosicion(),
-				Estado.Vacia, aux);
-		getTablero().setCasilla(posicion, Estado.Heroe,
-				aux);
+
+	private void moverse(Point posicion, Orientacion aux) {
+		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Vacia, aux);
+		getTablero().setCasilla(posicion, Estado.Heroe, aux);
 		getHeroe().setPosicion(posicion);
 		getHeroe().setOrientacion(aux);
 	}
-	
-	private void girarse(Orientacion aux){
-		getTablero().setCasilla(getHeroe().getPosicion(),
-				Estado.Heroe, aux);
+
+	private void girarse(Orientacion aux) {
+		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, aux);
 		getHeroe().setOrientacion(aux);
 	}
 
