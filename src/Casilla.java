@@ -1,16 +1,26 @@
-import javax.swing.JPanel;
 
-@SuppressWarnings("serial")
-public class Casilla extends JPanel implements Componentes {
-	private Estado estado;
-	private Orientacion orientacion;
-	private boolean ocupado;
+/**
+ * Clase que representa las casillas en las que
+ * se encontrarán los diferentes elementos del juego
+ */
+public class Casilla implements Componentes {
+	private Estado estado; //Estado de la casilla (Héroe, Enemigo, etc)
+	private Orientacion orientacion; //Orientación del elemento (si es Héroe o Enemigo)
+	private boolean ocupado; //Booleano para determinar si la casilla está ocupada.
 
+	/**
+	 * Constructor por defecto.
+	 * Por defecto la casilla está vacía.
+	 */
 	Casilla() {
 		setEstado(Estado.Vacia);
 		setOrientacion(Orientacion.Sur);
 	}
 
+	/**
+	 * Construye la casilla con un Estado determinado
+	 * @param estado
+	 */
 	Casilla(Estado estado) {
 		setEstado(estado);
 		setOrientacion(Orientacion.Sur);
@@ -24,6 +34,10 @@ public class Casilla extends JPanel implements Componentes {
 		return estado;
 	}
 
+	/**
+	 * Setter de estado. También cambia el booleano de ocupación
+	 * @param estado
+	 */
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 		switch (getEstado()) {

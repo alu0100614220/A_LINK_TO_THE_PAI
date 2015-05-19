@@ -68,7 +68,6 @@ public class Tablero extends JPanel implements Componentes {
 		for (int j = 0; j < SIZE; j++) {
 			for (int i = 0; i < SIZE; i++) {
 				casillas[i][j] = new Casilla();
-				this.add(casillas[i][j]);
 			}
 		}
 	}
