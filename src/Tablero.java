@@ -24,6 +24,10 @@ public class Tablero extends JPanel implements Componentes {
 	Image heroeN = (new ImageIcon("img/heroe_arriba.gif")).getImage();
 	Image heroeE = (new ImageIcon("img/heroe_derecha.gif")).getImage();
 	Image heroeO = (new ImageIcon("img/heroe_izquierda.gif")).getImage();
+	Image heroeAS = (new ImageIcon("img/heroeAS.gif")).getImage();
+	Image heroeAN = (new ImageIcon("img/heroeAN.gif")).getImage();
+	Image heroeAE = (new ImageIcon("img/heroeAE.gif")).getImage();
+	Image heroeAO = (new ImageIcon("img/heroeAO.gif")).getImage();
 	Image obstaculo = (new ImageIcon("img/obstaculo.gif")).getImage();
 	Image enemigoN = (new ImageIcon("img/enemigoN.gif")).getImage();
 	Image enemigoE = (new ImageIcon("img/enemigoE.gif")).getImage();
@@ -142,16 +146,16 @@ public class Tablero extends JPanel implements Componentes {
 								(int) ratioW, (int) ratioH, this);
 						break;
 					case AtacandoNorte:
-						g2.drawImage(heroeN, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeAN, (int) (i * ratioW), (int) (((j - 1) * ratioH) + ratioH / 2),
+								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Este:
 						g2.drawImage(heroeE, (int) (i * ratioW), (int) (j * ratioH),
 								(int) ratioW, (int) ratioH, this);
 						break;
 					case AtacandoEste:
-						g2.drawImage(heroeE, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeAE, (int) (i * ratioW), (int) (j * ratioH),
+								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 						
 					case Sur:
@@ -159,16 +163,16 @@ public class Tablero extends JPanel implements Componentes {
 								(int) ratioW, (int) ratioH, this);
 						break;
 					case AtacandoSur:
-						g2.drawImage(heroeS, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeAS, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) (ratioH + ratioH / 2), this);
 						break;
 					case Oeste:
 						g2.drawImage(heroeO, (int) (i * ratioW), (int) (j * ratioH),
 								(int) ratioW, (int) ratioH, this);
 						break;
 					case AtacandoOeste:
-						g2.drawImage(heroeO, (int) (i * ratioW), (int) (j * ratioH),
-								(int) ratioW, (int) ratioH, this);
+						g2.drawImage(heroeAO, (int) (((i -1) * ratioW) + ratioW / 2), (int) (j * ratioH),
+								(int) (ratioW + ratioW / 2), (int) ratioH, this);
 						break;
 					default:
 						System.err.println("Orientacion desconocida");

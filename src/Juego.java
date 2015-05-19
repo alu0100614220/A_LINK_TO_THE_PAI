@@ -24,6 +24,7 @@ public class Juego extends JFrame implements Componentes {
 	private int mundoActual = 1;
 	private Mundo mundo = new Mundo(mundoActual);
 	Orientacion antigua = Orientacion.Sur;
+
 	Juego() {
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
@@ -192,6 +193,8 @@ public class Juego extends JFrame implements Componentes {
 					case Oeste:
 						punto.x = punto.x - 1;
 						break;
+					default:
+						break;
 					}
 					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre
 							&& getHeroe().getKey()) {
@@ -200,8 +203,26 @@ public class Juego extends JFrame implements Componentes {
 				}
 				if (e.getKeyCode() == KeyEvent.VK_A) {
 					antigua = getHeroe().getOrientacion();
-					getTablero().setCasilla(getHeroe().getPosicion(),
-							Estado.Heroe, Orientacion.AtacandoNorte);
+					switch (heroe.getOrientacion()) {
+					case Norte:
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Heroe, Orientacion.AtacandoNorte);
+						break;
+					case Sur:
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Heroe, Orientacion.AtacandoSur);
+						break;
+					case Este:
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Heroe, Orientacion.AtacandoEste);
+						break;
+					case Oeste:
+						getTablero().setCasilla(getHeroe().getPosicion(),
+								Estado.Heroe, Orientacion.AtacandoOeste);
+						break;
+					default:
+						break;
+					}
 					animacion.start();
 					if (heroeCoolDown.isRunning() == false) { // Comprueba el cd
 						// del ataque
@@ -300,7 +321,7 @@ public class Juego extends JFrame implements Componentes {
 
 		public void actionPerformed(ActionEvent arg0) {
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-			antigua);
+					antigua);
 			animacion.stop();
 		}
 
