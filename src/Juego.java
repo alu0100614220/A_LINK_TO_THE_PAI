@@ -23,7 +23,7 @@ public class Juego extends JFrame implements Componentes {
 	private Panel panel;
 	private int mundoActual = 1;
 	private Mundo mundo = new Mundo(mundoActual);
-	
+	private PanelInferior panelSur = new PanelInferior(this);
 	Orientacion antigua = Orientacion.Sur;
 
 	Juego() {
@@ -31,7 +31,7 @@ public class Juego extends JFrame implements Componentes {
 		heroeLife = new Timer(50, new Listener());
 		heroeCoolDown = new Timer(500, new CDListener());
 		animacion = new Timer(500, new accion());
-		panel = new Panel(getHeroe(),this);
+		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -39,6 +39,7 @@ public class Juego extends JFrame implements Componentes {
 		setTablero(new Tablero(mundoActual, mundo.getPosicion()));
 		this.add(getTablero(), BorderLayout.CENTER);
 		this.add(panel, BorderLayout.NORTH);
+		this.add(panelSur,BorderLayout.SOUTH);
 		this.addKeyListener(listener);
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
