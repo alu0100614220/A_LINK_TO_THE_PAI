@@ -23,6 +23,7 @@ public class Juego extends JFrame implements Componentes {
 	private Panel panel;
 	private int mundoActual = 1;
 	private Mundo mundo = new Mundo(mundoActual);
+	
 	Orientacion antigua = Orientacion.Sur;
 
 	Juego() {
@@ -30,7 +31,7 @@ public class Juego extends JFrame implements Componentes {
 		heroeLife = new Timer(50, new Listener());
 		heroeCoolDown = new Timer(500, new CDListener());
 		animacion = new Timer(500, new accion());
-		panel = new Panel(getHeroe());
+		panel = new Panel(getHeroe(),this);
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -44,7 +45,9 @@ public class Juego extends JFrame implements Componentes {
 		setEnemigos();
 
 	}
-
+	public void reinicia(){
+		System.out.println("hayola");
+	}
 	private void setEnemigos() {
 		enemigos = new ArrayList<Enemigo>();
 		for (int i = 0; i < getTablero().getEnemigos().size(); i++) {
