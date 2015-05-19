@@ -1,4 +1,7 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -24,23 +27,26 @@ public class Panel extends JPanel {
 	JLabel picMuerte = new JLabel(new ImageIcon(imMuerte));
 	JLabel picVidaMas = new JLabel(new ImageIcon(imVidaMas));
 	JLabel vida = new JLabel("100");
-	JLabel estadoPause = new JLabel("Pause");
 	JButton restart = new JButton("Restart");
 	Boolean estado = false;
 	
 	Panel(Heroe heroe, Juego juego) {
+		setLayout(new BorderLayout());
 		this.heroe = heroe;
 		this.juego = juego;
 		this.setBackground(Color.LIGHT_GRAY);
-		this.add(picVidaMas);
+		
 		picVidaMas.setVisible(false);
-		this.add(picVida);
-		this.add(vida);
-		this.add(estadoPause);
-		this.add(restart);
+		Container containerVida = new Container();
+		containerVida.setLayout(new FlowLayout());
+		containerVida.add(picVida);
+		containerVida.add(vida);
+		containerVida.add(picVidaMas);
+		containerVida.setVisible(true);
+		this.add(containerVida,BorderLayout.CENTER);
+		this.add(restart,BorderLayout.EAST);
 		restart.setFocusable(false);
 		restart.addActionListener(new Clicker());
-		estadoPause.setVisible(false);
 		// //this.add(textoEspacio);
 
 	}
@@ -78,9 +84,9 @@ public class Panel extends JPanel {
 			g.drawImage(imEscudo, 82, 3, this);
 		}
 		if (estado == true) {
-			g.drawString("Pause.", this.getWidth() - 50, 17);
+			g.drawString("Pause.", this.getWidth() - 150, 17);
 		} else {
-			g.drawString("", this.getWidth() - 50, 17);
+			g.drawString("", this.getWidth() - 150, 17);
 		}
 
 	}
