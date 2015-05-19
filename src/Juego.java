@@ -10,10 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 /**
- * Es la clase principal, gestionara en general todo el juego en si.
- * Controla los movimientos del heroe, enemigos etc.
- * Tambien controla toda la lógica.
+ * Es la clase principal, gestionara en general todo el juego en si. Controla
+ * los movimientos del heroe, enemigos etc. Tambien controla toda la lï¿½gica.
  */
+@SuppressWarnings("serial")
 public class Juego extends JFrame implements Componentes {
 	private Tablero tablero; // Tablero del juego
 	private Heroe heroe = new Heroe(5, 5); // Jugador
@@ -43,7 +43,7 @@ public class Juego extends JFrame implements Componentes {
 													// ataque
 		panel = new Panel(getHeroe()); // Panel con los datos del heroe superior
 		panelSur = new PanelInferior(this); // Panel con inferior
-		setTitle("Roguelike PAI");
+		setTitle("A Link to the PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
@@ -85,7 +85,7 @@ public class Juego extends JFrame implements Componentes {
 		panel.setVisible(false);
 		panel = new Panel(getHeroe());
 		this.add(panel, BorderLayout.NORTH);
-		// Añadimos el heroe al tablero
+		// Aï¿½adimos el heroe al tablero
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
@@ -293,10 +293,19 @@ public class Juego extends JFrame implements Componentes {
 						enemigos.clear();
 					}
 				}
-				if (e.getKeyCode() == KeyEvent.VK_A //Controlamos que la A sea un ataque, y que no este en cooldown
+				if (e.getKeyCode() == KeyEvent.VK_A // Controlamos que la A sea
+													// un ataque, y que no este
+													// en cooldown
 						&& !heroeCoolDown.isRunning()) {
-					antigua = getHeroe().getOrientacion(); //Almacenamos la orientacion antigua del heroe para el manejo de los sprites
-					switch (heroe.getOrientacion()) { //Cambiara su orintacion(estado) a orientado a ese sitio atacando
+					antigua = getHeroe().getOrientacion(); // Almacenamos la
+															// orientacion
+															// antigua del heroe
+															// para el manejo de
+															// los sprites
+					switch (heroe.getOrientacion()) { // Cambiara su
+														// orintacion(estado) a
+														// orientado a ese sitio
+														// atacando
 					case Norte:
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Heroe, Orientacion.AtacandoNorte);
@@ -316,8 +325,12 @@ public class Juego extends JFrame implements Componentes {
 					default:
 						break;
 					}
-					animacion.start(); //Lanzamos el sprite
-					for (int i = 0; i < enemigos.size(); i++) { //Comprueba que hhaya enemigos en su ataque y les hace daño
+					animacion.start(); // Lanzamos el sprite
+					for (int i = 0; i < enemigos.size(); i++) { // Comprueba que
+																// hhaya
+																// enemigos en
+																// su ataque y
+																// les hace daï¿½o
 						if (getHeroe().atacar(enemigos.get(i))) {
 							enemigos.get(i).setHp(getHeroe().getDanio());
 						}
@@ -331,14 +344,19 @@ public class Juego extends JFrame implements Componentes {
 					heroeCoolDown.start();
 
 				}
-				
-				//Movimiento del heroe 
+
+				// Movimiento del heroe
 				if (e.getKeyCode() == KeyEvent.VK_UP
 						&& !heroeCoolDown.isRunning()) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
-					if (condicionParaMoverse(posicion)) { //Comprobamos que se puede mover a esa casilla
-						moverse(posicion, Orientacion.Norte); //LLamamos a moverse que actualizara la posicion
+					if (condicionParaMoverse(posicion)) { // Comprobamos que se
+															// puede mover a esa
+															// casilla
+						moverse(posicion, Orientacion.Norte); // LLamamos a
+																// moverse que
+																// actualizara
+																// la posicion
 					} else {
 						girarse(Orientacion.Norte);
 					}
@@ -375,6 +393,7 @@ public class Juego extends JFrame implements Componentes {
 			}
 
 		}
+
 		/**
 		 * Sin implementar
 		 */
@@ -391,40 +410,52 @@ public class Juego extends JFrame implements Componentes {
 	 */
 	class accion implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			//Cada vez que se llame a la funcion devolverá al heroe a su estado original
+			// Cada vez que se llame a la funcion devolverï¿½ al heroe a su estado
+			// original
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 					antigua);
 			animacion.stop();
 		}
 
 	}
+
 	/**
 	 * Clase que comprueba el CD del heroe
+	 * 
 	 * @author adrian
 	 *
 	 */
 	class CDListener implements ActionListener {
-		/** (non-Javadoc)
-		 * Si se llama el heroe no está en CD
+		/**
+		 * (non-Javadoc) Si se llama el heroe no estï¿½ en CD
 		 */
 		public void actionPerformed(ActionEvent arg0) {
 			heroeCoolDown.stop();
 		}
 	}
+
 	/**
-	 * Movera a los enemigos cada vez que se llame 
+	 * Movera a los enemigos cada vez que se llame
+	 * 
 	 * @author adrian
 	 *
 	 */
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			for (int i = 0; i < enemigos.size(); i++) { //Por cada enemigo que hay
-				if (enemigos.get(i).actuar(getHeroe().getPosicion())) { //Comprueba que les hace daño
-					if (getHeroe().getEscudo()) { //Si tiene escudo les hacen menos daño
+			for (int i = 0; i < enemigos.size(); i++) { // Por cada enemigo que
+														// hay
+				if (enemigos.get(i).actuar(getHeroe().getPosicion())) { // Comprueba
+																		// que
+																		// les
+																		// hace
+																		// daï¿½o
+					if (getHeroe().getEscudo()) { // Si tiene escudo les hacen
+													// menos daï¿½o
 						getHeroe().setHp(enemigos.get(i).getDamage() + 20);
 					} else
 						getHeroe().setHp(enemigos.get(i).getDamage());
-					if (getHeroe().getHp() <= 0) { //Si se muere el heroe se paran
+					if (getHeroe().getHp() <= 0) { // Si se muere el heroe se
+													// paran
 						enemyMoving.stop();
 						heroeLife.stop();
 					}
