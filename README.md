@@ -1,4 +1,4 @@
-# PAI_ROGUELIK
+# PAI_ROGUELIKE
 Proyecto de la Asignatura Programación de aplicaciones interacticas.
 # Participantes:
 Adrian Mesa Jaubert.
