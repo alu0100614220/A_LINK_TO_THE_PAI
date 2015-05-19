@@ -59,9 +59,6 @@ public class Casilla implements Componentes {
 		case Escudo:
 			setOcupado(true);
 			break;
-		case Objeto:
-			setOcupado(false);
-			break;
 		case Cofre:
 			setOcupado(true);
 			break;
