@@ -27,6 +27,7 @@ public class Juego extends JFrame implements Componentes {
 	Orientacion antigua = Orientacion.Sur;
 
 	Juego() {
+		
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
 		heroeCoolDown = new Timer(500, new CDListener());
@@ -47,7 +48,6 @@ public class Juego extends JFrame implements Componentes {
 
 	}
 	public void reinicia(){
-		System.out.println("hayola");
 	}
 	private void setEnemigos() {
 		enemigos = new ArrayList<Enemigo>();
@@ -202,7 +202,12 @@ public class Juego extends JFrame implements Componentes {
 					}
 					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre
 							&& getHeroe().getKey()) {
-						System.out.println("FINAL");
+						getTablero().cambiarTablero("maps/" + mundoActual + "/25.map");
+						Point ending = new Point(5,15);
+						getTablero().setCasilla(ending, Estado.Heroe, Orientacion.Norte);
+						getHeroe().setPosicion(ending);
+						getHeroe().setOrientacion(Orientacion.Norte);
+						enemigos.clear();
 					}
 				}
 				if (e.getKeyCode() == KeyEvent.VK_A) {
