@@ -24,8 +24,8 @@ public class Tablero extends JPanel implements Componentes {
 	private int alto = 0; // Alto del tablero
 
 	/**
-	 * Declaración de las diferentes imágenes que representarán los diferentes
-	 * elementos del juego
+	 * Declaración de las diferentes imágenes que representarán los
+	 * diferentes elementos del juego
 	 */
 	private Image suelo = (new ImageIcon("img/hierbilla.gif")).getImage();
 	private Image heroeSur = (new ImageIcon("img/heroeoncio.gif")).getImage();
@@ -212,7 +212,8 @@ public class Tablero extends JPanel implements Componentes {
 																// decide la
 																// orientación
 																// del héroe en
-																// función de la
+																// función de
+																// la
 																// info de la
 																// casilla
 					case Norte:
@@ -272,7 +273,8 @@ public class Tablero extends JPanel implements Componentes {
 																// orientación
 																// del enemigo
 																// en
-																// función de la
+																// función de
+																// la
 																// info de la
 																// casilla
 					case Norte:
