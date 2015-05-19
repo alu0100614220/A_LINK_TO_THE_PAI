@@ -131,13 +131,34 @@ public class Juego extends JFrame implements Componentes {
 			setEnemigos();
 		}
 	}
+	
+	private boolean condicionParaMoverse(Point posicion){
+		if ((!getTablero().getCasilla(posicion).isOcupado())
+				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
+				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
+				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
+			if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
+				getHeroe().setKey(true);
+			}
+			if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
+				getHeroe().setSword(true);
+			}
+			if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
+				getHeroe().setShield(true);
+			}
+			return true;
+		}
+		else
+			return false;
+		
+	}
 
 	class KeyListn implements KeyListener {
 
 		public void keyPressed(KeyEvent e) {
 			enemyMoving.start();
 			panel.repaint();
-			if (getHeroe().getHp() >= 0) {
+			if (getHeroe().getHp() > 0) {
 				if (e.getKeyCode() == KeyEvent.VK_E) {
 					Point punto = new Point(getHeroe().getPosicion());
 					switch (getHeroe().getOrientacion()) {
@@ -181,19 +202,7 @@ public class Juego extends JFrame implements Componentes {
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
-					if ((!getTablero().getCasilla(posicion).isOcupado())
-							|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
-							|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-							|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
-							getHeroe().setKey(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
-							getHeroe().setSword(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
-							getHeroe().setShield(true);
-						}
+					if (condicionParaMoverse(posicion)){
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
@@ -201,22 +210,17 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setPosicion(posicion);
 						getHeroe().setOrientacion(Orientacion.Norte);
 					}
+					else{
+						getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+								Orientacion.Norte);
+						getHeroe().setOrientacion(Orientacion.Norte);
+					}
+						
+						
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y + 1);
-					if ((!getTablero().getCasilla(posicion).isOcupado())
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
-							getHeroe().setKey(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
-							getHeroe().setSword(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
-							getHeroe().setShield(true);
-						}
+					if (condicionParaMoverse(posicion)){
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
@@ -224,22 +228,15 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setPosicion(posicion);
 						getHeroe().setOrientacion(Orientacion.Sur);
 					}
+					else{
+						getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+								Orientacion.Sur);
+						getHeroe().setOrientacion(Orientacion.Sur);
+					}
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					Point posicion = new Point(getHeroe().getPosicion().x - 1,
 							getHeroe().getPosicion().y);
-					if ((!getTablero().getCasilla(posicion).isOcupado())
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
-							getHeroe().setKey(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
-							getHeroe().setSword(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
-							getHeroe().setShield(true);
-						}
+					if (condicionParaMoverse(posicion)){
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
@@ -247,27 +244,25 @@ public class Juego extends JFrame implements Componentes {
 						getHeroe().setPosicion(posicion);
 						getHeroe().setOrientacion(Orientacion.Oeste);
 					}
+					else{
+						getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+								Orientacion.Oeste);
+						getHeroe().setOrientacion(Orientacion.Oeste);
+					}
 				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					Point posicion = new Point(getHeroe().getPosicion().x + 1,
 							getHeroe().getPosicion().y);
-					if ((!getTablero().getCasilla(posicion).isOcupado())
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
-							getHeroe().setKey(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
-							getHeroe().setSword(true);
-						}
-						if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
-							getHeroe().setShield(true);
-						}
+					if (condicionParaMoverse(posicion)){
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Vacia, Orientacion.Sur);
 						getTablero().setCasilla(posicion, Estado.Heroe,
 								Orientacion.Este);
 						getHeroe().setPosicion(posicion);
+						getHeroe().setOrientacion(Orientacion.Este);
+					}
+					else{
+						getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+								Orientacion.Este);
 						getHeroe().setOrientacion(Orientacion.Este);
 					}
 				}
