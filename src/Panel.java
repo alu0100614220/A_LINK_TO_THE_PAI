@@ -15,13 +15,14 @@ public class Panel extends JPanel {
 	Image imMuerte = (new ImageIcon("img/muerte.gif")).getImage();
 	Image imEspada = (new ImageIcon("img/espada.gif")).getImage();
 	Image imEscudo = (new ImageIcon("img/escudo.gif")).getImage();
-	JLabel pausa = new JLabel("Pausa.");
+	Image imPause = (new ImageIcon("img/pause.gif")).getImage();
 	JLabel picLlave = new JLabel(new ImageIcon(imLlave));
 	JLabel picEspada = new JLabel(new ImageIcon(imEspada));
 	JLabel picEscudo= new JLabel(new ImageIcon(imEscudo));
 	JLabel picVida = new JLabel(new ImageIcon(imVida));
 	JLabel picMuerte = new JLabel(new ImageIcon(imMuerte));
 	JLabel picVidaMas = new JLabel(new ImageIcon(imVidaMas));
+	JLabel picPause= new JLabel(new ImageIcon(imPause));	
 	JLabel vida = new JLabel("100");
 	Boolean estado = false;
 
@@ -44,11 +45,11 @@ public class Panel extends JPanel {
 		picVidaMas.setVisible(false);
 		cent.add(picVida);
 		cent.add(vida);
-		der.add(pausa);
+		der.add(picPause);
+		picPause.setVisible(false);
 		this.add(izq);
 		this.add(cent);
 		this.add(der);
-		pausa.setVisible(false);
 	}
 
 	public void actualizar() {
@@ -83,13 +84,16 @@ public class Panel extends JPanel {
 		} else
 			vida.setText(Integer.toString(heroe.getHp()));
 		if(estado) {
-			pausa.setVisible(true);
+			picPause.setVisible(true);
 		}
+		else
+			picPause.setVisible(false);
 
 	}
 
 	public void pintaPause(boolean estado) {
 		this.estado = estado;
+		actualizar();
 	}
 
 	/*protected void paintComponent(Graphics g) {
