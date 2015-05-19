@@ -30,7 +30,7 @@ public class Juego extends JFrame implements Componentes {
 	private PanelInferior panelSur = new PanelInferior(this);
 	Orientacion antigua = Orientacion.Sur;
 
-	Juego() {
+	public Juego() {
 		// Definimos los timer
 		enemyMoving = new Timer(500, new Listener()); // Controla los
 														// movimientos del

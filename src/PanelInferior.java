@@ -24,7 +24,7 @@ public class PanelInferior extends JPanel {
 	 * Constructor donde colocamos en su sitio los distintos elementos
 	 * 
 	 */	
-	PanelInferior(Juego juego) {
+	public PanelInferior(Juego juego) {
 		this.juego = juego;
 		this.setBackground(Color.LIGHT_GRAY);
 		this.add(new JLabel("Movimiento:"));

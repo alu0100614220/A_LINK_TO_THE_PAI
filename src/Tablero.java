@@ -62,7 +62,7 @@ public class Tablero extends JPanel implements Componentes {
 	/**
 	 * Constructor por defecto. Inicializa el vector de casillas.
 	 */
-	Tablero() {
+	public Tablero() {
 		casillas = new Casilla[SIZE][SIZE];
 		this.setLayout(new GridLayout(SIZE, SIZE));
 		for (int j = 0; j < SIZE; j++) {
@@ -81,7 +81,7 @@ public class Tablero extends JPanel implements Componentes {
 	 * @param mapa
 	 *            Mapa a mostrar
 	 */
-	Tablero(int mundo, int mapa) {
+	public Tablero(int mundo, int mapa) {
 		crearTablero(mundo, mapa);
 	}
 

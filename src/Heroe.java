@@ -12,7 +12,7 @@ public class Heroe implements Componentes {
 	private boolean escudo = false;
 	private boolean corazon = false;
 	
-	Heroe(int i, int j) {
+	public Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		setOrientacion(Orientacion.Sur);//Orientado por defecto mirando hacia abajo
 		this.setHp(HP);

@@ -41,7 +41,7 @@ public class Panel extends JPanel {
 	 * Constructor donde colocamos en su sitio los distintos elementos
 	 * 
 	 */	
-	Panel(Heroe heroe) {
+	public Panel(Heroe heroe) {
 		setLayout(new GridLayout(1,3));
 		JPanel izq = new JPanel();
 		JPanel cent = new JPanel();
