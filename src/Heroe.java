@@ -3,7 +3,6 @@ import java.awt.Point;
 public class Heroe implements Componentes {
 	private int HP = 100; // Vida inicial del jugador
 	private int hp; // Vida del jugador
-	private int arma; // Arma actual del jugador
 	private Point posicion; // Posici��n en el mapa del jugador
 	private Orientacion orientacion; // Orientaci��n en el mapa del jugador
 	private int danio = -50;
@@ -41,16 +40,7 @@ public class Heroe implements Componentes {
 	public void resetHp() {
 		this.hp = 100;
 	}
-	/*
-	 * Arma
-	 */
-	public int getArma() {
-		return arma;
-	}
-
-	public void setArma(Arma arma) {
-		this.arma = arma.ordinal();
-	}
+	
 	/*
 	 * Posicion
 	 */
