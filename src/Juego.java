@@ -27,44 +27,60 @@ public class Juego extends JFrame implements Componentes {
 	Orientacion antigua = Orientacion.Sur;
 
 	Juego() {
-
-		enemyMoving = new Timer(500, new Listener());
-		heroeLife = new Timer(50, new Listener());
-		heroeCoolDown = new Timer(100, new CDListener());
-		animacion = new Timer(500, new accion());
-		panel = new Panel(getHeroe());
+		//Definimos los timer
+		enemyMoving = new Timer(500, new Listener()); //Controla los movimientos del enemigo
+		heroeLife = new Timer(50, new Listener()); // Un controlador para saber si el heroe se movio
+		heroeCoolDown = new Timer(100, new CDListener());//EL CoolDown del ataque del heroe
+		animacion = new Timer(500, new accion());//Controlar la animacion de ataque
+		panel = new Panel(getHeroe()); //Panel con los datos del heroe superior
+		panelSur = new PanelInferior(this); //Panel con inferior
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
-		setTablero(new Tablero(mundoActual, mundo.getPosicion()));
+		setTablero(new Tablero(mundoActual, mundo.getPosicion())); //El juego tiene que aceder al tablero
 		this.add(getTablero(), BorderLayout.CENTER);
 		this.add(panel, BorderLayout.NORTH);
-		this.add(panelSur, BorderLayout.SOUTH);
+		this.add(panelSur, BorderLayout.SOUTH); 
 		this.addKeyListener(listener);
+		//Establecemos en el tablero la posicion del heroe
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
 
 	}
-
+	
+	/**
+	 * Llamaremos al metodo cada vez que pulsemos restart y nos "reiniciara" la partida sin crearlo todo de 0
+	 */
 	public void reinicia() {
-		enemyMoving.stop();
+		
+		//Paramos los timers
+		enemyMoving.stop(); 
 		heroeLife.stop();
 		heroeCoolDown.stop();
 		animacion.stop();
+		
+		//Volvemos al mapa 1
 		getTablero().cambiarTablero("maps/" + getMundoActual() + "/1.map");
 		this.setMundoActual(1);
 		this.mundo.setPosicion(1);
+		
+		//Volvemos a crear de 0 al Heroe en la posicion 5,5
 		setHeroe(new Heroe(5, 5));
+		//Ocultamos el panel y lo reiniciamos
 		panel.setVisible(false);
 		panel = new Panel(getHeroe());
 		this.add(panel, BorderLayout.NORTH);
+		//Añadimos el heroe al tablero
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
 	}
-
+	
+	/**
+	 * Crea un array de enemigos para hacerlo mas sencillo
+	 */
 	private void setEnemigos() {
 		enemigos = new ArrayList<Enemigo>();
 		for (int i = 0; i < getTablero().getEnemigos().size(); i++) {
@@ -73,7 +89,7 @@ public class Juego extends JFrame implements Componentes {
 		}
 	}
 
-	/*
+	/**
 	 * Getters & Setters
 	 */
 	public Tablero getTablero() {
@@ -109,20 +125,28 @@ public class Juego extends JFrame implements Componentes {
 		this.mundoActual = mundoActual;
 	}
 
+	/**
+	 * Comprobara a que direccion se ira dependiendo de la orientacion
+	 */
 	public void comprobarCambio() {
 		Point posicion = getHeroe().getPosicion();
-		if (posicion.x == 0) {
-			enemigos.clear();
-			mundo.cambioMapa(Orientacion.Oeste);
+		
+		//Oeste
+		if (posicion.x == 0) { 
+			enemigos.clear(); //Limpia el array de enemigos
+			mundo.cambioMapa(Orientacion.Oeste); //Cambia el mapa segun la orientacion
 			getHeroe().setPosicion(
 					new Point(getTablero().getAncho() - 2, getHeroe()
-							.getPosicion().y));
+							.getPosicion().y)); //establecemos la posicion nueva del heroe
 			getTablero().cambiarTablero(
-					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map");
+					"maps/" + mundoActual + "/" + mundo.getPosicion() + ".map"); //Recargamos el tablero del mapa actual
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-					Orientacion.Oeste);
+					Orientacion.Oeste); //añadimos la posicion del heroe al tablero
 			setEnemigos();
-		} else if (posicion.y == 0) {
+		} 
+		
+		//Norte
+		else if (posicion.y == 0) {
 			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Norte);
 			getHeroe()
@@ -134,7 +158,10 @@ public class Juego extends JFrame implements Componentes {
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 					Orientacion.Norte);
 			setEnemigos();
-		} else if (posicion.x == getTablero().getAncho() - 1) {
+		}
+		
+		//Este
+		else if (posicion.x == getTablero().getAncho() - 1) {
 			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Este);
 			getHeroe().setPosicion(new Point(1, getHeroe().getPosicion().y));
@@ -143,7 +170,10 @@ public class Juego extends JFrame implements Componentes {
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 					Orientacion.Este);
 			setEnemigos();
-		} else if (posicion.y == getTablero().getAlto() - 1) {
+		}
+		
+		//Sur
+		else if (posicion.y == getTablero().getAlto() - 1) {
 			enemigos.clear();
 			mundo.cambioMapa(Orientacion.Sur);
 			getHeroe().setPosicion(new Point(getHeroe().getPosicion().x, 1));
@@ -154,8 +184,13 @@ public class Juego extends JFrame implements Componentes {
 			setEnemigos();
 		}
 	}
-
+	
+	/**
+	 * @param posicion
+	 * @return
+	 */
 	private boolean condicionParaMoverse(Point posicion) {
+		//Comprueba que sea una casilla visitable
 		if ((!getTablero().getCasilla(posicion).isOcupado())
 				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
 				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
