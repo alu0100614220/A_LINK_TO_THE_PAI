@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
+/**
+ * @author adrian
+ *
+ */
 @SuppressWarnings("serial")
 public class Juego extends JFrame implements Componentes {
 	private Tablero tablero; // Tablero del juego
@@ -175,9 +179,15 @@ public class Juego extends JFrame implements Componentes {
 	 * @return
 	 */
 	private boolean condicionParaMoverse(Point posicion) {
+		/**
+		 * Si es una casilla vacia true
+		 */
 		if (!getTablero().getCasilla(posicion).isOcupado()) {
 			return true;
 		}
+		/**
+		 * Si no es vacia comprobamos cada uno de los tipos que puede ser
+		 */
 		switch (getTablero().getCasilla(posicion).getEstado()) {
 		case Llave:
 			getHeroe().setLlave(true);
@@ -196,6 +206,14 @@ public class Juego extends JFrame implements Componentes {
 		}
 	}
 
+	/**
+	 * Le pasamos la orientacion y la posicion, y actualizamos el tablero,
+	 * quitando alheroe de su posicion antigua y poniendolo en la nueva con la
+	 * orientacion
+	 * 
+	 * @param posicion
+	 * @param aux
+	 */
 	private void moverse(Point posicion, Orientacion aux) {
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Vacia, aux);
 		getTablero().setCasilla(posicion, Estado.Heroe, aux);
@@ -203,17 +221,26 @@ public class Juego extends JFrame implements Componentes {
 		getHeroe().setOrientacion(aux);
 	}
 
+	/**
+	 * Si el heroe esta bloqueado por algun objeto y se mueve en una direccion,
+	 * se cambia la orientacion hacia esa direccion
+	 */
 	private void girarse(Orientacion aux) {
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe, aux);
 		getHeroe().setOrientacion(aux);
 	}
 
+	/**
+	 * Clase que gestiona los eventos por teclado
+	 *
+	 */
 	class KeyListn implements KeyListener {
 
 		public void keyPressed(KeyEvent e) {
-			enemyMoving.start();
+			enemyMoving.start(); // Con cualquier tecla pulsada los enemigos
+									// empezaran a moverse
 			panel.repaint();
-			if (e.getKeyCode() == KeyEvent.VK_P) {
+			if (e.getKeyCode() == KeyEvent.VK_P) { // Pausara el juego
 				if (stop == false) {
 					stop = true;
 					enemyMoving.stop();
@@ -226,11 +253,16 @@ public class Juego extends JFrame implements Componentes {
 			} else {
 				panel.pintaPause(false);
 			}
-			if (getHeroe().getHp() > 0) {
+			if (getHeroe().getHp() > 0) { // Controlamos que podamos mover al
+											// heroe si sigue vivo
 				if (e.getKeyCode() == KeyEvent.VK_E
-						&& !heroeCoolDown.isRunning()) {
+						&& !heroeCoolDown.isRunning()) { // Abrir cofre,
+															// compartiendo CD
+															// con atacar
 					Point punto = new Point(getHeroe().getPosicion());
-					switch (getHeroe().getOrientacion()) {
+					switch (getHeroe().getOrientacion()) { // Comprueba la
+															// casilla a la que
+															// esta mirando
 					case Norte:
 						punto.y = punto.y - 1;
 						break;
@@ -246,10 +278,13 @@ public class Juego extends JFrame implements Componentes {
 					default:
 						break;
 					}
+					// Comprueba la casilla a la que esta mirando si es un cofre
 					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre
 							&& getHeroe().getLlave()) {
 						getTablero().cambiarTablero(
 								"maps/" + mundoActual + "/25.map");
+						// Si es asi y tiene la llave acabaria el juego yendo a
+						// la posicion 25 del mapa
 						Point ending = new Point(11, 6);
 						getTablero().setCasilla(ending, Estado.Heroe,
 								Orientacion.Sur);
@@ -258,10 +293,10 @@ public class Juego extends JFrame implements Componentes {
 						enemigos.clear();
 					}
 				}
-				if (e.getKeyCode() == KeyEvent.VK_A
+				if (e.getKeyCode() == KeyEvent.VK_A //Controlamos que la A sea un ataque, y que no este en cooldown
 						&& !heroeCoolDown.isRunning()) {
-					antigua = getHeroe().getOrientacion();
-					switch (heroe.getOrientacion()) {
+					antigua = getHeroe().getOrientacion(); //Almacenamos la orientacion antigua del heroe para el manejo de los sprites
+					switch (heroe.getOrientacion()) { //Cambiara su orintacion(estado) a orientado a ese sitio atacando
 					case Norte:
 						getTablero().setCasilla(getHeroe().getPosicion(),
 								Estado.Heroe, Orientacion.AtacandoNorte);
@@ -281,9 +316,8 @@ public class Juego extends JFrame implements Componentes {
 					default:
 						break;
 					}
-					animacion.start();
-					for (int i = 0; i < enemigos.size(); i++) {
-
+					animacion.start(); //Lanzamos el sprite
+					for (int i = 0; i < enemigos.size(); i++) { //Comprueba que hhaya enemigos en su ataque y les hace daño
 						if (getHeroe().atacar(enemigos.get(i))) {
 							enemigos.get(i).setHp(getHeroe().getDanio());
 						}
@@ -297,12 +331,14 @@ public class Juego extends JFrame implements Componentes {
 					heroeCoolDown.start();
 
 				}
+				
+				//Movimiento del heroe 
 				if (e.getKeyCode() == KeyEvent.VK_UP
 						&& !heroeCoolDown.isRunning()) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
-					if (condicionParaMoverse(posicion)) {
-						moverse(posicion, Orientacion.Norte);
+					if (condicionParaMoverse(posicion)) { //Comprobamos que se puede mover a esa casilla
+						moverse(posicion, Orientacion.Norte); //LLamamos a moverse que actualizara la posicion
 					} else {
 						girarse(Orientacion.Norte);
 					}
@@ -339,7 +375,9 @@ public class Juego extends JFrame implements Componentes {
 			}
 
 		}
-
+		/**
+		 * Sin implementar
+		 */
 		public void keyReleased(KeyEvent e) {
 		}
 
@@ -347,34 +385,46 @@ public class Juego extends JFrame implements Componentes {
 		}
 	}
 
+	/**
+	 * Clase que gestionara la accion, el sprite en si de ataque
+	 *
+	 */
 	class accion implements ActionListener {
-
 		public void actionPerformed(ActionEvent arg0) {
+			//Cada vez que se llame a la funcion devolverá al heroe a su estado original
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 					antigua);
 			animacion.stop();
 		}
 
 	}
-
+	/**
+	 * Clase que comprueba el CD del heroe
+	 * @author adrian
+	 *
+	 */
 	class CDListener implements ActionListener {
-
+		/** (non-Javadoc)
+		 * Si se llama el heroe no está en CD
+		 */
 		public void actionPerformed(ActionEvent arg0) {
 			heroeCoolDown.stop();
-
 		}
-
 	}
-
+	/**
+	 * Movera a los enemigos cada vez que se llame 
+	 * @author adrian
+	 *
+	 */
 	class Listener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			for (int i = 0; i < enemigos.size(); i++) {
-				if (enemigos.get(i).actuar(getHeroe().getPosicion())) {
-					if (getHeroe().getEscudo()) {
+			for (int i = 0; i < enemigos.size(); i++) { //Por cada enemigo que hay
+				if (enemigos.get(i).actuar(getHeroe().getPosicion())) { //Comprueba que les hace daño
+					if (getHeroe().getEscudo()) { //Si tiene escudo les hacen menos daño
 						getHeroe().setHp(enemigos.get(i).getDamage() + 20);
 					} else
 						getHeroe().setHp(enemigos.get(i).getDamage());
-					if (getHeroe().getHp() <= 0) {
+					if (getHeroe().getHp() <= 0) { //Si se muere el heroe se paran
 						enemyMoving.stop();
 						heroeLife.stop();
 					}
