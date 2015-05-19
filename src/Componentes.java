@@ -20,7 +20,7 @@ public interface Componentes {
 	
 	// Armas del jugador
 	enum Arma {
-		Espada, Arco
+		Espada, Escudo, Llave
 	}
 
 }

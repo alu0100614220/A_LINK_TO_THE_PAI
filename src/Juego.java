@@ -39,8 +39,7 @@ public class Juego extends JFrame implements Componentes {
 		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
 				Orientacion.Sur);
 		setEnemigos();
-		
-		
+
 	}
 
 	private void setEnemigos() {
@@ -155,7 +154,8 @@ public class Juego extends JFrame implements Componentes {
 						punto.x = punto.x - 1;
 						break;
 					}
-					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre && getHeroe().getKey()) {
+					if (getTablero().getCasilla(punto).getEstado() == Estado.Cofre
+							&& getHeroe().getKey()) {
 						System.out.println("FINAL");
 					}
 				}
@@ -181,7 +181,10 @@ public class Juego extends JFrame implements Componentes {
 				if (e.getKeyCode() == KeyEvent.VK_UP) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y - 1);
-					if (!getTablero().getCasilla(posicion).isOcupado()) {
+					if ((!getTablero().getCasilla(posicion).isOcupado())
+							|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
+							|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
+							|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
 						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
 							getHeroe().setKey(true);
 						}
@@ -201,7 +204,10 @@ public class Juego extends JFrame implements Componentes {
 				} else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 					Point posicion = new Point(getHeroe().getPosicion().x,
 							getHeroe().getPosicion().y + 1);
-					if (!getTablero().getCasilla(posicion).isOcupado()) {
+					if ((!getTablero().getCasilla(posicion).isOcupado())
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
 						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
 							getHeroe().setKey(true);
 						}
@@ -221,7 +227,10 @@ public class Juego extends JFrame implements Componentes {
 				} else if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 					Point posicion = new Point(getHeroe().getPosicion().x - 1,
 							getHeroe().getPosicion().y);
-					if (!getTablero().getCasilla(posicion).isOcupado()) {
+					if ((!getTablero().getCasilla(posicion).isOcupado())
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
 						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
 							getHeroe().setKey(true);
 						}
@@ -241,7 +250,10 @@ public class Juego extends JFrame implements Componentes {
 				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 					Point posicion = new Point(getHeroe().getPosicion().x + 1,
 							getHeroe().getPosicion().y);
-					if (!getTablero().getCasilla(posicion).isOcupado()) {
+					if ((!getTablero().getCasilla(posicion).isOcupado())
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
+						|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)) {
 						if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
 							getHeroe().setKey(true);
 						}
@@ -283,10 +295,9 @@ public class Juego extends JFrame implements Componentes {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
 				if (enemigos.get(i).actuar(getHeroe().getPosicion())) {
-					if(getHeroe().getShield()){
+					if (getHeroe().getShield()) {
 						getHeroe().setHp(enemigos.get(i).getDamage() + 20);
-					}
-					else
+					} else
 						getHeroe().setHp(enemigos.get(i).getDamage());
 					if (getHeroe().getHp() <= 0) {
 						enemyMoving.stop();
