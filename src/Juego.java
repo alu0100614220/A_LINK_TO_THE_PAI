@@ -54,6 +54,8 @@ public class Juego extends JFrame implements Componentes {
 		heroeCoolDown.stop();
 		animacion.stop();
 		getTablero().cambiarTablero("maps/" + getMundoActual() + "/1.map");
+		this.setMundoActual(1);
+		this.mundo.setPosicion(1);
 		setHeroe(new Heroe(5, 5));
 		panel.setVisible(false);
 		panel = new Panel(getHeroe());
