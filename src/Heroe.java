@@ -4,8 +4,8 @@ public class Heroe implements Componentes {
 	private static final int HP = 100; // Vida inicial del jugador
 	private int hp; // Vida del jugador
 	private int arma; // Arma actual del jugador
-	private Point posicion; // Posición en el mapa del jugador
-	private Orientacion orientacion; // Orientación en el mapa del jugador
+	private Point posicion; // Posici��n en el mapa del jugador
+	private Orientacion orientacion; // Orientaci��n en el mapa del jugador
 	private int danio = -50;
 	private boolean llave = false;
 	private boolean espada = false;
@@ -55,6 +55,10 @@ public class Heroe implements Componentes {
 
 	public void setHp(int hp) {
 		this.hp = this.hp + hp;
+	}
+	
+	public void resetHp() {
+		this.hp = 100;
 	}
 
 	public int getArma() {

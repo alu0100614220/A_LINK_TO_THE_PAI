@@ -39,6 +39,8 @@ public class PanelInferior extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == restart) {
 				System.out.println("HAYOLA");
+				juego.reinicia();
+				
 			}
 		}
 

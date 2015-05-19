@@ -49,6 +49,23 @@ public class Juego extends JFrame implements Componentes {
 	}
 
 	public void reinicia() {
+		enemyMoving.stop();
+		heroeLife.stop();
+		heroeCoolDown.stop();
+		animacion.stop();
+		getTablero().cambiarTablero("maps/" + getMundoActual() + "/1.map");
+		setHeroe(new Heroe(5, 5));
+		//panel.setVisible(false);
+		panel = new Panel(getHeroe());
+		//add(panel, BorderLayout.NORTH);
+		panel.actualizar();
+		panel.setVisible(true);
+		repaint();
+		panel.repaint();
+		panelSur.repaint();
+		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
+				Orientacion.Sur);
+		setEnemigos();
 	}
 
 	private void setEnemigos() {
