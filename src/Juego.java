@@ -175,49 +175,25 @@ public class Juego extends JFrame implements Componentes {
 	 * @return
 	 */
 	private boolean condicionParaMoverse(Point posicion) {
-		// Comprueba que sea una casilla visitable
-//		if ((!getTablero().getCasilla(posicion).isOcupado())){
-//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Llave)
-//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Espada)
-//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo)
-//				|| (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)) {
-				if (!getTablero().getCasilla(posicion).isOcupado()) {
-					return true;
-				}
-			switch (getTablero().getCasilla(posicion).getEstado()) {
-			case Llave:
-				getHeroe().setLlave(true);
-				return true;
-			case Espada:
-				getHeroe().setEspada(true);
-				return true;
-			case Escudo:
-				getHeroe().setEscudo(true);
-				return true;
-			case Corazon:
-				getHeroe().setCorazon(true);
-				return true;
-			default:
-				return false;
-			}
-		
-
-		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Llave) {
-		// getHeroe().setLlave(true);
-		// }
-		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Espada) {
-		// getHeroe().setEspada(true);
-		// }
-		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Escudo) {
-		// getHeroe().setEscudo(true);
-		// }
-		// if (getTablero().getCasilla(posicion).getEstado() == Estado.Corazon)
-		// {
-		// getHeroe().setCorazon(true);
-		// }
-		// return true;
-		// } else
-		// return false;
+		if (!getTablero().getCasilla(posicion).isOcupado()) {
+			return true;
+		}
+		switch (getTablero().getCasilla(posicion).getEstado()) {
+		case Llave:
+			getHeroe().setLlave(true);
+			return true;
+		case Espada:
+			getHeroe().setEspada(true);
+			return true;
+		case Escudo:
+			getHeroe().setEscudo(true);
+			return true;
+		case Corazon:
+			getHeroe().setCorazon(true);
+			return true;
+		default:
+			return false;
+		}
 	}
 
 	private void moverse(Point posicion, Orientacion aux) {
