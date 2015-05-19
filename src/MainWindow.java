@@ -21,10 +21,8 @@ public class MainWindow {
 			try {
 				Clip audioClip = (Clip) AudioSystem.getLine(info);
 				audioClip.open(audioStream);
-				audioClip.start();
-				audioClip.loop(100);
+				audioClip.loop(Clip.LOOP_CONTINUOUSLY);
 			} catch (LineUnavailableException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
