@@ -53,15 +53,15 @@ public class Panel extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		g.drawString("Objetos: ", 10, 17);
+		g.drawString("Objetos: ", 10, 25);
 		if (heroe.getLlave()) {
-			g.drawImage(imLlave, 90, -7, this);
+			g.drawImage(imLlave, 105, 2, this);
 		}
 		if (heroe.getEspada()) {
 			g.drawImage(imEspada, 60, 2, this);
 		}
 		if (heroe.getEscudo()) {
-			g.drawImage(imEscudo, 82, 3, this);
+			g.drawImage(imEscudo, 82, 2, this);
 		}
 		if (estado == true) {
 			g.setColor(Color.CYAN);
