@@ -90,7 +90,6 @@ public class Heroe implements Componentes {
 	}
 
 	public void setKey(boolean key) {
-		System.out.println("Llave obtenida.");
 		this.key = key;
 	}
 
@@ -100,6 +99,7 @@ public class Heroe implements Componentes {
 
 	public void setSword(boolean sword) {
 		this.sword = sword;
+		this.danio = -100;
 	}
 
 	public boolean getShield() {

@@ -26,7 +26,7 @@ public class Juego extends JFrame implements Componentes {
 	Juego() {
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
-		heroeCoolDown = new Timer(1000, new CDListener());
+		heroeCoolDown = new Timer(500, new CDListener());
 		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
@@ -283,7 +283,11 @@ public class Juego extends JFrame implements Componentes {
 		public void actionPerformed(ActionEvent e) {
 			for (int i = 0; i < enemigos.size(); i++) {
 				if (enemigos.get(i).actuar(getHeroe().getPosicion())) {
-					getHeroe().setHp(enemigos.get(i).getDamage());
+					if(getHeroe().getShield()){
+						getHeroe().setHp(enemigos.get(i).getDamage() + 20);
+					}
+					else
+						getHeroe().setHp(enemigos.get(i).getDamage());
 					if (getHeroe().getHp() <= 0) {
 						enemyMoving.stop();
 						heroeLife.stop();
