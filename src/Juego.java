@@ -23,12 +23,12 @@ public class Juego extends JFrame implements Componentes {
 	private Panel panel;
 	private int mundoActual = 1;
 	private Mundo mundo = new Mundo(mundoActual);
-
+	Orientacion antigua = Orientacion.Sur;
 	Juego() {
 		enemyMoving = new Timer(500, new Listener());
 		heroeLife = new Timer(50, new Listener());
 		heroeCoolDown = new Timer(500, new CDListener());
-		animacion = new Timer(1000, new accion());
+		animacion = new Timer(500, new accion());
 		panel = new Panel(getHeroe());
 		setTitle("Roguelike PAI");
 		setSize(ANCHO, ALTO);
@@ -199,7 +199,7 @@ public class Juego extends JFrame implements Componentes {
 					}
 				}
 				if (e.getKeyCode() == KeyEvent.VK_A) {
-
+					antigua = getHeroe().getOrientacion();
 					getTablero().setCasilla(getHeroe().getPosicion(),
 							Estado.Heroe, Orientacion.AtacandoNorte);
 					animacion.start();
@@ -300,7 +300,7 @@ public class Juego extends JFrame implements Componentes {
 
 		public void actionPerformed(ActionEvent arg0) {
 			getTablero().setCasilla(getHeroe().getPosicion(), Estado.Heroe,
-			Orientacion.Norte);
+			antigua);
 			animacion.stop();
 		}
 

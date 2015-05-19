@@ -142,18 +142,31 @@ public class Tablero extends JPanel implements Componentes {
 								(int) ratioW, (int) ratioH, this);
 						break;
 					case AtacandoNorte:
-						g2.drawImage(heroeS, (int) (i * ratioW), (int) (j * ratioH),
+						g2.drawImage(heroeN, (int) (i * ratioW), (int) (j * ratioH),
 								(int) ratioW, (int) ratioH, this);
 						break;
 					case Este:
 						g2.drawImage(heroeE, (int) (i * ratioW), (int) (j * ratioH),
 								(int) ratioW, (int) ratioH, this);
 						break;
+					case AtacandoEste:
+						g2.drawImage(heroeE, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
+						
 					case Sur:
 						g2.drawImage(heroeS, (int) (i * ratioW), (int) (j * ratioH),
 								(int) ratioW, (int) ratioH, this);
 						break;
+					case AtacandoSur:
+						g2.drawImage(heroeS, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
 					case Oeste:
+						g2.drawImage(heroeO, (int) (i * ratioW), (int) (j * ratioH),
+								(int) ratioW, (int) ratioH, this);
+						break;
+					case AtacandoOeste:
 						g2.drawImage(heroeO, (int) (i * ratioW), (int) (j * ratioH),
 								(int) ratioW, (int) ratioH, this);
 						break;
