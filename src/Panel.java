@@ -1,5 +1,5 @@
 import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.ImageIcon;
@@ -9,14 +9,12 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class Panel extends JPanel {
 	Heroe heroe;
-	final static JLabel textoEspacio = new JLabel("   ");
 	Image imLlave = (new ImageIcon("img/llave.gif")).getImage();
 	Image imVida = (new ImageIcon("img/vida.gif")).getImage();
 	Image imVidaMas = (new ImageIcon("img/corazon.gif")).getImage();
 	Image imMuerte = (new ImageIcon("img/muerte.gif")).getImage();
 	Image imEspada = (new ImageIcon("img/espada.gif")).getImage();
 	Image imEscudo = (new ImageIcon("img/escudo.gif")).getImage();
-	JLabel objetos = new JLabel("Objetos: ");
 	JLabel pausa = new JLabel("Pausa.");
 	JLabel picLlave = new JLabel(new ImageIcon(imLlave));
 	JLabel picEspada = new JLabel(new ImageIcon(imEspada));
@@ -28,38 +26,47 @@ public class Panel extends JPanel {
 	Boolean estado = false;
 
 	Panel(Heroe heroe) {
+		setLayout(new GridLayout(1,3));
+		JPanel izq = new JPanel();
+		JPanel cent = new JPanel();
+		JPanel der = new JPanel();
 		this.heroe = heroe;
-		this.setBackground(Color.LIGHT_GRAY);
-		add(objetos);
-		add(picLlave);
-		add(picEspada);
-		add(picEscudo);
+		izq.setBackground(Color.LIGHT_GRAY);
+		cent.setBackground(Color.LIGHT_GRAY);
+		der.setBackground(Color.LIGHT_GRAY);
+		izq.add(picLlave);
+		izq.add(picEspada);
+		izq.add(picEscudo);
 		picLlave.setVisible(false);
 		picEspada.setVisible(false);
 		picEscudo.setVisible(false);
-		this.add(picVidaMas);
+		cent.add(picVidaMas);
 		picVidaMas.setVisible(false);
-		this.add(picVida);
-		this.add(vida);
-		this.add(pausa);
+		cent.add(picVida);
+		cent.add(vida);
+		der.add(pausa);
+		this.add(izq);
+		this.add(cent);
+		this.add(der);
 		pausa.setVisible(false);
 	}
 
 	public void actualizar() {
 		if(heroe.getLlave())
 			picLlave.setVisible(true);
-		else {
-			System.out.println("no llave");
+		else
 			picLlave.setVisible(false);
-		}
+		
 		if(heroe.getEspada())
 			picEspada.setVisible(true);
 		else
 			picEspada.setVisible(false);
+		
 		if(heroe.getEscudo())
 			picEscudo.setVisible(true);
 		else
 			picEscudo.setVisible(false);
+		
 		if (heroe.getCorazon()) {
 			picVida.setVisible(false);
 			picVidaMas.setVisible(true);
