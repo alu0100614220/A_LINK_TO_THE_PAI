@@ -11,9 +11,9 @@ import javax.swing.JPanel;
 @SuppressWarnings("serial")
 public class PanelInferior extends JPanel {
 	Juego juego;// Acceso a heroe
-	JButton restart = new JButton("Restart"); //Boton que nos permite resetear el juego
+	JButton restart = new JButton("Restart"); //Botón que nos permite resetear el juego
 	/**
-	 * Declaracion de las imagenes que usaremos
+	 * Declaración de las imágenes que usaremos
 	 */
 	Image imFlechas = (new ImageIcon("img/flechas.gif")).getImage();
 	Image imgA = (new ImageIcon("img/a.gif")).getImage();
@@ -22,7 +22,6 @@ public class PanelInferior extends JPanel {
 
 	/**
 	 * Constructor donde colocamos en su sitio los distintos elementos
-	 * 
 	 */	
 	public PanelInferior(Juego juego) {
 		this.juego = juego;
@@ -39,6 +38,7 @@ public class PanelInferior extends JPanel {
 		restart.addActionListener(new Clicker());
 		restart.setFocusable(false);
 	}
+	
 	/**
 	 *Listener del boton "restart" que reinicia el juego
 	 */

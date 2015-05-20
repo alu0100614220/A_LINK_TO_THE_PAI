@@ -11,7 +11,7 @@ public class Mundo implements Componentes {
 	private int posicion;
 
 	/**
-	 * Constructor. Recibe el numero del mundo a generar.
+	 * Constructor. Recibe el número del mundo a generar.
 	 * @param numMundo
 	 */
 	public Mundo(int numMundo) {
@@ -52,50 +52,31 @@ public class Mundo implements Componentes {
 		}
 	}
 
-	/**
-	 * Getter de la altura del mundo
-	 * @return altura
+
+	/*
+	 * Getters y Setters
 	 */
+	
 	public int getAlto() {
 		return alto;
 	}
 
-	/**
-	 * Setter de la altura del mundo
-	 * @param alto
-	 */
 	public void setAlto(int alto) {
 		this.alto = alto;
 	}
 
-	/**
-	 * Getter de la anchura del mundo
-	 * @return anchura
-	 */
 	public int getAncho() {
 		return ancho;
 	}
 
-	/**
-	 * Setter de la anchura del mundo
-	 * @param ancho
-	 */
 	public void setAncho(int ancho) {
 		this.ancho = ancho;
 	}
 
-	/**
-	 * Getter de la posicion del mapa actual
-	 * @return posición
-	 */
 	public int getPosicion() {
 		return posicion;
 	}
 
-	/**
-	 * Setter de la posicion del mapa actual
-	 * @param posicion
-	 */
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}

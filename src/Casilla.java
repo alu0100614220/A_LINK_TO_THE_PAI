@@ -44,37 +44,18 @@ public class Casilla implements Componentes {
 	public void setEstado(Estado estado) {
 		this.estado = estado;
 		switch (getEstado()) {
-		case Obstaculo:
-			setOcupado(true);
+		case Vacia:
+			setOcupado(false);
 			break;
-		case Heroe:
-			setOcupado(true);
-			break;
-		case Enemigo:
-			setOcupado(true);
-			break;
-		case Llave:
-			setOcupado(true);
-			break;
-		case Espada:
-			setOcupado(true);
-			break;
-		case Escudo:
-			setOcupado(true);
-			break;
-		case Cofre:
-			setOcupado(true);
-			break;
-		case Corazon:
-			setOcupado(true);
+		case Puerta:
+			setOcupado(false);
 			break;
 		default:
-			setOcupado(false);
+			setOcupado(true);
 			break;
 		}
 	}
 
-	
 	/*
 	 * Getters y Setters
 	 */

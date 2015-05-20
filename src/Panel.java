@@ -69,7 +69,7 @@ public class Panel extends JPanel {
 		this.add(der);
 	}
 	/**
-	 * Método que comprueba y muestra/oculta los objetos del heroe o
+	 * Método que comprueba y muestra/oculta los objetos del héroe o
 	 * sus puntos de vida o si muere. 
 	 */
 	public void actualizar() {
@@ -111,7 +111,7 @@ public class Panel extends JPanel {
 
 	}
 	/**
-	 * Metodo usado para saber cuando mostrar la imagen PAUSE
+	 * Método usado para saber cuando mostrar la imagen PAUSE
 	 */
 	public void pintaPause(boolean estado) {
 		this.estado = estado;
