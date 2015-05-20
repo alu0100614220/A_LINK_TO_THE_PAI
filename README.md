@@ -1,7 +1,7 @@
 # PAI_ROGUELIKE
 Proyecto de la Asignatura Programación de aplicaciones interacticas.
 
-### Página web con Documentación [aquí.](https://alu0100614220.github.io/PAI_ROGUELIKE)
+### Página web con Documentación [aquí.](https://alu0100614220.github.io/A_LINK_TO_THE_PAI)
 ### Participantes:
   - [Jonathan Expósito Martín](https://github.com/alu0100696455).
   - [Adrian Mesa Jaubert](https://github.com/alu0100614220). 
