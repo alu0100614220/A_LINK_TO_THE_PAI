@@ -1,7 +1,8 @@
 
 /**
  * Clase que representa las casillas en las que
- * se encontrarán los diferentes elementos del juego
+ * se encontrarán los diferentes elementos del juego.
+ *
  */
 public class Casilla implements Componentes {
 	private Estado estado; //Estado de la casilla (Héroe, Enemigo, etc)
@@ -10,7 +11,7 @@ public class Casilla implements Componentes {
 
 	/**
 	 * Constructor por defecto.
-	 * Por defecto la casilla está vacía.
+	 * Define la casilla al estado vacía.
 	 */
 	public Casilla() {
 		setEstado(Estado.Vacia);
@@ -18,7 +19,8 @@ public class Casilla implements Componentes {
 	}
 
 	/**
-	 * Construye la casilla con un Estado determinado
+	 * Construye la casilla a partir de un Estado pasado por parámetro.
+	 * 
 	 * @param estado
 	 */
 	public Casilla(Estado estado) {
@@ -35,7 +37,8 @@ public class Casilla implements Componentes {
 	}
 
 	/**
-	 * Setter de estado. También cambia el booleano de ocupación
+	 * Cambia el booleano ocupado según el Estado pasado por parámetro.
+	 * 
 	 * @param estado
 	 */
 	public void setEstado(Estado estado) {
@@ -71,6 +74,11 @@ public class Casilla implements Componentes {
 		}
 	}
 
+	
+	/*
+	 * Getters y Setters
+	 */
+	
 	public Orientacion getOrientacion() {
 		return orientacion;
 	}

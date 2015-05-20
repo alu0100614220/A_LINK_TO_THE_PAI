@@ -15,7 +15,7 @@ public interface Componentes {
 
 	
 	/**
-	 * Diferentes orientaciones.
+	 * Diferentes orientaciones de los personajes.
 	 */
 	enum Orientacion {
 		Norte, Este, Sur, Oeste, AtacandoNorte, AtacandoEste, AtacandoSur, AtacandoOeste

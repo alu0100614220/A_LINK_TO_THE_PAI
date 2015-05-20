@@ -24,8 +24,8 @@ public class Tablero extends JPanel implements Componentes {
 	private int alto = 0; // Alto del tablero
 
 	/**
-	 * Declaración de las diferentes imágenes que representarán los
-	 * diferentes elementos del juego
+	 * Declaración de las diferentes imágenes que representarán los diferentes
+	 * elementos del juego
 	 */
 	private Image suelo = (new ImageIcon("img/hierbilla.gif")).getImage();
 	private Image heroeSur = (new ImageIcon("img/heroeoncio.gif")).getImage();
@@ -178,12 +178,9 @@ public class Tablero extends JPanel implements Componentes {
 		System.out.println(mapa);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see javax.swing.JComponent#paintComponent(java.awt.Graphics) Método
-	 * paintComponent que pintará todas las imágenes que forman parte del
-	 * tablero a partir de la información del array de Casillas
+	/**
+	 * Método que pintará todas las imágenes que forman parte del tablero a
+	 * partir de la información del array de Casillas
 	 */
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);

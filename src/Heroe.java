@@ -1,46 +1,41 @@
 import java.awt.Point;
 
 public class Heroe implements Componentes {
-	private int HP = 100; // Vida inicial del jugador
-	private int hp; // Vida del jugador
-	private Point posicion; // Posici��n en el mapa del jugador
-	private Orientacion orientacion; // Orientaci��n en el mapa del jugador
-	private int danio = -50;
-	//Booleanos para saber que objetos tiene el heroe
-	private boolean llave = false; 
+	private static final int HP = 100; // Vida inicial del jugador
+	private int hp; // Vida actual del jugador
+	private Point posicion; // Posición en el mapa del jugador
+	private Orientacion orientacion; // Orientación en el mapa del jugador
+	private Orientacion antigua; // Orientación antigua del jugador
+	private int danio = -50; // Daño del jugador
+	private int defensa = 20; // Daño que evita el escudo
+	// Booleanos para saber que objetos tiene el heroe
+	private boolean llave = false;
 	private boolean espada = false;
 	private boolean escudo = false;
 	private boolean corazon = false;
-	
+
 	public Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
-		setOrientacion(Orientacion.Sur);//Orientado por defecto mirando hacia abajo
+		// Por defecto la orientación es Sur
+		setOrientacion(Orientacion.Sur);
+		setAntigua(Orientacion.Sur);
 		this.setHp(HP);
 	}
 
-	/**
+	/*
 	 * Getters & Setters
 	 */
-	/**
-	 * Vida
-	 */
+
 	public int getHp() {
 		return hp;
 	}
 
 	public void setHp(int hp) {
+		if (getEscudo())
+			hp += defensa;
 		this.hp = this.hp + hp;
 	}
-	/**
-	 * Reinicio de la vida
-	 */
-	public void resetHp() {
-		this.hp = 100;
-	}
-	
-	/**
-	 * Posicion
-	 */
+
 	public Point getPosicion() {
 		return posicion;
 	}
@@ -48,9 +43,7 @@ public class Heroe implements Componentes {
 	public void setPosicion(Point posicion) {
 		this.posicion = posicion;
 	}
-	/**
-	 * Orientacion
-	 */
+
 	public Orientacion getOrientacion() {
 		return orientacion;
 	}
@@ -58,9 +51,15 @@ public class Heroe implements Componentes {
 	public void setOrientacion(Orientacion orientacion) {
 		this.orientacion = orientacion;
 	}
-	/**
-	 * Para el da�o
-	 */
+
+	public Orientacion getAntigua() {
+		return antigua;
+	}
+
+	public void setAntigua(Orientacion antigua) {
+		this.antigua = antigua;
+	}
+
 	public int getDanio() {
 		return danio;
 	}
@@ -68,9 +67,7 @@ public class Heroe implements Componentes {
 	public void setDanio(int danio) {
 		this.danio = danio;
 	}
-	/**
-	 * Cuando consiga la llave
-	 */
+
 	public boolean getLlave() {
 		return llave;
 	}
@@ -78,9 +75,7 @@ public class Heroe implements Componentes {
 	public void setLlave(boolean llave) {
 		this.llave = llave;
 	}
-	/**
-	 * Espada
-	 */
+
 	public boolean getEspada() {
 		return espada;
 	}
@@ -89,9 +84,7 @@ public class Heroe implements Componentes {
 		this.espada = espada;
 		this.danio = -100;
 	}
-	/**
-	 * Escudo
-	 */
+
 	public boolean getEscudo() {
 		return escudo;
 	}
@@ -99,9 +92,7 @@ public class Heroe implements Componentes {
 	public void setEscudo(boolean escudo) {
 		this.escudo = escudo;
 	}
-	/**
-	 * Aumentando la vida con corazon
-	 */
+
 	public boolean getCorazon() {
 		return corazon;
 	}
@@ -110,13 +101,21 @@ public class Heroe implements Componentes {
 		this.corazon = corazon;
 		this.hp = 150;
 	}
-	
+
 	/**
-	 * @param enemy
-	 * Verdadero si tiene un enemigo en la posicion en la que esta mirando
+	 * Reinicio la vida a HP
+	 */
+	public void resetHp() {
+		this.hp = HP;
+	}
+
+	/**
+	 * @param enemigo
+	 *            Verdadero si tiene un enemigo en la posición en la que está
+	 *            mirando
 	 * @return
 	 */
-	public boolean atacar(Enemigo enemy) {
+	public boolean atacar(Enemigo enemigo) {
 		Point punto = new Point(this.getPosicion());
 		switch (orientacion) {
 		case Norte:
@@ -134,13 +133,11 @@ public class Heroe implements Componentes {
 		default:
 			break;
 		}
-		if (enemy.getPosicion().x == punto.x
-				&& enemy.getPosicion().y == punto.y) {
+		if (enemigo.getPosicion().x == punto.x
+				&& enemigo.getPosicion().y == punto.y) {
 			return true;
 		} else {
 			return false;
 		}
-
 	}
-	
 }

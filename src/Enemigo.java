@@ -1,15 +1,24 @@
 import java.awt.Point;
 
+/**
+ * Clase que representa el enemigo.
+ * 
+ * Contiene su vida, posición, orientación y daño que realiza.
+ *
+ */
 public class Enemigo implements Componentes {
 	private int hp; // Vida del enemigo
-	private Point posicion; // Posici�n en el mapa
-	private Orientacion orientacion; // Orientaci�n del enemigo
+	private Point posicion; // Posición en el mapa
+	private Orientacion orientacion; // Orientación del enemigo
 	private Tablero tablero; // Acceso a Tablero
-	private int danyo = -30; // Da�o que inflinge el enemigo
-	boolean movimiento; // Controla el movimiento del enemigo
+	private int danyo = -30; // Daño que inflige el enemigo
+	private boolean movimiento;
 
 	/**
-	 * Constructor de enemigo
+	 * Constructor por defecto. Inicializa la vida a 100. 
+	 *
+	 * @param punto		Posición del enemigo en el tablero.
+	 * @param tablero	Mapa en el que se situará el enemigo.
 	 */
 	public Enemigo(Point punto, Tablero tablero) {
 		setTablero(tablero);
@@ -19,11 +28,14 @@ public class Enemigo implements Componentes {
 	}
 	
 	/**
-	 * M�todo que decide entre moverse si el heroe esta lejos
-	 * o atacar si esta junto al heroe
+	 * Método que decide entre moverse si el héroe esta lejos
+	 * o atacar si esta junto al héroe.
+	 *  
+	 * @param objetivo	Posición del héroe.
+	 * @return	Devuelve true en caso de atacar el enemigo.
 	 */
 	public boolean actuar(Point objetivo) {
-		if (skill(objetivo)) {
+		if (atacar(objetivo)) {
 			return true;
 		} else {
 			mover(objetivo);
@@ -32,14 +44,17 @@ public class Enemigo implements Componentes {
 	}
 	
 	/**
-	 * M�todo que mueve al enemigo a la casilla correspondiente
+	 * Método que mueve al enemigo a la casilla correspondiente.
+	 *
+	 * @param posicion	Posición a dónde quiere moverse.
+	 * @param aux
 	 */
 	private void moverse(Point posicion, Orientacion aux){
 		if (!getTablero().getCasilla(posicion).isOcupado()) {
 			getTablero().setCasilla(getPosicion(), Estado.Vacia,
 					aux);
 			setPosicion(posicion);
-			this.movimiento = true;
+			//this.movimiento = true;
 		}
 		getTablero().setCasilla(getPosicion(), Estado.Enemigo,
 				aux);
@@ -47,7 +62,7 @@ public class Enemigo implements Componentes {
 	}
 
 	/**
-	 * M�todo que analiza hacia donde debe moverse el enemigo
+	 * Método que analiza hacia donde debe moverse el enemigo.
 	 */
 	public void mover(Point objetivo) {
 		Point posicion;
@@ -72,10 +87,10 @@ public class Enemigo implements Componentes {
 	}
 
 	/**
-	 * M�todo para atacar al heroe si este en la posici�n 
-	 * a la que est� mirando
+	 * Método para atacar al heroe si este en la posición 
+	 * a la que está mirando.
 	 */
-	public boolean skill(Point objetivo) {
+	public boolean atacar(Point objetivo) {
 		Point punto = new Point(getPosicion());
 		switch (getOrientacion()) {
 		case Norte:
@@ -100,9 +115,11 @@ public class Enemigo implements Componentes {
 		}
 	}
 	
+	
 	/*
 	 * Getters & Setters
 	 */
+	
 	public Tablero getTablero() {
 		return tablero;
 	}
