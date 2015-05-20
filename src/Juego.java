@@ -24,11 +24,8 @@ public class Juego extends JFrame implements Componentes {
 	private TecladoListener listener = new TecladoListener();
 
 	/*
-	 * Timers de: 
-	 * - Movimiento de enemigo 
-	 * - Vida del héroe
-	 * - Tiempo de reutilización de acción del héroe 
-	 * - Controla las animaciones de héroe
+	 * Timers de: - Movimiento de enemigo - Vida del héroe - Tiempo de
+	 * reutilización de acción del héroe - Controla las animaciones de héroe
 	 */
 	private Timer movEnemigo;
 	private Timer heroeLife;
@@ -79,8 +76,8 @@ public class Juego extends JFrame implements Componentes {
 		getTablero().cambiarTablero("maps/" + getMundoActual() + "/1.map");
 		this.setMundoActual(1);
 		this.mundo.setPosicion(1);
-		// Reiniciamos al héroe en la posicion 5,5
-		setHeroe(new Heroe(5, 5));
+		// Reiniciamos al héroe en la posicion 1,1
+		setHeroe(new Heroe(1, 1));
 		// Ocultamos el panel y lo reiniciamos
 		panelHeroe.setVisible(false);
 		panelHeroe = new Panel(getHeroe());
@@ -102,11 +99,10 @@ public class Juego extends JFrame implements Componentes {
 		}
 	}
 
-	
 	/*
 	 * Getters & Setters
 	 */
-	
+
 	public Tablero getTablero() {
 		return tablero;
 	}
@@ -177,8 +173,8 @@ public class Juego extends JFrame implements Componentes {
 	}
 
 	/**
-	 * Si  la posición es una casilla vacia devuelve true.
-	 * Si no es vacia comprobamos cada uno de los tipos que puede ser.
+	 * Si la posición es una casilla vacia devuelve true. Si no es vacia
+	 * comprobamos cada uno de los tipos que puede ser.
 	 * 
 	 * @param posicion
 	 * @return
@@ -214,7 +210,8 @@ public class Juego extends JFrame implements Componentes {
 	 * @param orientacion
 	 */
 	private void moverse(Point posicion, Orientacion orientacion) {
-		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Vacia, orientacion);
+		getTablero().setCasilla(getHeroe().getPosicion(), Estado.Vacia,
+				orientacion);
 		getTablero().setCasilla(posicion, Estado.Heroe, orientacion);
 		getHeroe().setPosicion(posicion);
 		getHeroe().setOrientacion(orientacion);
@@ -237,20 +234,22 @@ public class Juego extends JFrame implements Componentes {
 
 		public void keyPressed(KeyEvent e) {
 			pausa = false;
-			movEnemigo.start();
 			panelHeroe.repaint();
-			if (e.getKeyCode() == KeyEvent.VK_P) { // Pausara el juego
-				if (pausa == false) {
-					pausa = true;
-					movEnemigo.stop();
-				}
-				panelHeroe.pintaPause(pausa);
-
-			} else {
-				panelHeroe.pintaPause(false);
-			}
 			if (getHeroe().getHp() > 0) { // Controlamos que podamos mover al
-											// héroe si sigue vivo
+				// héroe si sigue vivo
+				movEnemigo.start();
+
+				if (e.getKeyCode() == KeyEvent.VK_P) { // Pausara el juego
+					if (pausa == false) {
+						pausa = true;
+						movEnemigo.stop();
+					}
+					panelHeroe.pintaPause(pausa);
+
+				} else {
+					panelHeroe.pintaPause(false);
+				}
+
 				if (e.getKeyCode() == KeyEvent.VK_E
 						&& !heroeCoolDown.isRunning()) { // Abrir cofre,
 					Point punto = new Point(getHeroe().getPosicion());
@@ -287,7 +286,7 @@ public class Juego extends JFrame implements Componentes {
 						enemigos.clear();
 					}
 				}
-				if (e.getKeyCode() == KeyEvent.VK_A 
+				if (e.getKeyCode() == KeyEvent.VK_A
 						&& !heroeCoolDown.isRunning()) { // Controlamos el CD
 					antigua = getHeroe().getOrientacion(); // Almacenamos la
 															// orientación
