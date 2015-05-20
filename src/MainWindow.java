@@ -18,7 +18,7 @@ public class MainWindow {
 	 * Método que se encarga de la reproducción de la música de fondo.
 	 */
 	public void playSound() {
-		File audioFile = new File("8bitZelda.wav");
+		File audioFile = new File("audio/8bitZelda.wav");
 
 		try {
 			AudioInputStream audioStream = AudioSystem
