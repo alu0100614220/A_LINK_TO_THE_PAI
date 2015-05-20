@@ -175,7 +175,6 @@ public class Tablero extends JPanel implements Componentes {
 		} catch (Exception e) {
 			System.err.println("Error de lectura");
 		}
-		System.out.println(mapa);
 	}
 
 	/**

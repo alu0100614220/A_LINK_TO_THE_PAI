@@ -54,7 +54,7 @@ public class Enemigo implements Componentes {
 			getTablero().setCasilla(getPosicion(), Estado.Vacia,
 					aux);
 			setPosicion(posicion);
-			//this.movimiento = true;
+			this.movimiento = true;
 		}
 		getTablero().setCasilla(getPosicion(), Estado.Enemigo,
 				aux);
