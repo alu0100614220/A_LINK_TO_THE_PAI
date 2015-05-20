@@ -17,7 +17,7 @@ import javax.swing.Timer;
 @SuppressWarnings("serial")
 public class Juego extends JFrame implements Componentes {
 	private Tablero tablero; // Mapa actual en el juego
-	private Heroe heroe = new Heroe(5, 5); // Es el personaje que controla el
+	private Heroe heroe = new Heroe(1, 1); // Es el personaje que controla el
 											// jugador
 	private ArrayList<Enemigo> enemigos; // Array donde se almacenarán los
 											// enemigos
@@ -236,14 +236,13 @@ public class Juego extends JFrame implements Componentes {
 	class TecladoListener extends KeyAdapter {
 
 		public void keyPressed(KeyEvent e) {
+			pausa = false;
+			movEnemigo.start();
 			panelHeroe.repaint();
 			if (e.getKeyCode() == KeyEvent.VK_P) { // Pausara el juego
 				if (pausa == false) {
 					pausa = true;
 					movEnemigo.stop();
-				} else if (pausa == true) {
-					pausa = false;
-					movEnemigo.start();
 				}
 				panelHeroe.pintaPause(pausa);
 

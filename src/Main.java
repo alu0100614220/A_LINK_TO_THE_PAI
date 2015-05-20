@@ -13,7 +13,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * Clase que contiene el método principal e inicializa el juego.
  * También se encarga de reproducir el audio de fondo. 
  */
-public class MainWindow {
+public class Main {
 	/**
 	 * Método que se encarga de la reproducción de la música de fondo.
 	 */
@@ -45,7 +45,7 @@ public class MainWindow {
 	 */
 	public static void main(String[] args) {
 		Juego juego = new Juego();
-		MainWindow ventana = new MainWindow();
+		Main ventana = new Main();
 		ventana.playSound();
 		juego.setVisible(true);
 
