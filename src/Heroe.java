@@ -1,5 +1,8 @@
 import java.awt.Point;
 
+/**
+ * Clase para representar al heroe.
+ */
 public class Heroe implements Componentes {
 	private static final int HP = 100; // Vida inicial del jugador
 	private int hp; // Vida actual del jugador
@@ -14,6 +17,12 @@ public class Heroe implements Componentes {
 	private boolean escudo = false;
 	private boolean corazon = false;
 
+	/**
+	 * Constructor que inicializa el heroe en la
+	 * posicion especificada.
+	 * @param i
+	 * @param j
+	 */
 	public Heroe(int i, int j) {
 		setPosicion(new Point(i, j));
 		// Por defecto la orientación es Sur
