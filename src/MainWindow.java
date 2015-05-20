@@ -9,7 +9,14 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+/**
+ * Clase que contiene el método principal e inicializa el juego.
+ * También se encarga de reproducir el audio de fondo. 
+ */
 public class MainWindow {
+	/**
+	 * Método que se encarga de la reproducción de la música de fondo.
+	 */
 	public void playSound() {
 		File audioFile = new File("8bitZelda.wav");
 
@@ -33,6 +40,9 @@ public class MainWindow {
 		}
 	}
 
+	/**
+	 * Método principal que lanza el juego.
+	 */
 	public static void main(String[] args) {
 		Juego juego = new Juego();
 		MainWindow ventana = new MainWindow();
